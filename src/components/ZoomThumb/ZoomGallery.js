@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { isNull } from 'lodash'
 
 import ZoomThumb from './ZoomThumb'
 import useMousePosition from '../../hooks/useMousePosition'
@@ -10,9 +9,8 @@ const ZoomGallery = ({ images, zoomForever, defaultZoom, desaturate }) => {
   const { mouseX, mouseY } = useMousePosition()
 
   const [isHovering, setIsHovering] = useState(null)
-
   return <div className="zoom-gallery">
-    {images.map((image, index) => {
+    {images.map((imageData, index) => {
       return (
         <div key={index} className="zoom-gallery__image-container">
           <div className="zoom-gallery__image"
@@ -26,8 +24,8 @@ const ZoomGallery = ({ images, zoomForever, defaultZoom, desaturate }) => {
               zoomForever={zoomForever}
               mouseX={index === isHovering ? mouseX : null}
               mouseY={index === isHovering ? mouseY + window.scrollY : null}
-              image={image}
-              maxSize={image.zoom || defaultZoom}
+              imageData={imageData}
+              maxSize={defaultZoom}
             />
           </div>
         </div>

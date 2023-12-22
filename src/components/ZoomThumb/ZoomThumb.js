@@ -50,7 +50,8 @@ const getPosition = (imageDimensions, isHovering, maxSize, mouseX, mouseY, windo
   return {xPos, yPos, imageScale, idleX, idleY, idleImageScale}
 }
 
-const ZoomThumb = ({image,  maxSize, mouseX, mouseY, isHovering, zoomForever , index, desaturate}) => {
+const ZoomThumb = ({ imageData, maxSize, mouseX, mouseY, isHovering, zoomForever, index, desaturate }) => {
+  const { image, alt } = imageData
   const [windowRect, windowRef] = useRect()
   const [imageDimensions = {width: 1, height: 1}] = useImageSize(image.src)
   const [loaded, setLoaded] = useState(false)
@@ -65,7 +66,6 @@ const ZoomThumb = ({image,  maxSize, mouseX, mouseY, isHovering, zoomForever , i
     }
 
     if ( !windowRect?.x || !windowRect?.y || !imageDimensions?.width) return;
-    // refactor this garbage
 
     const {xPos, yPos, imageScale} = getPosition(imageDimensions, isHovering, maxSize, mouseX, mouseY, windowRect, hasLoaded)
 
@@ -97,10 +97,9 @@ const ZoomThumb = ({image,  maxSize, mouseX, mouseY, isHovering, zoomForever , i
     >
       {
         imageDimensions && (
-
           <img
             src={image.src}
-            alt={image.alt}
+            alt={alt}
             style={{
               transform: `translate(${imageTransform.x}px, ${imageTransform.y}px) scale(${imageTransform.scale})`,
               transition: `all ${easeTime}s ease-out`,
@@ -110,9 +109,9 @@ const ZoomThumb = ({image,  maxSize, mouseX, mouseY, isHovering, zoomForever , i
               '--desaturate': desaturate && !isHovering,
             })}
               onLoad={() => setLoaded(true)}
-              />
-              )
-        }
+          />
+        )
+      }
     </div>
   )
 }
