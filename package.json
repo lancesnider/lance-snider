@@ -11,9 +11,12 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
+    "lodash": "^4.17.21",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-image-size": "^2.3.2"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.6",
