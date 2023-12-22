@@ -68,13 +68,7 @@ const Template = (args) => (
 
 export const ZoomOnHover = Template.bind({})
 
-export const ZoomForever = Template.bind({})
-ZoomForever.args = {
+export const StayZoomed = Template.bind({})
+StayZoomed.args = {
   zoomForever: true,
 }
-
-export const Desaturate = Template.bind({})
-Desaturate.args = {
-  desaturate: true,
-}
-
