@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.yarnpkg.com
+          yarn-version: 4.0.0 # Specify the Yarn version you want to use
 
       - name: Install dependencies
         run: yarn
