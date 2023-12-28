@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
+      - uses: borales/actions-yarn@v4
       - uses: actions/checkout@v1
       - name: Install dependencies
         # 👇 Install dependencies with the same package manager used in the project (replace it as needed), e.g. yarn, npm, pnpm
