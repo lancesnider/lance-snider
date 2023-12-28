@@ -12,6 +12,10 @@
     "chromatic": "npx chromatic --project-token=chpt_ba5c2459d8149d9"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/lab": "^5.0.0-alpha.158",
+    "@mui/material": "^5.15.2",
     "classnames": "^2.3.2",
     "gsap": "^3.12.4",
     "lodash": "^4.17.21",

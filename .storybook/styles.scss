@@ -1,0 +1,13 @@
+html,
+body,
+sb-main-padded,
+sb-show-main {
+  height: 100vh;
+  background: white;
+  padding: 0;
+  margin: 0;
+}
+
+.sb-show-main.sb-main-padded {
+  padding: 0;
+}
