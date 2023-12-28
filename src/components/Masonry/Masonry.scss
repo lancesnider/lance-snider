@@ -1,0 +1,32 @@
+.masonry {
+  margin: -8px;
+
+  .masonry__image {
+    overflow: hidden;
+    display: flex;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+      transition: 0.2s ease-in-out;
+    }
+
+    &:hover {
+    }
+  }
+
+  .masonry__image-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .MuiMasonry-root {
+    margin: 0;
+  }
+}
