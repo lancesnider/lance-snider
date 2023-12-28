@@ -74,8 +74,8 @@ const imagesGrouped = [
     ],
   },
   { image: octopusCharcoal, alt: '' },
-  { image: hogwarts, alt: '' },
   { image: hermit, alt: '' },
+  { image: hogwarts, alt: '' },
   { image: humpback, alt: '' },
   {
     imageGroup: [
