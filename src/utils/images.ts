@@ -28,31 +28,117 @@ import zombies from '../assets/gallery-sm/zombies.jpg'
 import orcaExploded from '../assets/gallery-sm/orca-exploded.jpg'
 import hiking from '../assets/gallery-sm/hiking.jpg'
 
+const allImages = {
+  rhinoArmy: {
+    image: rhinoArmy,
+    key: 'rhinoArmy',
+  },
+  verticAlley: {
+    image: verticAlley,
+    key: 'verticAlley',
+  },
+  blindWolf: {
+    image: blindWolf,
+    key: 'blindWolf',
+  },
+  kraken: {
+    image: kraken,
+    key: 'kraken',
+  },
+  deadBird: {
+    image: deadBird,
+    key: 'deadBird',
+  },
+  hermit: {
+    image: hermit,
+    key: 'hermit',
+  },
+  birdsReal: {
+    image: birdsReal,
+    key: 'birdsReal',
+  },
+  hogwarts: {
+    image: hogwarts,
+    key: 'hogwarts',
+  },
+  humpback: {
+    image: humpback,
+    key: 'humpback',
+  },
+  sasquatch: {
+    image: sasquatch,
+    key: 'sasquatch',
+  },
+  glassOrca: {
+    image: glassOrca,
+    key: 'glassOrca',
+  },
+  capitolRiot: {
+    image: capitolRiot,
+    key: 'capitolRiot',
+  },
+  octopusCave: {
+    image: octopusCave,
+    key: 'octopusCave',
+  },
+  octopusCharcoal: {
+    image: octopusCharcoal,
+    key: 'octopusCharcoal',
+  },
+  octopus: {
+    image: octopus,
+    key: 'octopus',
+  },
+  witch: {
+    image: witch,
+    key: 'witch',
+  },
+  skeleton: {
+    image: skeleton,
+    key: 'skeleton',
+  },
+  crocTeeth: {
+    image: crocTeeth,
+    key: 'crocTeeth',
+  },
+  glinesCanyonDam: {
+    image: glinesCanyonDam,
+    key: 'glinesCanyonDam',
+  },
+  heart: {
+    image: heart,
+    key: 'heart',
+  },
+  littleFactories: {
+    image: littleFactories,
+    key: 'littleFactories',
+  },
+  hogwartsBw: {
+    image: hogwartsBw,
+    key: 'hogwartsBw',
+  },
+  cassowary: {
+    image: cassowary,
+    key: 'cassowary',
+  },
+  zombies: {
+    image: zombies,
+    key: 'zombies',
+  },
+  orcaExploded: {
+    image: orcaExploded,
+    key: 'orcaExploded',
+  },
+  hiking: {
+    image: hiking,
+    key: 'hiking',
+  },
+}
+
 const images = [
   { image: rhinoArmy, alt: 'Rhino Army' },
   { image: verticAlley, alt: 'Vertic Alley' },
   { image: birdsReal, alt: '' },
-  // { image: glassOrca, alt: '' },
-  // { image: sasquatch, alt: '' },
-  // { image: blindWolf, alt: 'Blind Wolf' },
-  // { image: witch, alt: '' },
-  // { image: kraken, alt: 'Kraken' },
-  // { image: hogwarts, alt: '' },
-  // { image: deadBird, alt: '' },
-  // { image: hermit, alt: '' },
-  // { image: glinesCanyonDam, alt: '' },
-  // { image: humpback, alt: '' },
-  // { image: hogwartsBw, alt: '' },
-  // { image: skeleton, alt: '' },
-  // { image: heart, alt: '' },
-  // { image: crocTeeth, alt: '' },
-  // { image: octopusCharcoal, alt: '' },
-  // { image: zombies, alt: '' },
-  // { image: octopus, alt: '' },
-  // { image: cassowary, alt: '' },
-  // { image: octopusCave, alt: '' },
-  // { image: capitolRiot, alt: 'Jan 6' },
-  // { image: littleFactories, alt: '' },
 ]
 
 const imagesGrouped = [
@@ -68,8 +154,8 @@ const imagesGrouped = [
   { image: birdsReal, alt: '' },
   {
     imageGroup: [
-      { image: cassowary, alt: '' },
       { image: deadBird, alt: '' },
+      { image: hiking, alt: '' },
     ],
   },
   { image: blindWolf, alt: 'Blind Wolf' },
@@ -97,7 +183,7 @@ const imagesGrouped = [
     ],
   },
   { image: capitolRiot, alt: 'Jan 6' },
-  // { image: hiking, alt: '' },
+  { image: cassowary, alt: '' },
 ]
 
-export { images, imagesGrouped }
+export { images, imagesGrouped, allImages }
