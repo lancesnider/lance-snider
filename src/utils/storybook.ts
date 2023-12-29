@@ -59,16 +59,15 @@ const imagesGrouped = [
   { image: verticAlley, alt: 'Vertic Alley' },
   {
     imageGroup: [
-      // { image: hiking, alt: '' },
       { image: glassOrca, alt: '' },
-      { image: cassowary, alt: '' },
+      { image: glinesCanyonDam, alt: '' },
     ],
   },
   { image: hogwartsBw, alt: '' },
   { image: birdsReal, alt: '' },
   {
     imageGroup: [
-      { image: glinesCanyonDam, alt: '' },
+      { image: cassowary, alt: '' },
       { image: deadBird, alt: '' },
     ],
   },
@@ -97,6 +96,7 @@ const imagesGrouped = [
     ],
   },
   { image: capitolRiot, alt: 'Jan 6' },
+  // { image: hiking, alt: '' },
 ]
 
 export { images, imagesGrouped }
