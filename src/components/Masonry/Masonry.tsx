@@ -11,17 +11,20 @@ export default function BasicMasonry({ images }) {
   return (
     <div className='masonry'>
       <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={1}>
-        {images.map(({ image, alt, imageGroup }) => {
+        {images.map(({ image, alt, imageGroup }, index) => {
           if (imageGroup && imageGroup.length > 1) {
             return (
-              <div key={imageGroup} className='masonry__image-group'>
-                {imageGroup.map(({ image, alt }) => (
+              <div
+                key={`${imageGroup}-${index}`}
+                className='masonry__image-group'
+              >
+                {imageGroup.map(({ image: groupedImage, alt: groupedAlt }) => (
                   <Image
-                    key={image.src}
-                    src={image.src}
-                    alt={alt}
-                    width={image.width}
-                    height={image.height}
+                    key={groupedImage.src}
+                    src={groupedImage.src}
+                    alt={groupedAlt}
+                    width={groupedImage.width}
+                    height={groupedImage.height}
                     style={{
                       height: 'auto',
                     }}

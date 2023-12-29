@@ -1,4 +1,4 @@
-import {images} from '../../utils/storybook'
+import {images} from '../../utils/images'
 import ZoomGallery from './ZoomGallery'
 
 export default {

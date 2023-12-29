@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Masonry from './Masonry'
-import { imagesGrouped } from '../../utils/storybook'
+import { imagesGrouped } from '../../utils/images'
 
 export default {
   title: 'Components/Masonry',
@@ -11,7 +11,7 @@ export default {
   },
 }
 
-const Template = (args) => (
+const Template = (args: any) => (
   <div
     style={{
       backgroundColor: '#1A2027',
