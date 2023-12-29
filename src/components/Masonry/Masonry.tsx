@@ -19,16 +19,18 @@ export default function BasicMasonry({ images }) {
                 className='masonry__image-group'
               >
                 {imageGroup.map(({ image: groupedImage, alt: groupedAlt }) => (
-                  <Image
-                    key={groupedImage.src}
-                    src={groupedImage.src}
-                    alt={groupedAlt}
-                    width={groupedImage.width}
-                    height={groupedImage.height}
-                    style={{
-                      height: 'auto',
-                    }}
-                  />
+                  <div key={groupedImage.src} className='masonry__image'>
+                    <div className='masonry__image-hover' />
+                    <Image
+                      src={groupedImage.src}
+                      alt={groupedAlt}
+                      width={groupedImage.width}
+                      height={groupedImage.height}
+                      style={{
+                        height: 'auto',
+                      }}
+                    />
+                  </div>
                 ))}
               </div>
             )
@@ -41,6 +43,7 @@ export default function BasicMasonry({ images }) {
               width={image.width}
               height={image.height}
             >
+              <div className='masonry__image-hover' />
               <Image
                 src={image.src}
                 alt={alt}
