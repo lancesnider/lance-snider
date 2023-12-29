@@ -11,9 +11,6 @@
       height: 100%;
       transition: 0.2s ease-in-out;
     }
-
-    &:hover {
-    }
   }
 
   .masonry__image-group {
@@ -23,6 +20,7 @@
 
     img {
       width: 100%;
+      cursor: pointer;
     }
   }
 

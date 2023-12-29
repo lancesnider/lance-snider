@@ -24,6 +24,8 @@ import littleFactories from '../assets/gallery-sm/little-factories.jpg'
 import hogwartsBw from '../assets/gallery-sm/hogwarts-wip.jpg'
 import cassowary from '../assets/gallery-sm/cassowary.jpg'
 import zombies from '../assets/gallery-sm/zombies.jpg'
+import orcaExploded from '../assets/gallery-sm/orca-exploded.jpg'
+import hiking from '../assets/gallery-sm/hiking.jpg'
 
 const images = [
   { image: rhinoArmy, alt: 'Rhino Army' },
@@ -57,22 +59,23 @@ const imagesGrouped = [
   { image: verticAlley, alt: 'Vertic Alley' },
   {
     imageGroup: [
+      // { image: hiking, alt: '' },
       { image: glassOrca, alt: '' },
       { image: cassowary, alt: '' },
     ],
   },
   { image: hogwartsBw, alt: '' },
   { image: birdsReal, alt: '' },
-  { image: blindWolf, alt: 'Blind Wolf' },
-  { image: kraken, alt: 'Kraken' },
-  { image: witch, alt: '' },
-  { image: sasquatch, alt: '' },
   {
     imageGroup: [
       { image: glinesCanyonDam, alt: '' },
       { image: deadBird, alt: '' },
     ],
   },
+  { image: blindWolf, alt: 'Blind Wolf' },
+  { image: kraken, alt: 'Kraken' },
+  { image: witch, alt: '' },
+  { image: sasquatch, alt: '' },
   { image: octopusCharcoal, alt: '' },
   { image: hermit, alt: '' },
   { image: hogwarts, alt: '' },
@@ -86,7 +89,7 @@ const imagesGrouped = [
   { image: crocTeeth, alt: '' },
   { image: zombies, alt: '' },
   { image: octopusCave, alt: '' },
-
+  { image: orcaExploded, alt: '' },
   {
     imageGroup: [
       { image: heart, alt: '' },
