@@ -3,11 +3,31 @@ body,
 sb-main-padded,
 sb-show-main {
   height: 100vh;
-  background: white;
+  color: white;
   padding: 0;
   margin: 0;
+  background-color: #1a2027;
 }
 
 .sb-show-main.sb-main-padded {
   padding: 0;
+}
+
+.storybook__description {
+  h1 {
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  a {
+    color: #f639bc;
+    text-decoration: none;
+    border-bottom: 1px solid #f639bc;
+  }
+
+  margin-bottom: 36px;
+  max-width: 500px;
 }

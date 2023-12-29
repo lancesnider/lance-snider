@@ -135,6 +135,93 @@ const allImages = {
   },
 }
 
+const masonryOrder = [
+  [
+    [
+      rhinoArmy,
+      [deadBird, hiking],
+      blindWolf,
+      hermit,
+      hogwarts,
+      orcaExploded,
+      [heart, littleFactories],
+    ],
+    [
+      verticAlley,
+      birdsReal,
+      kraken,
+      octopusCharcoal,
+      [skeleton, octopus],
+      crocTeeth,
+      octopusCave,
+      capitolRiot,
+    ],
+    [
+      [glassOrca, glinesCanyonDam],
+      hogwartsBw,
+      witch,
+      sasquatch,
+      humpback,
+      zombies,
+      cassowary,
+    ],
+  ],
+  [
+    [
+      rhinoArmy,
+      hogwartsBw,
+      blindWolf,
+      witch,
+      octopus,
+      hogwarts,
+      crocTeeth,
+      orcaExploded,
+      [heart, littleFactories],
+      capitolRiot,
+    ],
+    [
+      verticAlley,
+      [glassOrca, glinesCanyonDam],
+      birdsReal,
+      [deadBird, hiking],
+      kraken,
+      sasquatch,
+      hermit,
+      humpback,
+      [skeleton, octopus],
+      zombies,
+      octopusCave,
+      cassowary,
+    ],
+  ],
+  [
+    [
+      rhinoArmy,
+      verticAlley,
+      [glassOrca, glinesCanyonDam],
+      hogwartsBw,
+      birdsReal,
+      [deadBird, hiking],
+      blindWolf,
+      kraken,
+      witch,
+      sasquatch,
+      octopusCharcoal,
+      hermit,
+      hogwarts,
+      humpback,
+      [skeleton, octopus],
+      crocTeeth,
+      zombies,
+      orcaExploded,
+      octopusCave,
+      [heart, littleFactories],
+      capitolRiot,
+      cassowary,
+    ],
+  ],
+]
+
 const images = [
   { image: rhinoArmy, alt: 'Rhino Army' },
   { image: verticAlley, alt: 'Vertic Alley' },
@@ -186,4 +273,4 @@ const imagesGrouped = [
   { image: cassowary, alt: '' },
 ]
 
-export { images, imagesGrouped, allImages }
+export { images, imagesGrouped, allImages, masonryOrder }
