@@ -18,7 +18,10 @@
     font-weight: 800;
     font-size: 18px;
 
-    span {
+    color: white;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
       color: #f639bc;
     }
 

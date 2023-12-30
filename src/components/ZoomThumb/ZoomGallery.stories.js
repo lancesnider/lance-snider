@@ -17,6 +17,7 @@ const Template = (args) => (
     <ZoomGallery {...args} />
 
     <div className='storybook__description'>
+      <h2>Zoom Thumbnail Gallery</h2>
       <h1>Zoom Thumbnail Gallery</h1>
       <p>
         My art tends to be pretty detailed so I wanted some way to show some of it in the Thumbnail. The idea was to let people do a little bit of exploring just through hover.

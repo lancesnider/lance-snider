@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 import logo from '../../assets/logo.png'
 
@@ -7,10 +8,10 @@ import './Header.scss'
 const Header = () => {
   return (
     <div className='header'>
-      <div className='header__left'>
+      <Link href='/' className='header__left'>
         <img src={logo.src} alt='logo' />
         lances_art
-      </div>
+      </Link>
       <div className='header__links'>
         <a href='https://www.etsy.com/shop/artbylance'>Store</a>
         <a href='https://www.instagram.com/lances_art/'>Insta</a>

@@ -13,13 +13,65 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  color: white;
   background-color: #1a2027;
+  font-weight: 300;
+  color: #ddd;
+
+  h1 {
+    margin-bottom: 32px;
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+  }
+
+  h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #ddd;
+    margin-bottom: 32px;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 30px;
+    margin-bottom: 16px;
+  }
+
+  a {
+    color: #f639bc;
+    text-decoration: none;
+  }
+
+  .text-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+    .text-content__centered {
+      max-width: 730px;
+      width: 100%;
+    }
+  }
+
+  .image {
+    width: 100%;
+    margin-bottom: 72px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.page {
+  padding: 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 16px 36px;
+  }
 }
 
 // :root {

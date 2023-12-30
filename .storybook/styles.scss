@@ -3,10 +3,10 @@ body,
 sb-main-padded,
 sb-show-main {
   height: 100vh;
-  color: white;
   padding: 0;
   margin: 0;
   background-color: #1a2027;
+  font-family: 'Inter', sans-serif;
 }
 
 .sb-show-main.sb-main-padded {
@@ -14,20 +14,6 @@ sb-show-main {
 }
 
 .storybook__description {
-  h1 {
-    margin-bottom: 16px;
-  }
-
-  p {
-    margin-bottom: 16px;
-  }
-
-  a {
-    color: #f639bc;
-    text-decoration: none;
-    border-bottom: 1px solid #f639bc;
-  }
-
-  margin-bottom: 36px;
-  max-width: 500px;
+  margin: 36px 0;
+  max-width: 660px;
 }

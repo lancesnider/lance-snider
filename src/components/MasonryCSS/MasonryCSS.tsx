@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useWindowSize } from 'usehooks-ts'
+import Link from 'next/link'
 
 import './MasonryCSS.scss'
 import { isArray } from 'lodash'
@@ -20,23 +21,16 @@ const getImageOrderIdex = (width: number) => {
   return 2
 }
 
-const Loader = () => {
-  return (
-    <div className='masonry-css__loader'>
-      xyz
-      <div className='masonry-css__loader-spinner' />
-    </div>
-  )
-}
-
-const MasonryCSSThumbnail = ({ image }: any) => {
+const MasonryCSSThumbnail = ({ image, link }: any) => {
   const [loaded, setLoaded] = React.useState(false)
+  const Component = link ? Link : 'div'
 
   return (
-    <div
+    <Component
       className={classNames('masonry-css__image', {
         '-loaded': loaded,
       })}
+      href={link && link}
     >
       <div className='masonry-css__image-hover' />
       <Image
@@ -46,7 +40,7 @@ const MasonryCSSThumbnail = ({ image }: any) => {
         width={image.width}
         height={image.height}
       />
-    </div>
+    </Component>
   )
 }
 
@@ -68,31 +62,34 @@ const MasonryCSS = ({ order }: Props) => {
           <div className='masonry-css__column' key={`column-${index}`}>
             {isArray(column) &&
               // @ts-ignore
-              column.map((image: any) => {
-                if (isArray(image)) {
+              column.map((item) => {
+                // return null
+                if (isArray(item)) {
                   return (
                     <div
                       className='masonry-css__grouped-image'
-                      key={image[0].src}
+                      key={item[0].key}
                     >
                       <MasonryCSSThumbnail
-                        image={image[0]}
-                        key={image[0].src}
+                        image={item[0].image}
+                        key={item[0].key}
+                        link={item[0].link}
                       />
                       <MasonryCSSThumbnail
-                        image={image[1]}
-                        key={image[1].src}
+                        image={item[1].image}
+                        key={item[1].key}
+                        link={item[1].link}
                       />
                     </div>
                   )
                 }
 
                 return (
-                  <MasonryCSSThumbnail image={image} key={image.src} />
-                  // <div className='masonry-css__image' key={image.src}>
-                  //   <div className='masonry-css__image-hover' />
-                  //   <img src={image.src} alt={image.alt} />
-                  // </div>
+                  <MasonryCSSThumbnail
+                    image={item.image}
+                    key={item.key}
+                    link={item.link}
+                  />
                 )
               })}
           </div>
