@@ -1,0 +1,12 @@
+.details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .details__centered {
+    max-width: 730px;
+    width: 100%;
+  }
+}

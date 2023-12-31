@@ -41,29 +41,6 @@ body {
     color: #f639bc;
     text-decoration: none;
   }
-
-  .text-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-
-    .text-content__centered {
-      max-width: 730px;
-      width: 100%;
-    }
-  }
-
-  .image {
-    width: 100%;
-    margin-bottom: 72px;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
 }
 
 .page {

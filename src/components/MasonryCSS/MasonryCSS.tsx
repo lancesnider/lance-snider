@@ -21,7 +21,7 @@ const getImageOrderIdex = (width: number) => {
   return 2
 }
 
-const MasonryCSSThumbnail = ({ image, link }: any) => {
+const MasonryCSSThumbnail = ({ image, link, alt }: any) => {
   const [loaded, setLoaded] = React.useState(false)
   const Component = link ? Link : 'div'
 
@@ -35,7 +35,7 @@ const MasonryCSSThumbnail = ({ image, link }: any) => {
       <div className='masonry-css__image-hover' />
       <Image
         src={image.src}
-        alt={image.src}
+        alt={alt}
         onLoad={() => setLoaded(true)}
         width={image.width}
         height={image.height}
@@ -74,11 +74,13 @@ const MasonryCSS = ({ order }: Props) => {
                         image={item[0].image}
                         key={item[0].key}
                         link={item[0].link}
+                        alt={item[0].alt}
                       />
                       <MasonryCSSThumbnail
                         image={item[1].image}
                         key={item[1].key}
                         link={item[1].link}
+                        alt={item[1].alt}
                       />
                     </div>
                   )
@@ -89,6 +91,7 @@ const MasonryCSS = ({ order }: Props) => {
                     image={item.image}
                     key={item.key}
                     link={item.link}
+                    alt={item.alt}
                   />
                 )
               })}
