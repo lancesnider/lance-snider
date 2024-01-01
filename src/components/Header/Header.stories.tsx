@@ -3,7 +3,7 @@ import React from 'react'
 import Header from './Header'
 
 export default {
-  title: 'Website Components/Header',
+  title: 'lances_art site/Header',
   component: Header,
   args: {
     isArt: true,

@@ -3,7 +3,7 @@ import React from 'react'
 import Footer from './Footer'
 
 export default {
-  title: 'Website Components/Footer',
+  title: 'lances_art site/Footer',
   component: Footer,
   args: {
     devLink: '#',

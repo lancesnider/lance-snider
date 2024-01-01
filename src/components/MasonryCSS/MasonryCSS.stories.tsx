@@ -4,7 +4,7 @@ import { masonryOrder } from '../../utils/images'
 import MasonryCSS from './MasonryCSS'
 
 export default {
-  title: 'Website Components/Masonry (CSS)',
+  title: 'lances_art site/Masonry (CSS)',
   component: MasonryCSS,
   args: {
     order: masonryOrder,
