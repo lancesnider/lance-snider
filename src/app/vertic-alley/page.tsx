@@ -10,8 +10,8 @@ export default function Page() {
       <Image image={image} alt='Vertic Alley' />
       <Details subheading='Pen, watercolor & digital' heading='Vertical Alley'>
         <p>
-          One more from the magical world of Harry Potter to go with my{' '}
-          <Link href='/hogwatrs'>Hogwarts Castle</Link> cross section.
+          One more from the magical world to go with my{' '}
+          <Link href='/hogwarts'>Magical Castle</Link> cross section.
         </p>
       </Details>
     </div>

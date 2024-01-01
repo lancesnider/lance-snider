@@ -6,7 +6,11 @@
   width: 100%;
 
   .details__centered {
-    max-width: 730px;
+    max-width: 700px;
     width: 100%;
+
+    h1 {
+      max-width: 900px;
+    }
   }
 }

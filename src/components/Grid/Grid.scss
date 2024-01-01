@@ -1,0 +1,18 @@
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 72px;
+
+  .grid__content {
+    max-width: 1600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    img {
+      width: 100%;
+      max-width: 500px;
+    }
+  }
+}

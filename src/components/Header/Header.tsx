@@ -13,8 +13,9 @@ const Header = () => {
         lances_art
       </Link>
       <div className='header__links'>
-        <a href='https://www.etsy.com/shop/artbylance'>Store</a>
-        <a href='https://www.instagram.com/lances_art/'>Insta</a>
+        <a href='/'>art</a>
+        <a href='https://www.etsy.com/shop/artbylance'>store</a>
+        <a href='https://www.instagram.com/lances_art/'>insta</a>
       </div>
     </div>
   )

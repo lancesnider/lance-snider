@@ -1,0 +1,22 @@
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 72px 0;
+  width: 100%;
+
+  .video__content {
+    width: 700px;
+
+    height: 0 !important;
+    padding-bottom: 56.25%;
+    position: relative;
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+}

@@ -11,7 +11,7 @@ export default function Page() {
         subheading='Digital (Procreate)'
         heading="You've Got an Absolute Dumptruck Heart"
       >
-        <p>A GIFt for my lovely wife. Doodled and animated in Procreate.</p>
+        <p>Get this to bounce to the exact right song. Thank me later.</p>
       </Details>
     </div>
   )
