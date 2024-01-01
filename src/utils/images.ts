@@ -27,6 +27,10 @@ import cassowary from '../assets/gallery-sm/cassowary.jpg'
 import zombies from '../assets/gallery-sm/zombies.jpg'
 import orcaExploded from '../assets/gallery-sm/orca-exploded.jpg'
 import hiking from '../assets/gallery-sm/hiking.jpg'
+import hogwartsDetail1 from '../assets/hogwarts/detail-1.jpg'
+import hogwartsDetail2 from '../assets/hogwarts/detail-2.jpg'
+import hogwartsDetail3 from '../assets/hogwarts/detail-3.jpg'
+import hogwartsDetail4 from '../assets/hogwarts/detail-4.jpg'
 
 const allImages = {
   rhinoArmy: {
