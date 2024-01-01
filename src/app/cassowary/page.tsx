@@ -1,10 +1,7 @@
-import Image from '@/components/Image/Image'
 import Details from '@/components/Details/Details'
 
 import { allImages } from '@/utils/images'
 import Grid from '@/components/Grid/Grid'
-
-import image from '@/assets/gallery-sm/cassowary.jpg'
 
 const images = [
   allImages.cassowary,
