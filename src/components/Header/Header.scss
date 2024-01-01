@@ -43,10 +43,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 16px;
+      margin-right: -8px;
 
       a {
-        margin-left: 16px;
+        padding: 8px;
       }
     }
 
@@ -56,12 +56,7 @@
       align-items: center;
       font-weight: 600;
       padding: 12px 0;
-      margin-left: 32px;
       transition: 0.1s ease-in-out;
-
-      @media screen and (min-width: 768px) {
-        // padding: 12px;
-      }
     }
   }
 }
