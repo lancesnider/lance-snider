@@ -23,7 +23,6 @@ import heart from '../assets/gallery-sm/dumptruck-heart.gif'
 import littleFactories from '../assets/gallery-sm/little-factories.jpg'
 // import hogwartsBw from '../assets/gallery-sm/hogwarts-bw.jpg'
 import hogwartsBw from '../assets/gallery-sm/hogwarts-wip.jpg'
-import cassowary from '../assets/gallery-sm/cassowary.jpg'
 import zombies from '../assets/gallery-sm/zombies.jpg'
 import orcaExploded from '../assets/gallery-sm/orca-exploded.jpg'
 import hiking from '../assets/gallery-sm/hiking.jpg'
@@ -31,6 +30,16 @@ import hogwartsDetail1 from '../assets/hogwarts/detail-1.jpg'
 import hogwartsDetail2 from '../assets/hogwarts/detail-2.jpg'
 import hogwartsDetail3 from '../assets/hogwarts/detail-3.jpg'
 import hogwartsDetail4 from '../assets/hogwarts/detail-4.jpg'
+
+import platypus1 from '../assets/gallery-sm/platypus1.jpg'
+import platypus5 from '../assets/gallery-sm/platypus5.jpg'
+import platypus4 from '../assets/gallery-sm/platypus4.jpg'
+import platypus3 from '../assets/gallery-sm/platypus3.jpg'
+import platypus2 from '../assets/gallery-sm/platypus2.jpg'
+
+import cassowary from '../assets/gallery-sm/cassowary.jpg'
+import cassowary2 from '../assets/gallery-sm/cassowary2.jpg'
+import cassowary3 from '../assets/gallery-sm/cassowary3.jpg'
 
 const allImages = {
   rhinoArmy: {
@@ -170,6 +179,48 @@ const allImages = {
     key: 'cassowary',
     link: 'cassowary',
     alt: 'Cassowary by Lance Snider',
+  },
+  cassowary2: {
+    image: cassowary2,
+    key: 'cassowary2',
+    link: 'cassowary',
+    alt: 'Cassowary by Lance Snider',
+  },
+  cassowary3: {
+    image: cassowary3,
+    key: 'cassowary3',
+    link: 'cassowary',
+    alt: 'Cassowary by Lance Snider',
+  },
+  platypus1: {
+    image: platypus1,
+    key: 'platypus1',
+    link: 'platypus',
+    alt: 'Platypus by Lance Snider',
+  },
+  platypus2: {
+    image: platypus2,
+    key: 'platypus2',
+    link: 'platypus',
+    alt: 'Platypus by Lance Snider',
+  },
+  platypus3: {
+    image: platypus3,
+    key: 'platypus3',
+    link: 'platypus',
+    alt: 'Platypus by Lance Snider',
+  },
+  platypus4: {
+    image: platypus4,
+    key: 'platypus4',
+    link: 'platypus',
+    alt: 'Platypus by Lance Snider',
+  },
+  platypus5: {
+    image: platypus5,
+    key: 'platypus5',
+    link: 'platypus',
+    alt: 'Platypus by Lance Snider',
   },
   zombies: {
     image: zombies,
