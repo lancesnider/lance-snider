@@ -31,16 +31,16 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
           )}
 
           {isArt && (
-            <a href='https://www.etsy.com/shop/artbylance'>
+            <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
               <FontAwesomeIcon icon={faEtsy} height={16} />
             </a>
           )}
-          <a href='https://www.instagram.com/lances_art/'>
+          <a target='_blank' href='https://www.instagram.com/lances_art/'>
             <FontAwesomeIcon icon={faInstagram} height={16} />
           </a>
 
           {isArt && (
-            <a href={devLink}>
+            <a target='_blank' href={devLink}>
               <FontAwesomeIcon icon={faCode} height={16} />
             </a>
           )}

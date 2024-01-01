@@ -13,4 +13,4 @@ export default {
 
 const Template = (args: any) => <MasonryCSS {...args} />
 
-export const Default = Template.bind({})
+export const Art = Template.bind({})
