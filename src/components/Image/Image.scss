@@ -5,6 +5,12 @@
   justify-content: center;
   align-items: center;
 
+  &.-sm {
+    img {
+      max-width: 700px;
+    }
+  }
+
   img {
     max-width: 1600px;
     height: auto;
