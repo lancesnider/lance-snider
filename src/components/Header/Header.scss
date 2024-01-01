@@ -2,13 +2,13 @@
   // padding: 8px 16px 16px 0;
   padding: 0;
   margin-bottom: 16px;
-  margin-left: -4px;
+  margin-left: -2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   @media screen and (min-width: 768px) {
-    // padding: 16px 16px 24px 16px;
+    margin-left: -4px;
     padding: 16px;
   }
 
@@ -29,7 +29,31 @@
   }
 
   .header__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .header__text-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .header__icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 16px;
+
+      a {
+        margin-left: 16px;
+      }
+    }
+
     a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-weight: 600;
       padding: 12px 0;
       margin-left: 32px;

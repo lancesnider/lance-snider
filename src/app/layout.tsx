@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.scss'
 import Header from '@/components/Header/Header'
-import Link from 'next/link'
+import Footer from '@/components/Footer/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,26 +15,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' className='page'>
       <body className={inter.className}>
-        <Header />
-        {children}
-
-        <hr />
-        <div className='footer'>
-          <h2>God I love coloring</h2>
-          <div className='footer__heading'>
-            Let's chat about doing art.
-            <br />
-            Or dev&hellip; or artsy dev.
-          </div>
-
-          <div className='footer__links'>
-            <Link href='https://www.instagram.com/lances_art/'>home</Link>
-            <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
-          </div>
-          <div className='footer__copyright'>
-            {/* display the current year thatn copyright */}
-            &copy; {new Date().getFullYear()} Blah, blah - legal stuff
-          </div>
+        <div className='layout'>
+          <Header isArt />
+          {children}
+          <Footer />
         </div>
       </body>
     </html>
