@@ -5,6 +5,14 @@
   flex-direction: column;
   width: 100%;
 
+  &.-mt {
+    margin-top: 72px;
+  }
+
+  &.-mb {
+    margin-bottom: 72px;
+  }
+
   .details__centered {
     max-width: 700px;
     width: 100%;

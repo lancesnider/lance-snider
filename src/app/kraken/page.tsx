@@ -7,7 +7,10 @@ export default function Page() {
   return (
     <div>
       <Image image={image} alt='Kraken' />
-      <Details subheading='Charcoal' heading='Kraken'></Details>
+      <Details subheading='Digital (Procreate)' heading='Kraken'>
+        They're more curious than malicious, but that doesn't mean they won't
+        sink ya.
+      </Details>
     </div>
   )
 }

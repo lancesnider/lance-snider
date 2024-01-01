@@ -7,7 +7,9 @@ export default function Page() {
   return (
     <div>
       <Image image={image} alt='Skeleton Woman' />
-      <Details subheading='Charcoal' heading='Boney Lady'></Details>
+      <Details subheading='Charcoal' heading='Skin and Bones'>
+        I'm pretty sure this is the sexiest thing I've drawn. Weird.
+      </Details>
     </div>
   )
 }
