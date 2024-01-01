@@ -3,7 +3,11 @@ import Link from 'next/link'
 
 import './Footer.scss'
 
-const Footer = () => {
+interface Props {
+  devLink: string
+}
+
+const Footer = ({ devLink }: Props) => {
   return (
     <>
       <hr />
@@ -17,7 +21,7 @@ const Footer = () => {
 
         <div className='footer__links'>
           <Link href='https://www.instagram.com/lances_art/'>art</Link>
-          <Link href='https://www.instagram.com/lances_art/dev'>dev</Link>
+          <Link href={devLink}>dev</Link>
           <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
           <Link href='https://www.etsy.com/shop/artbylance'>etsy</Link>
         </div>

@@ -12,9 +12,10 @@ import './Header.scss'
 interface Props {
   isArt?: boolean
   isDev?: boolean
+  devLink: string
 }
 
-const Header = ({ isArt, isDev }: Props) => {
+const Header = ({ isArt, isDev, devLink }: Props) => {
   return (
     <div className='header'>
       <Link href='/' className='header__left'>
@@ -39,7 +40,7 @@ const Header = ({ isArt, isDev }: Props) => {
           </a>
 
           {isArt && (
-            <a href='https://www.instagram.com/lances_art/'>
+            <a href={devLink}>
               <FontAwesomeIcon icon={faCode} height={16} />
             </a>
           )}

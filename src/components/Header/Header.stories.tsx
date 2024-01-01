@@ -8,6 +8,7 @@ export default {
   args: {
     isArt: true,
     isDev: false,
+    devLink: '#',
   },
 }
 
