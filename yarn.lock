@@ -9853,6 +9853,7 @@ __metadata:
     react: "npm:^18"
     react-dom: "npm:^18"
     react-image-size: "npm:^2.3.2"
+    react-photo-gallery: "npm:^8.0.0"
     resize-observer-polyfill: "npm:^1.5.1"
     sass: "npm:^1.69.5"
     storybook: "npm:^7.6.6"
@@ -11580,6 +11581,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prop-types@npm:~15.7.2":
+  version: 15.7.2
+  resolution: "prop-types@npm:15.7.2"
+  dependencies:
+    loose-envify: "npm:^1.4.0"
+    object-assign: "npm:^4.1.1"
+    react-is: "npm:^16.8.1"
+  checksum: 4eb527daec962acd789c621ce3234a6f077ce202049291642d8efd13b19805adf07227672c570531cdb56a357640ea27e336527682b7ed4be0c5b392a01662ab
+  languageName: node
+  linkType: hard
+
 "proxy-addr@npm:~2.0.7":
   version: 2.0.7
   resolution: "proxy-addr@npm:2.0.7"
@@ -11872,7 +11884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1, react-is@npm:^16.7.0":
+"react-is@npm:^16.13.1, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
@@ -11890,6 +11902,19 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 6eb5e4b28028c23e2bfcf73371e72cd4162e4ac7ab445ddae2afe24e347a37d6dc22fae6e1748632cd43c6d4f9b8f86dcf26bf9275e1874f436d129952528ae0
+  languageName: node
+  linkType: hard
+
+"react-photo-gallery@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "react-photo-gallery@npm:8.0.0"
+  dependencies:
+    prop-types: "npm:~15.7.2"
+    resize-observer-polyfill: "npm:^1.5.0"
+  peerDependencies:
+    react: ^16.8.0
+    react-dom: ^16.8.0
+  checksum: 2e70b6004c7a94d2a0f8762d3bdb81366c3c74db8ee8c4149d5d6f698dd18c8764f7db122238cf32f9c938b8388b7917bc48047d380d33a63af1e03e280f30e6
   languageName: node
   linkType: hard
 
@@ -12217,7 +12242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resize-observer-polyfill@npm:^1.5.1":
+"resize-observer-polyfill@npm:^1.5.0, resize-observer-polyfill@npm:^1.5.1":
   version: 1.5.1
   resolution: "resize-observer-polyfill@npm:1.5.1"
   checksum: 5e882475067f0b97dc07e0f37c3e335ac5bc3520d463f777cec7e894bb273eddbfecb857ae668e6fb6881fd6f6bb7148246967172139302da50fa12ea3a15d95

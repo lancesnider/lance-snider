@@ -380,4 +380,169 @@ const imagesGrouped = [
   { image: cassowary, alt: '' },
 ]
 
-export { images, imagesGrouped, allImages, masonryOrder }
+const imagesGrouped2 = [
+  {
+    src: '',
+    image: rhinoArmy,
+    width: rhinoArmy.width,
+    height: rhinoArmy.height,
+    alt: 'Rhino Army',
+  },
+  {
+    src: '',
+    image: verticAlley,
+    width: verticAlley.width,
+    height: verticAlley.height,
+    alt: 'Vertic Alley',
+  },
+  {
+    src: '',
+    width: 2,
+    height: 1,
+    imageGroup: [
+      { image: glassOrca, alt: '' },
+      { image: glinesCanyonDam, alt: '' },
+    ],
+  },
+  {
+    src: '',
+    image: hogwartsBw,
+    width: hogwartsBw.width,
+    height: hogwartsBw.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: birdsReal,
+    width: birdsReal.width,
+    height: birdsReal.height,
+    alt: '',
+  },
+  {
+    src: '',
+    width: 2,
+    height: 1,
+    imageGroup: [
+      { image: deadBird, alt: '' },
+      { image: hiking, alt: '' },
+    ],
+  },
+  {
+    src: '',
+    image: blindWolf,
+    width: blindWolf.width,
+    height: blindWolf.height,
+    alt: 'Blind Wolf',
+  },
+  {
+    src: '',
+    image: kraken,
+    width: kraken.width,
+    height: kraken.height,
+    alt: 'Kraken',
+  },
+  {
+    src: '',
+    image: witch,
+    width: witch.width,
+    height: witch.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: sasquatch,
+    width: sasquatch.width,
+    height: sasquatch.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: octopusCharcoal,
+    width: octopusCharcoal.width,
+    height: octopusCharcoal.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: hermit,
+    width: hermit.width,
+    height: hermit.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: hogwarts,
+    width: hogwarts.width,
+    height: hogwarts.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: humpback,
+    width: humpback.width,
+    height: humpback.height,
+    alt: '',
+  },
+  {
+    src: '',
+    width: 2,
+    height: 1.4,
+    imageGroup: [
+      { image: skeleton, alt: '' },
+      { image: octopus, alt: '' },
+    ],
+  },
+  {
+    src: '',
+    image: crocTeeth,
+    width: crocTeeth.width,
+    height: crocTeeth.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: zombies,
+    width: zombies.width,
+    height: zombies.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: orcaExploded,
+    width: orcaExploded.width,
+    height: orcaExploded.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: octopusCave,
+    width: octopusCave.width,
+    height: octopusCave.height,
+    alt: '',
+  },
+  {
+    src: '',
+    image: capitolRiot,
+    width: capitolRiot.width,
+    height: capitolRiot.height,
+    alt: 'Jan 6',
+  },
+  {
+    src: '',
+    width: 2,
+    height: 1,
+    imageGroup: [
+      { image: heart, alt: '' },
+      { image: littleFactories, alt: '' },
+    ],
+  },
+  {
+    src: '',
+    image: cassowary,
+    width: cassowary.width,
+    height: cassowary.height,
+    alt: '',
+  },
+]
+
+export { images, imagesGrouped, allImages, masonryOrder, imagesGrouped2 }
