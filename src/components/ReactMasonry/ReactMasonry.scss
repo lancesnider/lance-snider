@@ -1,2 +1,46 @@
-.reactmasonry {
+.react-masonry {
+  .react-masonry__image {
+    position: absolute;
+    max-width: 100%;
+    cursor: pointer;
+
+    &:hover {
+      z-index: 100;
+      .react-masonry__image-hover {
+        border: 8px solid #f639bc;
+      }
+    }
+  }
+
+  .react-masonry__image-hover {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: 0.1s ease-in-out;
+
+    border: 0px solid #f639bc;
+  }
+
+  .react-masonry__image-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .react-masonry__group-image {
+      position: relative;
+      cursor: pointer;
+
+      &:hover {
+        z-index: 100;
+        .react-masonry__image-hover {
+          border: 8px solid #f639bc;
+        }
+      }
+    }
+  }
 }

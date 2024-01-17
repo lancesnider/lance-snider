@@ -1,36 +1,41 @@
 import React from 'react'
 
+import Link from 'next/link'
+
 import Gallery from 'react-photo-gallery'
+
+import './ReactMasonry.scss'
 
 const ReactMasonry = ({images}) => {
   const imageRenderer = ({ index, left, top, key, photo, margin }) => {
     if (photo.imageGroup) {
       return (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          width: photo.width,
-          height: photo.height,
-          position: 'absolute',
-          left: left,
-          top: top,
-          boxSizing: 'border-box',
-          overflow: 'hidden',
-          margin: margin,
-          gap: margin * 2
-        }}
+        <div
+          className='react-masonry__image-group'
+          style={{
+            width: photo.width,
+            height: photo.height,
+            left: left,
+            top: top,
+            margin: margin,
+            gap: margin * 2
+          }}
           key={photo.imageGroup[0].image.src}
         >
-          {photo.imageGroup.map((group, index) => {
-            const image = group.image
+          {photo.imageGroup.map((groupedImage, index) => {
+            const image = groupedImage.image
+
             return (
-              <img
-                key={index}
-                alt={image.alt}
-                src={image.src}
-                onClick={() => console.log('clicked', index, photo)}
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-              />
+              <Link
+                href={groupedImage.link}
+                className='react-masonry__group-image' key={groupedImage.key}>
+                <div className='react-masonry__image-hover' />
+                <img
+                  alt={image.alt}
+                  src={image.src}
+                  style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+                />
+              </Link>
             )
           })}
         </div>
@@ -38,25 +43,25 @@ const ReactMasonry = ({images}) => {
     }
 
     return (
-      <div
+      <Link
+        href={photo.link}
+        className='react-masonry__image'
         style={{
           margin,
           height: photo.height,
           width: photo.width,
-          position: 'absolute',
           left: left,
           top: top,
-          maxWidth: '100%',
         }}
-        key={photo.image.src}
+        key={photo.key}
       >
+        <div className='react-masonry__image-hover' />
         <img
           alt={photo.title}
           src={photo.image.src}
-            onClick={() => console.log('clicked', index, photo)}
-            style={{ height: '100%', width: '100%', objectFit: 'cover'  }}
+          style={{ height: '100%', width: '100%', objectFit: 'cover'  }}
         />
-      </div>
+      </Link>
     )
   }
 

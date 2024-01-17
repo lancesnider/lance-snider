@@ -4,7 +4,7 @@ import ReactMasonry from './ReactMasonry'
 import { imagesGrouped2 } from '../../utils/images'
 
 export default {
-  title: 'Experiments/Masonry (react-photo-gallery)',
+  title: 'Experiments/Masonry/Masonry (react-photo-gallery)',
   component: ReactMasonry,
   args: {
     images: imagesGrouped2
