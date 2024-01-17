@@ -4,7 +4,7 @@ import Masonry from './Masonry'
 import { imagesGrouped } from '../../utils/images'
 
 export default {
-  title: 'Experiments/Masonry (@mui)',
+  title: 'Experiments/Masonry/Masonry (@mui)',
   component: Masonry,
   args: {
     images: imagesGrouped,

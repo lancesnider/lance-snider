@@ -1,8 +1,8 @@
 'use client'
 
-import MasonryCSS from '@/components/MasonryCSS/MasonryCSS'
-import { masonryOrder } from '@/utils/images'
+import ReactMasonry from '@/components/ReactMasonry/ReactMasonry'
+import { imagesGrouped2 } from '@/utils/images'
 
 export default function Home() {
-  return <MasonryCSS order={masonryOrder} />
+  return <ReactMasonry images={imagesGrouped2} />
 }

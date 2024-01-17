@@ -21,7 +21,7 @@ const Footer = ({ devLink }: Props) => {
 
         <div className='footer__links'>
           <Link href='https://www.instagram.com/lances_art/'>art</Link>
-          <Link href={devLink}>dev</Link>
+          {/* <Link href={devLink}>dev</Link> */}
           <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
           <Link href='https://www.etsy.com/shop/artbylance'>etsy</Link>
         </div>

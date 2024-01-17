@@ -27,6 +27,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-image-size": "^2.3.2",
+    "react-photo-gallery": "^8.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "usehooks-ts": "^2.9.1"
   },
