@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div>
       <Image image={image} alt='Glines Canyon Dam Removal - art' />
-      <Details subheading='Charcoal' heading='Glines Canyon '>
+      <Details subheading='Charcoal' heading='Glines Canyon' sold>
         <h3>Largest dam removal in US history. For the fishies!</h3>
       </Details>
       <Video>

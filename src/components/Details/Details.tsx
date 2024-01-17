@@ -9,9 +9,10 @@ interface Props {
   children?: React.ReactNode
   mb?: boolean
   mt?: boolean
+  sold?: boolean
 }
 
-const Details = ({ children, subheading, heading, mb, mt }: Props) => {
+const Details = ({ children, subheading, heading, mb, mt, sold }: Props) => {
   return (
     <div
       className={classNames('details', {
@@ -20,7 +21,13 @@ const Details = ({ children, subheading, heading, mb, mt }: Props) => {
       })}
     >
       <div className='details__centered'>
-        {subheading && <h2>{subheading}</h2>}
+        <div className='details__subheading'>
+          {subheading && (
+            <h2>
+              {subheading} {sold && <span>(Sold)</span>}
+            </h2>
+          )}
+        </div>
         {heading && <h1>{heading}</h1>}
         {children && children}
       </div>
