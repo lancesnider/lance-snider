@@ -1,9 +1,8 @@
 import React from 'react'
 
 import Gallery from 'react-photo-gallery'
-import { imagesGrouped2 } from '../../utils/images'
 
-const ReactMasonry = () => {
+const ReactMasonry = ({images}) => {
   const imageRenderer = ({ index, left, top, key, photo, margin }) => {
     if (photo.imageGroup) {
       return (
@@ -61,12 +60,10 @@ const ReactMasonry = () => {
     )
   }
 
-
   return (
     <div className='react-masonry'>
       <Gallery
-
-        photos={imagesGrouped2}
+        photos={images}
         renderImage={imageRenderer}
         direction={'column'}
       />

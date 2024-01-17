@@ -1,11 +1,14 @@
 import React from 'react'
 
 import ReactMasonry from './ReactMasonry'
+import { imagesGrouped2 } from '../../utils/images'
 
 export default {
   title: 'Experiments/Masonry (react-photo-gallery)',
   component: ReactMasonry,
-  args: {},
+  args: {
+    images: imagesGrouped2
+  },
 }
 
 const Template = (args) => <ReactMasonry {...args} />
