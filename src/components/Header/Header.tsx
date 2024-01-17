@@ -39,11 +39,11 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
             <FontAwesomeIcon icon={faInstagram} height={16} />
           </a>
 
-          {isArt && (
+          {/* {isArt && (
             <a target='_blank' href={devLink}>
               <FontAwesomeIcon icon={faCode} height={16} />
             </a>
-          )}
+          )} */}
         </div>
       </div>
     </div>

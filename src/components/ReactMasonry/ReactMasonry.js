@@ -7,7 +7,7 @@ import Gallery from 'react-photo-gallery'
 import './ReactMasonry.scss'
 
 const ReactMasonry = ({images}) => {
-  const imageRenderer = ({ index, left, top, key, photo, margin }) => {
+  const imageRenderer = ({ left, top, photo, margin }) => {
     if (photo.imageGroup) {
       return (
         <div
