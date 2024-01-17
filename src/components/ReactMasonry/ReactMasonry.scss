@@ -1,4 +1,8 @@
 .react-masonry {
+  img {
+    pointer-events: none;
+  }
+
   .react-masonry__image {
     position: absolute;
     max-width: 100%;

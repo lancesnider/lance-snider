@@ -5,11 +5,11 @@ import image from '@/assets/gallery-sm/little-factories.jpg'
 
 export default function Page() {
   return (
-    <div>
+    <div className='page'>
       <Image image={image} alt='Not Your Little Factories' />
       <Details
         subheading='Pen, Marker and Watercolor'
-        heading='Not Your Little Factories (Sold)'
+        heading='Not Your Little Factories'
       >
         <p>Got a little fired up when Rov v Wade got overturned. </p>
       </Details>

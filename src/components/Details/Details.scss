@@ -21,4 +21,13 @@
       max-width: 900px;
     }
   }
+
+  .details__subheading {
+    display: flex;
+
+    span {
+      text-transform: lowercase;
+      color: var(--primary);
+    }
+  }
 }

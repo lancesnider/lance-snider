@@ -1,0 +1,54 @@
+.button {
+  color: white;
+  border: 3px solid var(--primary);
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0 1rem;
+  transition: all 0.1s ease-in-out;
+  height: 3rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  white-space: nowrap;
+  font-weight: 600;
+
+  svg {
+    pointer-events: none;
+  }
+
+  img {
+    margin-right: 0.5rem;
+  }
+
+  &--icon {
+    width: 1.875rem;
+    padding: 0;
+    img {
+      margin-right: 0;
+    }
+  }
+
+  &:hover,
+  &--active {
+    cursor: pointer;
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: white;
+  }
+
+  &--primary,
+  &--primary:visited {
+    color: #fff;
+    background-color: var(--primary);
+  }
+
+  &--primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}

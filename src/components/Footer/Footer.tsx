@@ -1,5 +1,8 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
+
+import Button from '../Button/Button'
 
 import './Footer.scss'
 
@@ -8,6 +11,13 @@ interface Props {
 }
 
 const Footer = ({ devLink }: Props) => {
+  const [copySuccess, setCopySuccess] = React.useState(false)
+
+  const copyContact = () => {
+    setCopySuccess(true)
+    navigator.clipboard.writeText('lance@lancesnider.com')
+  }
+
   return (
     <>
       <hr />
@@ -19,9 +29,12 @@ const Footer = ({ devLink }: Props) => {
           Or dev&hellip; or artsy dev.
         </div>
 
+        <Button onClick={copyContact} primary width={200}>
+          {copySuccess ? 'Copied!' : 'Copy My Email'}
+        </Button>
+
         <div className='footer__links'>
           <Link href='https://www.instagram.com/lances_art/'>art</Link>
-          {/* <Link href={devLink}>dev</Link> */}
           <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
           <Link href='https://www.etsy.com/shop/artbylance'>etsy</Link>
         </div>

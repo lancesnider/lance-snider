@@ -7,7 +7,11 @@ export default function Page() {
   return (
     <div>
       <Image image={image} alt='Giant Pacific Octopus' />
-      <Details subheading='Charcoal' heading='Giant Pacific Octopus'></Details>
+      <Details
+        subheading='Charcoal'
+        heading='Giant Pacific Octopus'
+        sold
+      ></Details>
     </div>
   )
 }
