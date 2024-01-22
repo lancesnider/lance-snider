@@ -13,16 +13,16 @@ export const metadata: Metadata = {
   description: 'I make pretty things.',
 }
 
-const devLink = 'https://main--658df898ec129ee3d5a882ae.chromatic.com'
+// const devLink = 'https://main--658df898ec129ee3d5a882ae.chromatic.com'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en' className='page'>
       <body className={inter.className}>
         <div className='layout'>
-          <Header isArt devLink={devLink} />
+          <Header />
           {children}
-          <Footer devLink={devLink} />
+          <Footer />
         </div>
       </body>
     </html>

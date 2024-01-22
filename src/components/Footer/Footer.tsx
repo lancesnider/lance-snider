@@ -6,11 +6,7 @@ import Button from '../Button/Button'
 
 import './Footer.scss'
 
-interface Props {
-  devLink: string
-}
-
-const Footer = ({ devLink }: Props) => {
+const Footer = () => {
   const [copySuccess, setCopySuccess] = React.useState(false)
 
   const copyContact = () => {
