@@ -3,19 +3,12 @@ import Link from 'next/link'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInstagram, faEtsy } from '@fortawesome/free-brands-svg-icons'
-import { faCode, faPalette } from '@fortawesome/free-solid-svg-icons'
 
 import logo from '../../assets/logo.png'
 
 import './Header.scss'
 
-interface Props {
-  isArt?: boolean
-  isDev?: boolean
-  devLink: string
-}
-
-const Header = ({ isArt, isDev, devLink }: Props) => {
+const Header = () => {
   return (
     <div className='header'>
       <Link href='/' className='header__left'>
@@ -30,9 +23,9 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
           <Link href='/'>
             <div className='header__link-text'>art</div>
           </Link>
-          <Link href='/dev'>
+          {/* <Link href='/dev'>
             <div className='header__link-text'>dev</div>
-          </Link>
+          </Link> */}
         </div>
         <div className='header__icons'>
           <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
@@ -41,12 +34,6 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
           <a target='_blank' href='https://www.instagram.com/lances_art/'>
             <FontAwesomeIcon icon={faInstagram} height={16} />
           </a>
-
-          {/* {isArt && (
-            <a target='_blank' href={devLink}>
-              <FontAwesomeIcon icon={faCode} height={16} />
-            </a>
-          )} */}
         </div>
       </div>
     </div>

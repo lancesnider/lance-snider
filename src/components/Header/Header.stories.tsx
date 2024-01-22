@@ -5,11 +5,7 @@ import Header from './Header'
 export default {
   title: 'lances_art site/Header',
   component: Header,
-  args: {
-    isArt: true,
-    isDev: false,
-    devLink: '#',
-  },
+  args: {},
 }
 
 const Template = (args: any) => (
@@ -28,21 +24,6 @@ const Template = (args: any) => (
       }}
     >
       <Header {...args} />
-    </div>
-    <Header {...args} isArt={false} isDev />
-    <div
-      style={{
-        maxWidth: 768,
-      }}
-    >
-      <Header {...args} isArt={false} isDev />
-    </div>
-    <div
-      style={{
-        maxWidth: 360,
-      }}
-    >
-      <Header {...args} isArt={false} isDev />
     </div>
   </div>
 )

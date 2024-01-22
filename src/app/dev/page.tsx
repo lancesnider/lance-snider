@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div>
       <Columns
-        heading={'Configure Your Project'}
+        heading={'Coming Soon!'}
         subheading={
           "Because Storybook works separately from your app, you'll need to configure it for your specific stack and setup. Below, explore guides for configuring Storybook with popular frameworks and tools. If you get stuck, learn how you can ask for help from our community."
         }
