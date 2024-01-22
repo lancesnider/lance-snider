@@ -1,5 +1,4 @@
 .header {
-  // padding: 8px 16px 16px 0;
   padding: 0;
   margin-bottom: 16px;
   margin-left: -2px;
@@ -9,7 +8,7 @@
 
   @media screen and (min-width: 768px) {
     margin-left: -4px;
-    padding: 16px;
+    padding: 16px 0;
   }
 
   .header__left {
@@ -20,6 +19,10 @@
 
     color: white;
     transition: 0.1s ease-in-out;
+
+    span {
+      color: var(--primary);
+    }
 
     img {
       width: 48px;
