@@ -20,21 +20,24 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
     <div className='header'>
       <Link href='/' className='header__left'>
         <img src={logo.src} alt='logo' />
-        lance<span>snider</span>
+        <div className='header__name'>
+          <div>lance</div>
+          <div className='header__last-name'>snider</div>
+        </div>
       </Link>
       <div className='header__links'>
+        <div className='header__text-links'>
+          <Link href='/'>
+            <div className='header__link-text'>art</div>
+          </Link>
+          <Link href='/dev'>
+            <div className='header__link-text'>dev</div>
+          </Link>
+        </div>
         <div className='header__icons'>
-          {isDev && (
-            <a href='/'>
-              <FontAwesomeIcon icon={faPalette} height={16} />
-            </a>
-          )}
-
-          {isArt && (
-            <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
-              <FontAwesomeIcon icon={faEtsy} height={16} />
-            </a>
-          )}
+          <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
+            <FontAwesomeIcon icon={faEtsy} height={16} />
+          </a>
           <a target='_blank' href='https://www.instagram.com/lances_art/'>
             <FontAwesomeIcon icon={faInstagram} height={16} />
           </a>

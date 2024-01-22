@@ -11,6 +11,18 @@
     padding: 16px 0;
   }
 
+  .header__name {
+    line-height: 18px;
+
+    @media screen and (min-width: 375px) {
+      display: flex;
+    }
+  }
+
+  .header__last-name {
+    color: var(--primary);
+  }
+
   .header__left {
     display: flex;
     align-items: center;
@@ -58,8 +70,19 @@
       justify-content: center;
       align-items: center;
       font-weight: 600;
+      height: 48px;
       padding: 12px 0;
       transition: 0.1s ease-in-out;
     }
+  }
+
+  .header__text-links {
+    margin-right: 8px;
+    border-right: 1px solid var(--primary);
+  }
+
+  .header__link-text {
+    margin-right: 16px;
+    // height: 48px;
   }
 }
