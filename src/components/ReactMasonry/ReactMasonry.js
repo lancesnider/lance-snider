@@ -22,18 +22,18 @@ const ReactMasonry = ({images}) => {
           }}
           key={photo.imageGroup[0].image.src}
         >
-          {photo.imageGroup.map((groupedImage, index) => {
+          {photo.imageGroup.map((groupedImage) => {
             const image = groupedImage.image
 
             return (
               <Link
                 href={groupedImage.link}
-                className='react-masonry__group-image' key={groupedImage.key}>
+                className='react-masonry__group' key={groupedImage.key}>
                 <div className='react-masonry__image-hover' />
                 <img
                   alt={image.alt}
                   src={image.src}
-                  style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+                  className='react-masonry__group-image'
                 />
               </Link>
             )
@@ -59,7 +59,6 @@ const ReactMasonry = ({images}) => {
         <img
           alt={photo.title}
           src={photo.image.src}
-          style={{ height: '100%', width: '100%', objectFit: 'cover'  }}
         />
       </Link>
     )

@@ -20,7 +20,7 @@ const Header = ({ isArt, isDev, devLink }: Props) => {
     <div className='header'>
       <Link href='/' className='header__left'>
         <img src={logo.src} alt='logo' />
-        lances_art
+        lance<span>snider</span>
       </Link>
       <div className='header__links'>
         <div className='header__icons'>

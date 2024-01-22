@@ -1,5 +1,17 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .react-masonry {
+  min-height: 100vh;
+
   img {
+    animation: fadeIn 0.2s ease-out;
     pointer-events: none;
   }
 
@@ -7,6 +19,12 @@
     position: absolute;
     max-width: 100%;
     cursor: pointer;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
 
     &:hover {
       z-index: 100;
@@ -35,9 +53,15 @@
     box-sizing: border-box;
     overflow: hidden;
 
-    .react-masonry__group-image {
+    .react-masonry__group {
       position: relative;
       cursor: pointer;
+
+      .react-masonry__group-image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
 
       &:hover {
         z-index: 100;
