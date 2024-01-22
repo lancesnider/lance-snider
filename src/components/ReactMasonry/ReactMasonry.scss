@@ -8,6 +8,12 @@
     max-width: 100%;
     cursor: pointer;
 
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
     &:hover {
       z-index: 100;
       .react-masonry__image-hover {
@@ -35,9 +41,15 @@
     box-sizing: border-box;
     overflow: hidden;
 
-    .react-masonry__group-image {
+    .react-masonry__group {
       position: relative;
       cursor: pointer;
+
+      .react-masonry__group-image {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
 
       &:hover {
         z-index: 100;
