@@ -22,7 +22,7 @@ const ReactMasonry = ({images}) => {
           }}
           key={photo.imageGroup[0].image.src}
         >
-          {photo.imageGroup.map((groupedImage, index) => {
+          {photo.imageGroup.map((groupedImage) => {
             const image = groupedImage.image
 
             return (

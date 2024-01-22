@@ -1,5 +1,17 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .react-masonry {
+  min-height: 100vh;
+
   img {
+    animation: fadeIn 0.2s ease-out;
     pointer-events: none;
   }
 
