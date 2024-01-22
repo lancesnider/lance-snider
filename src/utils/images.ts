@@ -51,8 +51,8 @@ const allImages = {
   verticAlley: {
     image: verticAlley,
     key: 'verticAlley',
-    link: 'vertic-alley',
-    alt: 'Vertic Alley by Lance Snider',
+    link: 'magic-alley',
+    alt: 'Magic Alley by Lance Snider',
   },
   blindWolf: {
     image: blindWolf,
@@ -331,13 +331,13 @@ const masonryOrder = [
 
 const images = [
   { image: rhinoArmy, alt: 'Rhino Army' },
-  { image: verticAlley, alt: 'Vertic Alley' },
+  { image: verticAlley, alt: 'Magic Alley' },
   { image: birdsReal, alt: '' },
 ]
 
 const imagesGrouped = [
   { image: rhinoArmy, alt: 'Rhino Army' },
-  { image: verticAlley, alt: 'Vertic Alley' },
+  { image: verticAlley, alt: 'Magic Alley' },
   {
     imageGroup: [
       { image: glassOrca, alt: '' },

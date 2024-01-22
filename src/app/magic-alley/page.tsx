@@ -7,8 +7,8 @@ import image from '@/assets/art/verticAlley.jpg'
 export default function Page() {
   return (
     <div>
-      <Image image={image} alt='Vertic Alley' />
-      <Details subheading='Pen, watercolor & digital' heading='Vertical Alley'>
+      <Image image={image} alt='Magic Alley' />
+      <Details subheading='Pen, watercolor & digital' heading='Magic Alley'>
         <p>
           One more from the magical world to go with my{' '}
           <Link href='/hogwarts'>Magical Castle</Link> cross section.
