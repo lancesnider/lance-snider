@@ -63,9 +63,7 @@
     margin-bottom: 16px;
     img {
       max-width: 100%;
+      animation: fadeIn 0.2s ease-out;
     }
-  }
-
-  .columns__column__content {
   }
 }
