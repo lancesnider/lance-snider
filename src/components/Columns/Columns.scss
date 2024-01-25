@@ -39,6 +39,9 @@
     justify-content: center;
 
     @media screen and (min-width: 1024px) {
+      &.--4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
       &.--3 {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -65,5 +68,24 @@
       max-width: 100%;
       animation: fadeIn 0.2s ease-out;
     }
+  }
+
+  .columns__tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    color: var(--primary);
+    color: #aaa;
+    font-weight: 500;
+  }
+
+  .columns__tag {
+    color: var(--primary);
+    color: #aaa;
+    font-weight: 500;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

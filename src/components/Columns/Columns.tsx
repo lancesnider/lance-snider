@@ -9,13 +9,14 @@ interface Props {
   subheading?: string
   columns: {
     heading: string
-    subheading: string
+    body: string
     alt?: string
     image: {
       src: string
     }
-    link: string
-    linkText: string
+    link?: string
+    linkText?: string
+    tags?: string
   }[]
   defaultColumns?: number
 }
@@ -30,6 +31,7 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
         </div>
         <div
           className={classNames('columns__content', {
+            '--4': defaultColumns === 4,
             '--3': defaultColumns === 3,
             '--2': defaultColumns === 2,
             '--1': defaultColumns === 1,
@@ -40,10 +42,16 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
               <div className='columns__column__image'>
                 <img src={column.image.src} alt={column.alt || ''} />
               </div>
-              <div className='columns__column__content'>
+              <div>
                 <h3>{column.heading}</h3>
-                <p>{column.subheading}</p>
-                <Link href={column.link}>{column.linkText}</Link>
+
+                <p>{column.body}</p>
+                {column.tags && (
+                  <div className='columns__tags'>{column.tags}</div>
+                )}
+                {column.link && column.linkText && (
+                  <Link href={column.link}>{column.linkText}</Link>
+                )}
               </div>
             </div>
           ))}
