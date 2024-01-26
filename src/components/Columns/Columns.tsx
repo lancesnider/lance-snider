@@ -11,12 +11,13 @@ interface Props {
     heading: string
     body: string
     alt?: string
-    image: {
+    image?: {
       src: string
     }
     link?: string
     linkText?: string
     tags?: string
+    component?: () => JSX.Element
   }[]
   defaultColumns?: number
 }
@@ -39,9 +40,18 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
         >
           {columns.map((column, index) => (
             <div key={index} className='columns__column'>
-              <div className='columns__column__image'>
-                <img src={column.image.src} alt={column.alt || ''} />
-              </div>
+              {column.image && (
+                <div className='columns__column__image'>
+                  <img src={column.image.src} alt={column.alt || ''} />
+                </div>
+              )}
+              {column.component && (
+                <div className='columns__column-component-container'>
+                  <div className='columns__column-component'>
+                    {column.component()}
+                  </div>
+                </div>
+              )}
               <div>
                 <h3>{column.heading}</h3>
 

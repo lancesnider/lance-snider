@@ -13,6 +13,8 @@ import offroad from '@/assets/dev/offroad.jpg'
 import rightGuard from '@/assets/dev/right-guard.jpg'
 import utahMovingAds from '@/assets/dev/utah-moving-ads.png'
 
+import BrokeBot from '@/components/BrokeBot/BrokeBot'
+
 export default function Page() {
   return (
     <div>
@@ -86,6 +88,12 @@ export default function Page() {
             link: '/dev/case-studies/zyft-xpath-metadata',
             linkText: 'Learn more',
             tags: 'Unity, C#',
+          },
+          {
+            heading: 'Pure CSS Error Page',
+            body: "There are good reasons to avoid using Javascript on error pages, but that doesn't mean you can't have animation.",
+            component: () => <BrokeBot />,
+            tags: 'CSS, Illustration',
           },
         ]}
       />

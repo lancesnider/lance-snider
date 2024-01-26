@@ -1,0 +1,271 @@
+$clawTweenTime: 1; // how long it takes to open the claws after they snap shut
+$rightClawRepeatDelay: 1; // time between claw snaps
+$leftClawRepeatDelay: 1.7; // time between claw snaps
+
+// body vars
+$bodySwayTime: 2s; // how long it takes to sway left or right
+$bodySwayAmount: 2; // how much it sways (in degrees)
+
+// eye vars
+$blinkRepeatTime: 2.2; // time between each blink
+$eyesMoveRepeatTime: 0.9; // how often the eyes move
+
+#upperBody {
+  animation: swayAnimation $bodySwayTime ease-in-out infinite;
+  transform-origin: 154px 200px;
+}
+
+@keyframes swayAnimation {
+  0% {
+    transform: rotateZ(0);
+  }
+  50% {
+    transform: rotateZ(-7deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+#leftArm {
+  animation: rotateArm $bodySwayTime ease-in-out infinite;
+  animation-delay: -1.5s;
+  transform-origin: 260px 157px;
+}
+
+@keyframes rotateArm {
+  0% {
+    transform: rotateZ(-3deg);
+  }
+  50% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(-3deg);
+  }
+}
+
+#rightLowerArm {
+  animation: swayAnimation2 $bodySwayTime ease-in-out infinite;
+  animation-delay: -1.4s;
+  transform-origin: 130px 155px;
+}
+
+@keyframes swayAnimation2 {
+  0% {
+    transform: rotateZ(0);
+  }
+  50% {
+    transform: rotateZ(10deg);
+  }
+  100% {
+    transform: rotateZ(0);
+  }
+}
+
+#eyesMove {
+  animation: moveEyes 2.2s infinite;
+}
+
+@keyframes moveEyes {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  71% {
+    transform: translate(0px, 0px);
+  }
+  72% {
+    transform: translate(-2px, -1px);
+  }
+  100% {
+    transform: translate(-2px, -1px);
+  }
+}
+
+#eyesBlink {
+  animation: blinkEyes 2.7s infinite;
+  transform-origin: 0% 220px;
+}
+
+@keyframes blinkEyes {
+  0% {
+    transform: scaleY(1);
+  }
+  1% {
+    transform: scaleY(0.2);
+  }
+  5% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+#rightOuterClaw {
+  animation: rotateRightOuterClaw 1.6s infinite ease-in-out;
+  transform-origin: 126px 181.3px;
+}
+
+@keyframes rotateRightOuterClaw {
+  0%,
+  5% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#rightInnerClaw {
+  animation: rotateRightInnerClaw 1.6s infinite ease-in-out;
+  transform-origin: 135px 181.3px;
+}
+
+@keyframes rotateRightInnerClaw {
+  0%,
+  5% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#leftInnerClaw {
+  animation: rotateLeftInnerClaw 2s infinite ease-in-out;
+  transform-origin: 258px 220px;
+}
+
+#leftOuterClaw {
+  animation: rotateLeftOuterClaw 2s infinite ease-in-out;
+  transform-origin: 258px 220px;
+}
+
+@keyframes rotateLeftInnerClaw {
+  0%,
+  5% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotateLeftOuterClaw {
+  0%,
+  5% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+////////////////////////////////////////////
+///
+///
+///
+///
+////////////////////////////////////////////
+
+.robot_holder {
+  display: flex;
+}
+
+.robot_limbs_and_ears {
+  fill: #503643;
+}
+
+.robot_joints_and_belly {
+  fill: #8bca9b;
+}
+
+.error_code {
+  fill: #ceddd1;
+  font-size: 322px;
+}
+
+.robot_body {
+  fill: #56bf9b;
+}
+
+.robot_eye_whites {
+  fill: #f3ecba;
+}
+
+.robot_hands_feet {
+  fill: #e64661;
+}
+
+.robot_antenna {
+  fill: #e64661;
+}
+
+.robot_antenna_highlight {
+  fill: #f2748d;
+}
+
+.robot_eyes {
+  fill: #e64661;
+}
+
+.robot_eyes_highlight {
+  fill: #f2748d;
+}
+
+p {
+  margin: 0;
+  margin-bottom: 1.5em;
+}
+
+.robotpage-top-half {
+  background-color: #d5ebda;
+  overflow: hidden;
+}
+
+#errorCodeTxt {
+  color: #ceddd1;
+}
+
+#brokebotSVG {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  padding-top: 10%;
+}
+
+#robot-text {
+  color: #e54560;
+  text-align: center;
+  font-size: 2em;
+  padding: 0;
+}
+
+.robotpage-bottom-half {
+  padding: 0 16px;
+  font-family: 'Open Sans', sans-serif;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.brokebot {
+  display: flex;
+  flex-direction: column;
+  background-color: #4f3542;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #d5ebda;
+}

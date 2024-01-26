@@ -38,6 +38,15 @@
     gap: 24px;
     justify-content: center;
 
+    @media screen and (min-width: 660px) {
+      &.--4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      &.--3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media screen and (min-width: 1024px) {
       &.--4 {
         grid-template-columns: repeat(4, 1fr);
@@ -87,5 +96,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .columns__column-component-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 74.9%;
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .columns__column-component {
+    position: absolute;
+    background-color: red;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }

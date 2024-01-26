@@ -23,9 +23,9 @@ const Header = () => {
           <Link href='/'>
             <div className='header__link-text'>art</div>
           </Link>
-          {/* <Link href='/dev'>
+          <Link href='/dev'>
             <div className='header__link-text'>dev</div>
-          </Link> */}
+          </Link>
         </div>
         <div className='header__icons'>
           <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
