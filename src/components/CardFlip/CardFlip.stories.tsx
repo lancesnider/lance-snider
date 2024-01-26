@@ -3,7 +3,7 @@ import React from 'react'
 import CardFlip from './CardFlip'
 
 export default {
-  title: 'CardFlip',
+  title: 'Experiments/CardFlip',
   component: CardFlip,
   args: {
     href: 'https://www.google.com',

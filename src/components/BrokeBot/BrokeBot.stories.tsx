@@ -3,7 +3,7 @@ import React from 'react'
 import BrokeBot from './BrokeBot'
 
 export default {
-  title: 'Components/BrokeBot',
+  title: 'Experiments/BrokeBot',
   component: BrokeBot,
   args: {},
 }
