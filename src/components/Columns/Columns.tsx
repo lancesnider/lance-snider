@@ -17,6 +17,7 @@ interface Props {
     link?: string
     linkText?: string
     tags?: string
+    target?: string
     component?: () => JSX.Element
   }[]
   defaultColumns?: number
@@ -40,7 +41,14 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
         >
           {columns.map((column, index) => (
             <div key={index} className='columns__column'>
-              {column.image && (
+              {column.image && column.link && (
+                <div className='columns__column__image'>
+                  <Link href={column.link} target={column.target}>
+                    <img src={column.image.src} alt={column.alt || ''} />
+                  </Link>
+                </div>
+              )}
+              {column.image && !column.link && (
                 <div className='columns__column__image'>
                   <img src={column.image.src} alt={column.alt || ''} />
                 </div>
@@ -60,7 +68,13 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
                   <div className='columns__tags'>{column.tags}</div>
                 )}
                 {column.link && column.linkText && (
-                  <Link href={column.link}>{column.linkText}</Link>
+                  <Link
+                    className='columns__text-link'
+                    href={column.link}
+                    target={column.target}
+                  >
+                    {column.linkText}
+                  </Link>
                 )}
               </div>
             </div>

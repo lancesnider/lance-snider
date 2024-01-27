@@ -10,6 +10,7 @@ import untsLogo from '@/assets/dev/unts-logo.gif'
 import geographyGame from '@/assets/dev/geography-game.jpg'
 
 import offroad from '@/assets/dev/offroad.jpg'
+import zicam from '@/assets/dev/zicam.jpg'
 import rightGuard from '@/assets/dev/right-guard.jpg'
 import utahMovingAds from '@/assets/dev/utah-moving-ads.png'
 
@@ -27,71 +28,64 @@ export default function Page() {
         columns={[
           {
             heading: 'Zyft Browser Extension',
-            body: 'Chrome, Safari (desktop/mobile) extension & snapshot testing for XPath & Metadata Logic that Needs to Work across 40k+ Domains.',
+            body: 'I built the Chrome, Safari (desktop/mobile) extension, plus snapshot testing for XPath & Metadata Logic that needs to work across 40k+ Domains.',
             image: zyft,
             link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
+            linkText: 'Case Study',
             tags: 'React, Typescript, NodeJS',
           },
           {
             heading: 'Milkshake Website Builder',
             body: "Envato's Milkshake let's you build a website right from your phone. Along with 10 other devs, I helped build the mobile site buider and website themes.",
             image: milkshake,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
             tags: 'React Native, Typescript, Design',
           },
           {
             heading: 'Ukraine Siren Alerts',
             body: 'I was lead dev on UASA, a website with real-time missile alerts and a shelter locator for citizens of Ukraine.',
             image: ukraineSirenAlerts,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
+            link: '/dev/case-studies/ukraine-siren-alerts',
+            linkText: 'Case Study',
             tags: 'React, Typescript, Design',
           },
           {
             heading: 'Math Monsters',
             body: 'With over 200k downloads, Math Monsters is a fun way for kids to practice their math skills. I did everything, including the illustration and animation.',
             image: mathMonsters,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
+            link: 'https://apps.apple.com/us/app/math-monsters/id499455175',
+            linkText: 'App Store',
+            target: '_blank',
             tags: 'Unity, C#, Illustration',
           },
           {
             heading: 'Built For Teams',
             body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl id luctus ',
             image: built,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
             tags: 'React, React Native, Typescript, Rails',
           },
           {
-            heading: 'Cheeky *unts',
+            heading: 'Cheeky #unts',
             body: "An NFT project where we raised $50,000 for Australian wildlife charities, including the Australian Koala Foundation and Steve Irwin's Wildlife Warriors.",
             image: untsLogo,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
             tags: 'React, Gatsby',
           },
           {
             heading: "Lance's Art",
             body: "I don't just make pretty code - I also make pretty pictures. Regardless of medium, I'm a little obsessed with the art of storytelling.",
             image: lanceSnider,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
+            link: '/',
+            linkText: "Lance's Art",
             tags: 'React, NextJS',
           },
           {
-            heading: 'VR Geography Game (Prototype)',
-            body: "I don't just make code, I make 2d and 3d art too.",
+            heading: 'VR Geography Game',
+            body: "Standing at the center of an inverted globe, you don't just need to find the country, you need great aim.",
             image: geographyGame,
-            link: '/dev/case-studies/zyft-xpath-metadata',
-            linkText: 'Learn more',
             tags: 'Unity, C#',
           },
           {
-            heading: 'Pure CSS Error Page',
-            body: "There are good reasons to avoid using Javascript on error pages, but that doesn't mean you can't have animation.",
+            heading: 'Pure CSS 404 Page',
+            body: "There are good reasons to avoid using Javascript on error pages, but that doesn't mean you can't have an adorable animation.",
             component: () => <BrokeBot />,
             tags: 'CSS, Illustration',
           },
@@ -101,7 +95,7 @@ export default function Page() {
       <Columns
         heading={'Oldies but Goodies'}
         subheading={
-          "Is it weird to put 15-year-old projects in my portfolio? Not if I was makin' cool ass shit 15 years ago."
+          "Is it weird to put 15-year-old projects in my portfolio? Not if I was makin' killer stuff for big clients 15 years ago!"
         }
         defaultColumns={4}
         columns={[
@@ -119,6 +113,11 @@ export default function Page() {
             heading: 'Utah Moving Ads',
             body: 'This little scene included animated charcters that, when clicked, would explode.',
             image: utahMovingAds,
+          },
+          {
+            heading: 'Zicam Ad',
+            body: 'I loved this dumb little animation with its punchy arms, bounching around like a boxer.',
+            image: zicam,
           },
         ]}
       />
