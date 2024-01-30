@@ -9,13 +9,16 @@ interface Props {
   subheading?: string
   columns: {
     heading: string
-    subheading: string
+    body: string
     alt?: string
-    image: {
+    image?: {
       src: string
     }
-    link: string
-    linkText: string
+    link?: string
+    linkText?: string
+    tags?: string
+    target?: string
+    component?: () => JSX.Element
   }[]
   defaultColumns?: number
 }
@@ -30,6 +33,7 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
         </div>
         <div
           className={classNames('columns__content', {
+            '--4': defaultColumns === 4,
             '--3': defaultColumns === 3,
             '--2': defaultColumns === 2,
             '--1': defaultColumns === 1,
@@ -37,13 +41,41 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
         >
           {columns.map((column, index) => (
             <div key={index} className='columns__column'>
-              <div className='columns__column__image'>
-                <img src={column.image.src} alt={column.alt || ''} />
-              </div>
-              <div className='columns__column__content'>
+              {column.image && column.link && (
+                <div className='columns__column__image'>
+                  <Link href={column.link} target={column.target}>
+                    <img src={column.image.src} alt={column.alt || ''} />
+                  </Link>
+                </div>
+              )}
+              {column.image && !column.link && (
+                <div className='columns__column__image'>
+                  <img src={column.image.src} alt={column.alt || ''} />
+                </div>
+              )}
+              {column.component && (
+                <div className='columns__column-component-container'>
+                  <div className='columns__column-component'>
+                    {column.component()}
+                  </div>
+                </div>
+              )}
+              <div>
                 <h3>{column.heading}</h3>
-                <p>{column.subheading}</p>
-                <Link href={column.link}>{column.linkText}</Link>
+
+                <p>{column.body}</p>
+                {column.tags && (
+                  <div className='columns__tags'>{column.tags}</div>
+                )}
+                {column.link && column.linkText && (
+                  <Link
+                    className='columns__text-link'
+                    href={column.link}
+                    target={column.target}
+                  >
+                    {column.linkText}
+                  </Link>
+                )}
               </div>
             </div>
           ))}
