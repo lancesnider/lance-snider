@@ -13,6 +13,7 @@ import offroad from '@/assets/dev/offroad.jpg'
 import zicam from '@/assets/dev/zicam.jpg'
 import rightGuard from '@/assets/dev/right-guard.jpg'
 import utahMovingAds from '@/assets/dev/utah-moving-ads.png'
+import skywest from '@/assets/dev/skywest-mba.jpg'
 
 import BrokeBot from '@/components/BrokeBot/BrokeBot'
 
@@ -95,7 +96,7 @@ export default function Page() {
       <Columns
         heading={'Oldies but Goodies'}
         subheading={
-          "Is it weird to put 15-year-old projects in my portfolio? Not if I was makin' killer stuff for big clients 15 years ago!"
+          "Is it weird to put 20-year-old projects in my portfolio? Maybe, but I'm really proud of what I was able to achieve back when my experience and the tech were so limited."
         }
         defaultColumns={4}
         columns={[
@@ -114,10 +115,15 @@ export default function Page() {
             body: 'This little scene included animated charcters that, when clicked, would explode.',
             image: utahMovingAds,
           },
+          // {
+          //   heading: 'Zicam Ad',
+          //   body: 'I loved this dumb little animation with its punchy arms, bounching around like a boxer.',
+          //   image: zicam,
+          // },
           {
-            heading: 'Zicam Ad',
-            body: 'I loved this dumb little animation with its punchy arms, bounching around like a boxer.',
-            image: zicam,
+            heading: 'SkyWest Airlines',
+            body: 'Interactive 3D (actually rendered & 2.5D) training modules for all kinds of airline equipment.',
+            image: skywest,
           },
         ]}
       />
