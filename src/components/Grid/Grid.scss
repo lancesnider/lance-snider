@@ -10,6 +10,14 @@
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 
+    &.--3 {
+      grid-template-columns: 1fr;
+
+      @media screen and (min-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
     img {
       width: 100%;
       max-width: 500px;

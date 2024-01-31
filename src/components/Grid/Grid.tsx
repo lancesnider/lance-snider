@@ -1,12 +1,17 @@
 import React from 'react'
 
 import './Grid.scss'
+import classNames from 'classnames'
 
-const Grid = ({ images }: any) => {
-  console.log(images)
+const Grid = ({ images, columns }: any) => {
   return (
     <div className='grid'>
-      <div className='grid__content'>
+      <div
+        className={classNames('grid__content', {
+          '--2': columns === 2,
+          '--3': columns === 3,
+        })}
+      >
         {images.map((img: any) => {
           return (
             <img key={img.image.src} src={img.image.src} alt={img.image.alt} />
