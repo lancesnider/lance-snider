@@ -17,10 +17,12 @@
       object-fit: cover;
     }
 
-    &:hover {
-      z-index: 100;
-      .react-masonry__image-hover {
-        border: 8px solid #f639bc;
+    @media screen and (min-width: 1024px) {
+      &:hover {
+        z-index: 100;
+        .react-masonry__image-hover {
+          border: 8px solid #f639bc;
+        }
       }
     }
   }
@@ -54,10 +56,12 @@
         object-fit: cover;
       }
 
-      &:hover {
-        z-index: 100;
-        .react-masonry__image-hover {
-          border: 8px solid #f639bc;
+      @media screen and (min-width: 1024px) {
+        &:hover {
+          z-index: 100;
+          .react-masonry__image-hover {
+            border: 8px solid #f639bc;
+          }
         }
       }
     }
