@@ -60,9 +60,9 @@ export default function Page() {
           },
           {
             heading: 'Built For Teams',
-            body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl id luctus ',
+            body: 'I worked on everything from the mobile app to the browser extension to the website.',
             image: built,
-            tags: 'React, React Native, Typescript, Rails',
+            tags: 'React, React Native, Typescript',
           },
           {
             heading: 'Cheeky #unts',
