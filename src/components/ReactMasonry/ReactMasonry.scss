@@ -1,5 +1,10 @@
 .react-masonry {
   min-height: 100vh;
+  margin: 0 -18px;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 
   img {
     animation: fadeIn 0.2s ease-out;

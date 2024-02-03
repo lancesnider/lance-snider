@@ -10,7 +10,7 @@ import untsLogo from '@/assets/dev/unts-logo.gif'
 import geographyGame from '@/assets/dev/geography-game.jpg'
 
 import offroad from '@/assets/dev/offroad.jpg'
-import zicam from '@/assets/dev/zicam.jpg'
+// import zicam from '@/assets/dev/zicam.jpg'
 import rightGuard from '@/assets/dev/right-guard.jpg'
 import utahMovingAds from '@/assets/dev/utah-moving-ads.png'
 import skywest from '@/assets/dev/skywest-mba.jpg'
@@ -21,10 +21,8 @@ export default function Page() {
   return (
     <div>
       <Columns
-        heading='Portfolio'
-        subheading={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl id luctus '
-        }
+        heading='My Portfolio'
+        subheading="Hi, I'm Lance! I'm a mobile, web, game, and extension developer with over 20 years of experience and a particular focus on interactive experiences. I've done work for major brands like the NBA, Right Guard, Estee Lauder, and Zicam and am here for your next project."
         defaultColumns={3}
         columns={[
           {
@@ -96,7 +94,7 @@ export default function Page() {
       <Columns
         heading={'Oldies but Goodies'}
         subheading={
-          "Is it weird to put 20-year-old projects in my portfolio? Maybe, but I'm really proud of what I was able to achieve back when my experience and the tech were so limited."
+          "Is it weird to put 15-year-old projects in my portfolio? Maybe, but I'm really proud of what I was able to achieve back when my experience and the tech were so limited."
         }
         defaultColumns={4}
         columns={[
