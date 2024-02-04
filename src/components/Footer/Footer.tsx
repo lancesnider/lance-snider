@@ -24,12 +24,12 @@ const Footer = () => {
           Or dev. Or artsy dev.
         </div>
 
-        <Button onClick={copyContact} primary width={200}>
+        <Button onClick={copyContact} width={200}>
           {copySuccess ? 'Copied!' : 'Copy My Email'}
         </Button>
 
         <div className='footer__links'>
-          <Link href='https://www.instagram.com/lances_art/'>art</Link>
+          <Link href='/'>art</Link>
           <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
           <Link href='https://www.etsy.com/shop/artbylance'>etsy</Link>
         </div>

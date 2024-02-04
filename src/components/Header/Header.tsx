@@ -10,9 +10,9 @@ import './Header.scss'
 
 const Header = () => {
   return (
-    <div className='header'>
+    <header className='header'>
       <Link href='/' className='header__left'>
-        <img src={logo.src} alt='logo' />
+        <img src={logo.src} alt='Lance Snider Logo' />
         <div className='header__name'>
           <div>lance</div>
           <div className='header__last-name'>snider</div>
@@ -28,15 +28,23 @@ const Header = () => {
           </Link>
         </div>
         <div className='header__icons'>
-          <a target='_blank' href='https://www.etsy.com/shop/artbylance'>
+          <a
+            target='_blank'
+            href='https://www.etsy.com/shop/artbylance'
+            aria-label='Etsy'
+          >
             <FontAwesomeIcon icon={faEtsy} height={16} />
           </a>
-          <a target='_blank' href='https://www.instagram.com/lances_art/'>
+          <a
+            target='_blank'
+            href='https://www.instagram.com/lances_art/'
+            aria-label='Instagram'
+          >
             <FontAwesomeIcon icon={faInstagram} height={16} />
           </a>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

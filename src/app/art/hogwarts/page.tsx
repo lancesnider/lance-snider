@@ -13,18 +13,22 @@ const images = [
   {
     image: detail3,
     key: 'detail3',
+    alt: 'Magical Castle Work in Progress',
   },
   {
     image: detail4,
     key: 'detail4',
+    alt: 'Magical Castle Detail 2',
   },
   {
     image: detail1,
     key: 'detail1',
+    alt: 'Magical Castle Detail 3',
   },
   {
     image: detail2,
     key: 'detail2',
+    alt: 'Magical Castle Detail 4',
   },
 ]
 
@@ -46,7 +50,6 @@ export default function Page() {
             href='https://www.etsy.com/listing/1004430653/magical-castle-rising-from-the-ashes?click_key=cdc5912a948eefa871954d28f46a68d53af93ad0%3A1004430653&click_sum=658bc75b&ref=shop_home_recs_2&crt=1'
             target='_blank'
             rel='noopener noreferrer'
-            primary
           >
             Color Prints
           </Button>

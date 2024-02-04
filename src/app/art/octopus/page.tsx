@@ -14,7 +14,6 @@ export default function Page() {
             href='https://www.etsy.com/listing/939435722/giant-pacific-octopus-charcoal-digital?click_key=fa710c2a8214c41327fdfb2ce6ed18530242def5%3A939435722&click_sum=d62ab13a&ref=shop_home_recs_9'
             target='_blank'
             rel='noopener noreferrer'
-            primary
           >
             Prints
           </Button>

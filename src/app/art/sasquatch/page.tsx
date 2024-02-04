@@ -15,7 +15,6 @@ export default function Page() {
             href='https://www.etsy.com/listing/1198676414/bigfoot-sasquatch-doesnt-like-his'
             target='_blank'
             rel='noopener noreferrer'
-            primary
           >
             Buy Prints
           </Button>

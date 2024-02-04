@@ -44,13 +44,13 @@ const Columns = ({ heading, subheading, columns, defaultColumns }: Props) => {
               {column.image && column.link && (
                 <div className='columns__column__image'>
                   <Link href={column.link} target={column.target}>
-                    <img src={column.image.src} alt={column.alt || ''} />
+                    <img src={column.image.src} alt={column.heading || ''} />
                   </Link>
                 </div>
               )}
               {column.image && !column.link && (
                 <div className='columns__column__image'>
-                  <img src={column.image.src} alt={column.alt || ''} />
+                  <img src={column.image.src} alt={column.heading || ''} />
                 </div>
               )}
               {column.component && (

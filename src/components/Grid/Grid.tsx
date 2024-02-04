@@ -13,9 +13,7 @@ const Grid = ({ images, columns }: any) => {
         })}
       >
         {images.map((img: any) => {
-          return (
-            <img key={img.image.src} src={img.image.src} alt={img.image.alt} />
-          )
+          return <img key={img.image.src} src={img.image.src} alt={img.alt} />
         })}
       </div>
     </div>

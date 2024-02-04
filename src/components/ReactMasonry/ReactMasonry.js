@@ -28,10 +28,12 @@ const ReactMasonry = ({images}) => {
             return (
               <Link
                 href={groupedImage.link}
-                className='react-masonry__group' key={groupedImage.key}>
+                className='react-masonry__group' key={groupedImage.key}
+                alt={image.alt}
+              >
                 <div className='react-masonry__image-hover' />
                 <img
-                  alt={image.alt}
+                  alt={groupedImage.alt}
                   src={image.src}
                   className='react-masonry__group-image'
                 />
@@ -53,11 +55,12 @@ const ReactMasonry = ({images}) => {
           left: left,
           top: top,
         }}
+        alt={photo.alt}
         key={photo.key}
       >
         <div className='react-masonry__image-hover' />
         <img
-          alt={photo.title}
+          alt={photo.alt}
           src={photo.image.src}
         />
       </Link>
