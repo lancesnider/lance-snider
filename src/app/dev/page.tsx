@@ -54,7 +54,7 @@ export default function Page() {
             link: 'https://apps.apple.com/us/app/math-monsters/id499455175',
             linkText: 'App Store',
             target: '_blank',
-            tags: 'Unity, C#, Illustration',
+            tags: 'iOS, Unity, C#, Illustration',
           },
           {
             heading: 'Built For Teams',
@@ -80,7 +80,7 @@ export default function Page() {
             heading: 'VR Geography Game',
             body: "Standing at the center of an inverted globe, you don't just need to find the country, you need great aim.",
             image: geographyGame,
-            tags: 'Unity, C#',
+            tags: 'Unity, C#, VR',
           },
           {
             heading: 'Pure CSS 404 Page',
