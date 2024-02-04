@@ -46,10 +46,10 @@ body {
 
   h2 {
     font-size: 13px;
-    text-transform: uppercase;
-    color: #ccc;
-    margin-bottom: 32px;
+    text-transform: lowercase;
+
     font-weight: 700;
+    color: var(--primary);
   }
 
   p {
@@ -76,10 +76,14 @@ body {
 
 hr {
   max-width: 48px;
-  margin: 144px auto 0;
+  margin: 48px auto 0;
   text-align: center;
   border: none;
   border-top: 1px solid #f639bc;
+
+  @media screen and (min-width: 768px) {
+    margin: 144px auto 0;
+  }
 }
 
 // :root {

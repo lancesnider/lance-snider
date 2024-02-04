@@ -1,14 +1,27 @@
 .image {
-  width: 100%;
-  margin-bottom: 72px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
+  margin: 0 -18px 72px;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 0 72px;
+    width: 100%;
+  }
 
   &.-sm {
+    margin: 0 0 72px;
+    width: 100%;
+
     img {
       max-width: 700px;
     }
+  }
+
+  .image__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 -10px;
   }
 
   img {

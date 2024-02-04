@@ -18,11 +18,10 @@ const Footer = () => {
     <>
       <hr />
       <div className='footer'>
-        <h2>God I love coloring</h2>
         <div className='footer__heading'>
           Let's chat about doing art.
           <br />
-          Or dev&hellip; or artsy dev.
+          Or dev. Or artsy dev.
         </div>
 
         <Button onClick={copyContact} primary width={200}>

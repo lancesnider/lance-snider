@@ -1,6 +1,5 @@
 .footer {
-  padding-top: 144px;
-  padding-bottom: 72px;
+  padding-top: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,10 +10,12 @@
     font-weight: 700;
     max-width: 680px;
     text-align: center;
-    margin-bottom: 72px;
+    margin-bottom: 24px;
+    text-transform: lowercase;
 
     @media screen and (min-width: 768px) {
       font-size: 48px;
+      margin-bottom: 36px;
     }
   }
 
@@ -27,11 +28,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 72px 0;
+    margin: 36px 0 48px;
 
     @media screen and (min-width: 768px) {
       flex-direction: row;
-      margin-bottom: 144px;
+      margin: 36px 0 72px;
+      margin-bottom: px;
     }
 
     font-weight: 700;

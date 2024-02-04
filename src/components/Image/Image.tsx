@@ -17,7 +17,9 @@ const Image = ({ image, alt, sm }: Props) => {
         '-sm': sm,
       })}
     >
-      <NextImage src={image} alt={alt} />
+      <div className='image__container'>
+        <NextImage src={image} alt={alt} />
+      </div>
     </div>
   )
 }
