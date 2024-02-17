@@ -9,7 +9,7 @@ export default {
 }
 
 const Template = (args: any) => (
-  <div style={{ height: '100vh' }}>
+  <div style={{ height: '100vh', paddingTop: 32 }}>
     <Cassowary {...args} />
   </div>
 )
