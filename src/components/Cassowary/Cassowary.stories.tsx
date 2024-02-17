@@ -3,7 +3,7 @@ import React from 'react'
 import Cassowary from './Cassowary'
 
 export default {
-  title: 'Components/Cassowary',
+  title: 'Animations/Cassowary',
   component: Cassowary,
   args: {},
 }

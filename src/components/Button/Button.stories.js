@@ -3,7 +3,7 @@ import React from "react";
 import Button from "./Button";
 
 export default {
-  title: "Button",
+  title: "Lances_art Site/Button",
   component: Button,
   args: {
     href: "https://google.com",

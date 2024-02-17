@@ -3,7 +3,7 @@ import React from 'react'
 import Seagulls from './Seagulls'
 
 export default {
-  title: 'Components/Seagulls',
+  title: 'Animations/Seagulls',
   component: Seagulls,
   args: {},
 }
