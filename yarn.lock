@@ -1992,6 +1992,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gsap/react@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@gsap/react@npm:2.1.0"
+  dependencies:
+    gsap: "npm:^3.12.4"
+    react: "npm:>=16"
+  checksum: 00ec2d2e312aae8ba56d323e373b70255e67b3825490c92087a18b02405711b31cfe7569e8c9eaf342b5b5c89e6716c6e16e1825ff751aa834c3ce9134f95b73
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -3125,6 +3135,24 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.13.10"
   checksum: 4c5159661340acc31b11e1f2ebd87a1521d39bfa287544dd2cd75b399539a4b625d38a1501c90ceae21fcca18ed164b0c3735817ff140ae334098192c110e571
+  languageName: node
+  linkType: hard
+
+"@rive-app/canvas@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@rive-app/canvas@npm:2.10.1"
+  checksum: a96e9b28b0a14971b34f9eb7c6d82220b850e7b3331c76be80a1d5b3e8dc79e90169a9feeacb544044d037548a9f9cee0230f9941a4fd51d381b325fcaa2f59b
+  languageName: node
+  linkType: hard
+
+"@rive-app/react-canvas@npm:^4.8.1":
+  version: 4.8.1
+  resolution: "@rive-app/react-canvas@npm:4.8.1"
+  dependencies:
+    "@rive-app/canvas": "npm:2.10.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 4bf836974f10b7cb264a0c9ea607374b288964c05d14b792fd59d958c8ced60515d5e9a99f820fa3a0b2b04cf75ed15a83c8090e9502e1b838974b3e5800e7dc
   languageName: node
   linkType: hard
 
@@ -9828,8 +9856,10 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": "npm:^6.5.1"
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
+    "@gsap/react": "npm:^2.1.0"
     "@mui/lab": "npm:^5.0.0-alpha.158"
     "@mui/material": "npm:^5.15.2"
+    "@rive-app/react-canvas": "npm:^4.8.1"
     "@storybook/addon-essentials": "npm:^7.6.6"
     "@storybook/addon-interactions": "npm:^7.6.6"
     "@storybook/addon-links": "npm:^7.6.6"
@@ -11992,7 +12022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18":
+"react@npm:>=16, react@npm:^18":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
