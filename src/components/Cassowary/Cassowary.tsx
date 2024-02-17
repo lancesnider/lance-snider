@@ -8,7 +8,7 @@ const STATE_MACHINE_NAME = 'State Machine 1'
 
 export default function Example() {
   const { RiveComponent } = useRive({
-    src: '/rive/Cassowary.riv',
+    src: '/rive/cassowary.riv',
     stateMachines: STATE_MACHINE_NAME,
     layout: new Layout({
       fit: Fit.Cover,
