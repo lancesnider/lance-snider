@@ -43,7 +43,6 @@ export default function Example() {
 
     setValue(valueAsNumber)
 
-    // @ts-ignore
     riveValue.value = valueAsNumber
   }
 
