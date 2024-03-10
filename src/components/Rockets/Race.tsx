@@ -1,8 +1,6 @@
-import React, { createRef, useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
-
-import Rocket from './Rocket'
 
 import './Race.scss'
 import classNames from 'classnames'
@@ -44,9 +42,7 @@ const Race = ({ users, totalDuration }: Props) => {
   return (
     <div className='race' ref={raceRef}>
       {users.map(({ id }, index) => (
-        <div key={id} className={classNames('rocket', `rocket${index}`)}>
-          <Rocket />
-        </div>
+        <div key={id} className={classNames('rocket', `rocket${index}`)}></div>
       ))}
     </div>
   )
