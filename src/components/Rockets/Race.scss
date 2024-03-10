@@ -1,0 +1,13 @@
+.race {
+  height: 500px;
+  width: 500px;
+  background-color: black;
+  position: relative;
+
+  .rocket {
+    position: absolute;
+    width: 50px;
+    height: 100px;
+    bottom: 0;
+  }
+}
