@@ -1,0 +1,43 @@
+.arcade {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  .arcade__centered {
+    width: 100%;
+  }
+
+  .arcade__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 24px;
+  }
+
+  .arcade__rive {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .arcade__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    background-color: white;
+    padding: 16px;
+
+    div {
+      width: 100%;
+    }
+  }
+}

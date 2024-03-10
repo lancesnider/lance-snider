@@ -19,7 +19,7 @@ import { isNumber } from 'lodash'
 const STATE_MACHINE_NAME = 'State Machine - Flag'
 
 export default function Example() {
-  const [flagSolo, setFlagSolo] = useState(0)
+  const [flagSolo, setFlagSolo] = useState(2)
 
   const { rive, RiveComponent } = useRive({
     src: '/rive/flag_animation.riv',
