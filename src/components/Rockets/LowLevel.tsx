@@ -7,13 +7,15 @@ import {
   getArtboardByName,
   getInput,
 } from './utils/riveUtils'
+import { forEach } from 'lodash'
+
 const CANVAS_WIDTH = 1600
 const CANVAS_HEIGHT = 1600
 const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
 
-const position = { x: 0, y: 0 }
+// const position = { x: 0, y: 0 }
 
 interface RaceSegment {
   time: number
@@ -33,10 +35,13 @@ interface User {
 interface Props {
   raceData: {
     users: User[]
+    duration: number
   }
 }
 
 const RiveAnimation = ({ raceData }: Props) => {
+  const { users, duration } = raceData
+
   const { canvasRef, rive, renderer, riveFile, InputType } = useRiveCanvas({
     wasmUrl: RIVE_WASM_URL,
     dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
@@ -47,42 +52,45 @@ const RiveAnimation = ({ raceData }: Props) => {
     async function loadRive() {
       if (!rive || !renderer) return
 
-      const bomberArtboard = getArtboardByName(riveFile, 'bomber')
-      const bomberStateMachine = getStateMachineByName(
-        rive,
-        bomberArtboard,
-        'State Machine 1'
-      )
-      const bomberDestruction = getInput(
-        bomberStateMachine,
-        InputType.Trigger,
-        'destruction'
-      )
+      const riveRace = users.map(({ ship, race }, index) => {
+        const artboard = getArtboardByName(riveFile, ship)
+        const stateMachine = getStateMachineByName(
+          rive,
+          artboard,
+          'State Machine 1'
+        )
+        const destructionTrigger = getInput(
+          stateMachine,
+          InputType.Trigger,
+          'destruction'
+        )
 
-      const fighterArtboard = getArtboardByName(riveFile, 'fighter')
-      const fighterStateMachine = getStateMachineByName(
-        rive,
-        fighterArtboard,
-        'State Machine 1'
-      )
-      const fighterDestruction = getInput(
-        fighterStateMachine,
-        InputType.Trigger,
-        'destruction'
-      )
+        const position = { x: index * 320, y: 1300 }
+
+        const tl = gsap.timeline({ delay: 2 })
+
+        race.map(({ x, y, time, onCompleteTrigger }) => {
+          tl.to(position, {
+            x: x,
+            y: y,
+            duration: time * duration,
+            onComplete: () => {
+              if (onCompleteTrigger && destructionTrigger) {
+                destructionTrigger.fire()
+              }
+            },
+          })
+        })
+
+        return {
+          artboard,
+          stateMachine,
+          destructionTrigger,
+          position,
+        }
+      })
 
       let lastTime = 0
-
-      gsap.to(position, {
-        x: 200,
-        y: 400,
-        duration: 4,
-        onComplete: () => {
-          if (bomberDestruction) {
-            bomberDestruction.fire()
-          }
-        },
-      })
 
       function renderLoop(time: number) {
         if (!rive || !renderer) return
@@ -94,9 +102,10 @@ const RiveAnimation = ({ raceData }: Props) => {
         const elapsedTimeSec = elapsedTimeMs / 1000
         lastTime = time
         renderer.clear()
-        if (bomberArtboard && bomberStateMachine) {
-          bomberStateMachine.advance(elapsedTimeSec)
-          bomberArtboard.advance(elapsedTimeSec)
+
+        forEach(riveRace, ({ artboard, stateMachine, position }) => {
+          stateMachine.advance(elapsedTimeSec)
+          artboard.advance(elapsedTimeSec)
 
           renderer.save()
           renderer.align(
@@ -105,34 +114,15 @@ const RiveAnimation = ({ raceData }: Props) => {
             {
               minX: position.x,
               minY: position.y,
-              maxX: position.x + 220,
-              maxY: position.y + 220,
+              maxX: position.x + artboard.bounds.maxX,
+              maxY: position.y + artboard.bounds.maxY,
             },
-            bomberArtboard.bounds
+            artboard.bounds
           )
-          bomberArtboard.draw(renderer)
-          renderer.restore()
-        }
 
-        if (fighterArtboard && bomberStateMachine) {
-          bomberStateMachine.advance(elapsedTimeSec)
-          fighterArtboard.advance(elapsedTimeSec)
-
-          renderer.save()
-          renderer.align(
-            rive.Fit.contain,
-            rive.Alignment.topCenter,
-            {
-              minX: position.y + 200,
-              minY: position.x,
-              maxX: position.y + 420,
-              maxY: position.x + 220,
-            },
-            fighterArtboard.bounds
-          )
-          fighterArtboard.draw(renderer)
+          artboard.draw(renderer)
           renderer.restore()
-        }
+        })
 
         rive.requestAnimationFrame(renderLoop)
       }
@@ -145,7 +135,7 @@ const RiveAnimation = ({ raceData }: Props) => {
     return () => {
       // Perform any necessary clean-up here
     }
-  }, [rive, renderer, riveFile])
+  }, [rive, renderer, riveFile, users])
 
   return (
     <canvas
