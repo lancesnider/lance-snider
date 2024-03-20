@@ -15,7 +15,28 @@ const RIVE_WASM_URL =
 
 const position = { x: 0, y: 0 }
 
-function RiveAnimation() {
+interface RaceSegment {
+  time: number
+  x: number
+  y: number
+  onCompleteTrigger?: string
+}
+
+interface User {
+  id: string
+  name: string
+  ship: string
+  place?: number
+  race: RaceSegment[]
+}
+
+interface Props {
+  raceData: {
+    users: User[]
+  }
+}
+
+const RiveAnimation = ({ raceData }: Props) => {
   const { canvasRef, rive, renderer, riveFile, InputType } = useRiveCanvas({
     wasmUrl: RIVE_WASM_URL,
     dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
