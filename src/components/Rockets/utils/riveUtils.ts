@@ -1,4 +1,8 @@
-import { SMIInput, StateMachineInstance } from '@rive-app/canvas-advanced'
+import {
+  Artboard,
+  SMIInput,
+  StateMachineInstance,
+} from '@rive-app/canvas-advanced'
 
 enum InputType {
   Number = 'number',
@@ -53,4 +57,57 @@ const getStateMachineByName = (rive: any, artboard: any, name: string) => {
   )
 }
 
-export { getInput, InputType, getArtboardByName, getStateMachineByName }
+const advanceStateMachines = (
+  artboards: StateMachineInstance[],
+  elapsedTimeSec: number
+) => {
+  artboards.forEach((artboard) => {
+    if (!artboard) return
+    artboard.advance(elapsedTimeSec)
+  })
+}
+
+const advanceArtboards = (artboards: Artboard[], elapsedTimeSec: number) => {
+  artboards.forEach((artboard) => {
+    if (!artboard) return
+    artboard.advance(elapsedTimeSec)
+  })
+}
+
+const drawArtboards = (
+  artboards: { artboard: Artboard; position?: { x: number; y: number } }[],
+  renderer: any,
+  rive: any
+) => {
+  artboards.forEach(({ artboard, position }) => {
+    // renderer.clear()
+    if (!artboard) return
+
+    if (position) {
+      console.log('position', position)
+      renderer.translate(position.x, position.y)
+      //   renderer.align(
+      //     rive.Fit.contain,
+      //     rive.Alignment.topCenter,
+      //     {
+      //       minX: position.x,
+      //       minY: position.y,
+      //       maxX: position.x + 220,
+      //       maxY: position.y + 220,
+      //     },
+      //     artboard.bounds
+      //   )
+    }
+    renderer.save()
+    artboard.draw(renderer)
+  })
+}
+
+export {
+  getInput,
+  InputType,
+  getArtboardByName,
+  getStateMachineByName,
+  // advanceStateMachines,
+  // advanceArtboards,
+}

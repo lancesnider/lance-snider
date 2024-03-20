@@ -26,15 +26,26 @@ function RiveAnimation() {
     async function loadRive() {
       if (!rive || !renderer) return
 
-      const bomberArtboard = getArtboardByName(riveFile, 'fighter')
+      const bomberArtboard = getArtboardByName(riveFile, 'bomber')
       const bomberStateMachine = getStateMachineByName(
         rive,
         bomberArtboard,
         'State Machine 1'
       )
-
       const bomberDestruction = getInput(
         bomberStateMachine,
+        InputType.Trigger,
+        'destruction'
+      )
+
+      const fighterArtboard = getArtboardByName(riveFile, 'fighter')
+      const fighterStateMachine = getStateMachineByName(
+        rive,
+        fighterArtboard,
+        'State Machine 1'
+      )
+      const fighterDestruction = getInput(
+        fighterStateMachine,
         InputType.Trigger,
         'destruction'
       )
@@ -43,7 +54,7 @@ function RiveAnimation() {
 
       gsap.to(position, {
         x: 200,
-        y: 200,
+        y: 400,
         duration: 4,
         onComplete: () => {
           if (bomberDestruction) {
@@ -62,11 +73,10 @@ function RiveAnimation() {
         const elapsedTimeSec = elapsedTimeMs / 1000
         lastTime = time
         renderer.clear()
-        if (bomberArtboard) {
-          if (bomberStateMachine) {
-            bomberStateMachine.advance(elapsedTimeSec)
-          }
+        if (bomberArtboard && bomberStateMachine) {
+          bomberStateMachine.advance(elapsedTimeSec)
           bomberArtboard.advance(elapsedTimeSec)
+
           renderer.save()
           renderer.align(
             rive.Fit.contain,
@@ -82,6 +92,27 @@ function RiveAnimation() {
           bomberArtboard.draw(renderer)
           renderer.restore()
         }
+
+        if (fighterArtboard && bomberStateMachine) {
+          bomberStateMachine.advance(elapsedTimeSec)
+          fighterArtboard.advance(elapsedTimeSec)
+
+          renderer.save()
+          renderer.align(
+            rive.Fit.contain,
+            rive.Alignment.topCenter,
+            {
+              minX: position.y + 200,
+              minY: position.x,
+              maxX: position.y + 420,
+              maxY: position.x + 220,
+            },
+            fighterArtboard.bounds
+          )
+          fighterArtboard.draw(renderer)
+          renderer.restore()
+        }
+
         rive.requestAnimationFrame(renderLoop)
       }
       rive.requestAnimationFrame(renderLoop)
