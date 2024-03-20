@@ -74,6 +74,7 @@ const RiveAnimation = ({ raceData }: Props) => {
             x: x,
             y: y,
             duration: time * duration,
+            ease: 'back.inOut',
             onComplete: () => {
               if (onCompleteTrigger && destructionTrigger) {
                 destructionTrigger.fire()
