@@ -22,15 +22,15 @@ const raceData = {
       id: '2',
       name: 'Lance',
       ship: 'frigate',
-      race: [{ time: 0.3, x: 1220, y: 1240, onCompleteTrigger: 'destroy' }],
+      race: [{ time: 0.2, x: 1220, y: 1240, onCompleteTrigger: 'destroy' }],
     },
     {
       id: '3',
       name: 'Brad',
       ship: 'bomber',
       race: [
-        { time: 0.1, x: 420, y: 740 },
-        { time: 0.3, x: 0, y: 0, onCompleteTrigger: 'destroy' },
+        { time: 0.15, x: 420, y: 740 },
+        { time: 0.1, x: 0, y: 0, onCompleteTrigger: 'destroy' },
       ],
     },
   ],

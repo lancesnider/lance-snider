@@ -22,6 +22,9 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
   const [renderer, setRenderer] = useState<WrappedRenderer | null>(null)
   const [mainRiveFile, setMainRiveFile] = useState<any>(null)
+  const [context2d, setContext2d] = useState<CanvasRenderingContext2D | null>(
+    null
+  )
 
   const canvasRef = useRef(null)
 
@@ -43,7 +46,9 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
       const riveFile = await fetch(riveFileUrl)
       const arrayBuffer = await riveFile.arrayBuffer()
       const mainRive = await rive.load(new Uint8Array(arrayBuffer))
+      const context = mainCanvas.getContext('2d')
 
+      setContext2d(context)
       setCanvas(mainCanvas)
       setRenderer(renderer)
       setRive(rive)
@@ -54,6 +59,7 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
   }, [])
 
   return {
+    context2d,
     canvasRef,
     rive,
     canvas,
