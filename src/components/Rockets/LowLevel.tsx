@@ -78,7 +78,7 @@ const RiveAnimation = ({ raceData }: Props) => {
           'destruction'
         )
 
-        const position = { x: index * 320, y: 1300 }
+        const position = { x: index * 250, y: 1300 }
 
         const tl = gsap.timeline({ delay: 2 })
 
