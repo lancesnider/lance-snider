@@ -58,6 +58,13 @@ const RiveAnimation = ({ raceData }: Props) => {
     async function loadRive() {
       if (!rive || !renderer) return
 
+      const starsArtboard = getArtboardByName(riveFile, 'stars')
+      const starsStateMachine = getStateMachineByName(
+        rive,
+        starsArtboard,
+        'State Machine 1'
+      )
+
       const riveRace = users.map(({ ship, race, id }, index) => {
         const artboard = getArtboardByName(riveFile, ship)
         const stateMachine = getStateMachineByName(
@@ -117,27 +124,21 @@ const RiveAnimation = ({ raceData }: Props) => {
         lastTime = time
         renderer.clear()
 
-        users.map(({ place, name, alive }) => {
-          if (!place || !alive) return
-          renderer.beginPath()
-          renderer.lineWidth = 1
-          renderer.strokeStyle = 'red'
-          renderer.rect(
-            PLACE_X,
-            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
-            PLACE_WIDTH,
-            PLACE_HEIGHT
-          )
-          renderer.stroke()
-
-          renderer.fillText(
-            name,
-            PLACE_X + 40,
-            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
-          )
-          renderer.fillStyle = 'green'
-          renderer.font = '48px serif'
-        })
+        starsStateMachine.advance(elapsedTimeSec)
+        starsArtboard.advance(elapsedTimeSec)
+        renderer.save()
+        renderer.align(
+          rive.Fit.contain,
+          rive.Alignment.topCenter,
+          {
+            minX: 0,
+            minY: 0,
+            maxX: 1600,
+            maxY: 1600,
+          },
+          starsArtboard.bounds
+        )
+        starsArtboard.draw(renderer)
 
         riveRace.map(({ artboard, stateMachine, position, id }) => {
           stateMachine.advance(elapsedTimeSec)
@@ -183,6 +184,28 @@ const RiveAnimation = ({ raceData }: Props) => {
               user.place = index + 1
             }
           })
+        })
+
+        users.map(({ place, name, alive }) => {
+          if (!place || !alive) return
+          renderer.beginPath()
+          renderer.lineWidth = 1
+          renderer.strokeStyle = 'red'
+          renderer.rect(
+            PLACE_X,
+            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
+            PLACE_WIDTH,
+            PLACE_HEIGHT
+          )
+          renderer.stroke()
+
+          renderer.fillText(
+            name,
+            PLACE_X + 40,
+            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
+          )
+          renderer.fillStyle = 'green'
+          renderer.font = '48px serif'
         })
 
         // Canvas (not Rivet) stuff
