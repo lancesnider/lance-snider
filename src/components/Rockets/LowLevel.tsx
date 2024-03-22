@@ -7,13 +7,19 @@ import {
   getArtboardByName,
   getInput,
 } from './utils/riveUtils'
-import { find, forEach } from 'lodash'
+import { forEach } from 'lodash'
 
 const CANVAS_WIDTH = 1600
 const CANVAS_HEIGHT = 1600
 const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
+
+const PLACE_WIDTH = 400
+const PLACE_HEIGHT = 100
+const PLACE_SPACING = 16
+const PLACE_FULL_HEIGHT = PLACE_HEIGHT + PLACE_SPACING
+const PLACE_X = CANVAS_WIDTH - PLACE_WIDTH - PLACE_SPACING
 
 interface RaceSegment {
   time: number
@@ -27,6 +33,7 @@ interface User {
   name: string
   ship: string
   place?: number
+  alive: boolean
   race: RaceSegment[]
 }
 
@@ -40,7 +47,7 @@ interface Props {
 const RiveAnimation = ({ raceData }: Props) => {
   const { users, duration } = raceData
 
-  const { context2d, canvasRef, rive, renderer, riveFile, InputType } =
+  const { canvas, context2d, canvasRef, rive, renderer, riveFile, InputType } =
     useRiveCanvas({
       wasmUrl: RIVE_WASM_URL,
       dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
@@ -77,6 +84,7 @@ const RiveAnimation = ({ raceData }: Props) => {
             onComplete: () => {
               if (onCompleteTrigger && destructionTrigger) {
                 destructionTrigger.fire()
+                raceData.users.find((user) => user.id === id)!.alive = false
               }
             },
           })
@@ -93,13 +101,13 @@ const RiveAnimation = ({ raceData }: Props) => {
 
       let lastTime = 0
       const currentPlaces: { y: number; id: string | null }[] = [
-        { y: 1300, id: null },
-        { y: 1300, id: null },
-        { y: 1300, id: null },
+        { y: 1300, id: '1' },
+        { y: 1300, id: '2' },
+        { y: 1300, id: '3' },
       ]
 
       function renderLoop(time: number) {
-        if (!rive || !renderer || !context2d) return
+        if (!rive || !renderer || !context2d || !canvas) return
 
         if (!lastTime) {
           lastTime = time
@@ -109,7 +117,29 @@ const RiveAnimation = ({ raceData }: Props) => {
         lastTime = time
         renderer.clear()
 
-        forEach(riveRace, ({ artboard, stateMachine, position, id }) => {
+        users.map(({ place, name, alive }) => {
+          if (!place || !alive) return
+          renderer.beginPath()
+          renderer.lineWidth = 1
+          renderer.strokeStyle = 'red'
+          renderer.rect(
+            PLACE_X,
+            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
+            PLACE_WIDTH,
+            PLACE_HEIGHT
+          )
+          renderer.stroke()
+
+          renderer.fillText(
+            name,
+            PLACE_X + 40,
+            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
+          )
+          renderer.fillStyle = 'green'
+          renderer.font = '48px serif'
+        })
+
+        riveRace.map(({ artboard, stateMachine, position, id }) => {
           stateMachine.advance(elapsedTimeSec)
           artboard.advance(elapsedTimeSec)
 
@@ -134,27 +164,29 @@ const RiveAnimation = ({ raceData }: Props) => {
             (place) => place.id === id
           )
 
+          const alive = users.find((user) => user.id === id)?.alive
+
           if (previousPlaceIndex !== -1) {
             // Update existing position if found
-            currentPlaces[previousPlaceIndex].y = position.y
-          } else {
+            currentPlaces[previousPlaceIndex].y = alive ? position.y : 10000
+          } else if (alive) {
             // Insert new position if not found
             currentPlaces.push({ y: position.y, id })
           }
 
-          // Sort the current places array based on y values in descending order
-          currentPlaces.sort((a, b) => b.y - a.y)
-          // Keep only the top three positions
-          currentPlaces.splice(3)
+          // Sort the current places array based on y values in ascending order
+          currentPlaces.sort((a, b) => a.y - b.y)
+
+          forEach(currentPlaces, (place, index) => {
+            const user = users.find((user) => user.id === place.id)
+            if (user) {
+              user.place = index + 1
+            }
+          })
         })
 
         // Canvas (not Rivet) stuff
-
-        context2d.beginPath()
-        context2d.lineWidth = 6
-        context2d.strokeStyle = 'red'
-        context2d.rect(5, 5, 290, 140)
-        context2d.stroke()
+        renderer.save()
 
         rive.requestAnimationFrame(renderLoop)
       }
@@ -171,7 +203,13 @@ const RiveAnimation = ({ raceData }: Props) => {
 
   return (
     <canvas
-      style={{ width: 800, height: 800, maxWidth: '100vw', maxHeight: '100vw' }}
+      style={{
+        width: 800,
+        height: 800,
+        maxWidth: '100vw',
+        maxHeight: '100vw',
+        background: 'black',
+      }}
       width={800}
       height={800}
       ref={canvasRef}

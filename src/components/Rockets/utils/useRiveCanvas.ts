@@ -20,7 +20,7 @@ enum InputType {
 const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
   const [rive, setRive] = useState<RiveCanvasType | null>(null)
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
-  const [renderer, setRenderer] = useState<WrappedRenderer | null>(null)
+  const [renderer, setRenderer] = useState<any>(null)
   const [mainRiveFile, setMainRiveFile] = useState<any>(null)
   const [context2d, setContext2d] = useState<CanvasRenderingContext2D | null>(
     null
