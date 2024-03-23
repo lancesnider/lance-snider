@@ -28,6 +28,15 @@ interface RaceSegment {
   onCompleteTrigger?: string
 }
 
+const fighterTypes = {
+  bomber: 0,
+  fighter: 1,
+  frigate: 2,
+  scout: 3,
+  support: 4,
+  gunner: 5,
+}
+
 interface User {
   id: string
   name: string
@@ -66,7 +75,7 @@ const RiveAnimation = ({ raceData }: Props) => {
       )
 
       const riveRace = users.map(({ ship, race, id }, index) => {
-        const artboard = getArtboardByName(riveFile, ship)
+        const artboard = getArtboardByName(riveFile, 'rockets')
         const stateMachine = getStateMachineByName(
           rive,
           artboard,
@@ -77,8 +86,14 @@ const RiveAnimation = ({ raceData }: Props) => {
           InputType.Trigger,
           'destruction'
         )
+        const fighterType = getInput(
+          stateMachine,
+          InputType.Number,
+          'fighterType'
+        )
+        fighterType.value = fighterTypes[ship]
 
-        const position = { x: index * 250, y: 1300 }
+        const position = { x: index * 220, y: 1300 }
 
         const tl = gsap.timeline({ delay: 2 })
 
