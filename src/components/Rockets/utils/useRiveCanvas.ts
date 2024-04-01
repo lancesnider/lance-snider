@@ -69,4 +69,4 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
   }
 }
 
-export default useRiveCanvas
+export { useRiveCanvas as default, InputType }

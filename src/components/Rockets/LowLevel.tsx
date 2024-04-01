@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import gsap from 'gsap'
 
-import useRiveCanvas from './utils/useRiveCanvas'
+import useRiveCanvas, { InputType } from './utils/useRiveCanvas'
 import {
   getStateMachineByName,
   getArtboardByName,
@@ -56,12 +56,11 @@ interface Props {
 const RiveAnimation = ({ raceData }: Props) => {
   const { users, duration } = raceData
 
-  const { canvas, context2d, canvasRef, rive, renderer, riveFile, InputType } =
-    useRiveCanvas({
-      wasmUrl: RIVE_WASM_URL,
-      dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
-      riveFileUrl: RIVE_FILE_URL,
-    })
+  const { canvas, canvasRef, rive, renderer, riveFile } = useRiveCanvas({
+    wasmUrl: RIVE_WASM_URL,
+    dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
+    riveFileUrl: RIVE_FILE_URL,
+  })
 
   useEffect(() => {
     async function loadRive() {
@@ -129,7 +128,7 @@ const RiveAnimation = ({ raceData }: Props) => {
       ]
 
       function renderLoop(time: number) {
-        if (!rive || !renderer || !context2d || !canvas) return
+        if (!rive || !renderer || !canvas) return
 
         if (!lastTime) {
           lastTime = time
