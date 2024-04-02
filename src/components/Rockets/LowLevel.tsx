@@ -11,7 +11,7 @@ import { forEach } from 'lodash'
 
 const CANVAS_WIDTH = 1600
 const CANVAS_HEIGHT = 1600
-const RIVE_FILE_URL = '/rive/space_race.riv'
+const RIVE_FILE_URL = '/rockets/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
 
@@ -44,6 +44,8 @@ interface User {
   place?: number
   alive: boolean
   race: RaceSegment[]
+  baseImage: HTMLImageElement
+  destructionType?: number
 }
 
 interface Props {
@@ -73,7 +75,18 @@ const RiveAnimation = ({ raceData }: Props) => {
         'State Machine 1'
       )
 
-      const riveRace = users.map(({ ship, race, id }, index) => {
+      const riveRace = users.map((user, index) => {
+        const { ship, race, id, destructionType } = user
+
+        // ship thumbnail
+        const baseImage = new Image()
+        baseImage.src = `/rockets/ships/${ship}.png`
+        baseImage.onload = function () {
+          // This function will be called when the image is fully loaded
+          user.baseImage = baseImage
+          // You can perform any further actions you need here
+        }
+
         const artboard = getArtboardByName(riveFile, 'rockets')
         const stateMachine = getStateMachineByName(
           rive,
@@ -90,7 +103,16 @@ const RiveAnimation = ({ raceData }: Props) => {
           InputType.Number,
           'fighterType'
         )
-        fighterType.value = fighterTypes[ship]
+        const destructionTypeInput = getInput(
+          stateMachine,
+          InputType.Number,
+          'destructionType'
+        )
+
+        if (fighterType)
+          fighterType.value = fighterTypes[ship as keyof typeof fighterTypes]
+
+        if (destructionTypeInput) destructionTypeInput.value = destructionType
 
         const position = { x: index * 220, y: 1300 }
 
@@ -154,6 +176,38 @@ const RiveAnimation = ({ raceData }: Props) => {
         )
         starsArtboard.draw(renderer)
 
+        users.map(({ place, name, alive, baseImage }) => {
+          if (!place || !alive) return
+          renderer.beginPath()
+          renderer.lineWidth = 1
+          renderer.strokeStyle = 'red'
+          renderer.rect(
+            PLACE_X,
+            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
+            PLACE_WIDTH,
+            PLACE_HEIGHT
+          )
+          renderer.stroke()
+
+          if (baseImage) {
+            renderer.drawImage(
+              baseImage,
+              PLACE_X,
+              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
+              PLACE_HEIGHT,
+              PLACE_HEIGHT
+            )
+          }
+
+          renderer.fillText(
+            name,
+            PLACE_X + 140,
+            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
+          )
+          renderer.fillStyle = 'green'
+          renderer.font = '48px serif'
+        })
+
         riveRace.map(({ artboard, stateMachine, position, id }) => {
           stateMachine.advance(elapsedTimeSec)
           artboard.advance(elapsedTimeSec)
@@ -179,7 +233,8 @@ const RiveAnimation = ({ raceData }: Props) => {
             (place) => place.id === id
           )
 
-          const alive = users.find((user) => user.id === id)?.alive
+          const user = users.find((user) => user.id === id)
+          const alive = user?.alive
 
           if (previousPlaceIndex !== -1) {
             // Update existing position if found
@@ -198,28 +253,6 @@ const RiveAnimation = ({ raceData }: Props) => {
               user.place = index + 1
             }
           })
-        })
-
-        users.map(({ place, name, alive }) => {
-          if (!place || !alive) return
-          renderer.beginPath()
-          renderer.lineWidth = 1
-          renderer.strokeStyle = 'red'
-          renderer.rect(
-            PLACE_X,
-            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
-            PLACE_WIDTH,
-            PLACE_HEIGHT
-          )
-          renderer.stroke()
-
-          renderer.fillText(
-            name,
-            PLACE_X + 40,
-            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
-          )
-          renderer.fillStyle = 'green'
-          renderer.font = '48px serif'
         })
 
         // Canvas (not Rivet) stuff

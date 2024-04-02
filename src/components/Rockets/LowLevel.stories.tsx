@@ -23,7 +23,8 @@ const raceData = {
       name: 'Lance',
       ship: 'frigate',
       alive: true,
-      race: [{ time: 0.2, x: 1220, y: 1240, onCompleteTrigger: 'destroy' }],
+      destructionType: 1,
+      race: [{ time: 0.2, x: 400, y: 1240, onCompleteTrigger: 'destroy' }],
     },
     {
       id: '3',
@@ -44,6 +45,7 @@ const raceData = {
       ship: 'scout',
       place: 1,
       alive: true,
+      destructionType: 1,
       race: [
         { time: 0.15, x: 300, y: 300 },
         { time: 0.1, x: 100, y: 140 },
