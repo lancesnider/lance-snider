@@ -193,9 +193,7 @@ const RiveAnimation = ({ raceData }: Props) => {
             renderer.drawImage(
               baseImage,
               PLACE_X,
-              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
-              PLACE_HEIGHT,
-              PLACE_HEIGHT
+              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
             )
           }
 
