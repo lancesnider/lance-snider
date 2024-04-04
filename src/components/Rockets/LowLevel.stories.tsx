@@ -15,9 +15,9 @@ const raceData = {
       race: [
         { time: 0.1, x: 100, y: 140 },
         { time: 0.3, x: 1200, y: 240 },
-        { time: 0.2, x: 300, y: 1300 },
+        { time: 0.25, x: 300, y: 1300 },
         { time: 0.15, x: 300, y: 300 },
-        { time: 0.1, x: 100, y: 140 },
+        { time: 0.2, x: 100, y: 140 },
       ],
     },
     {
@@ -28,7 +28,7 @@ const raceData = {
       ship: 'frigate',
       alive: true,
       destructionType: 1,
-      race: [{ time: 0.2, x: 400, y: 1240, onCompleteTrigger: 'destroy' }],
+      race: [{ time: 0.2, x: 800, y: 1240, onCompleteTrigger: 'destroy' }],
     },
     {
       id: '3',
@@ -36,12 +36,14 @@ const raceData = {
       avatar:
         'https://converted-media.jpgstoreapis.com/QmdLiN1XRFStiCS2MsfWhXdt7BiBbjMxEuE3zm5TwG5fsy.sz_10206.dims_100x100.anim_0.webp',
       ship: 'bomber',
+      place: 3,
       alive: true,
       race: [
-        { time: 0.15, x: 420, y: 740 },
-        { time: 0.1, x: 0, y: 0 },
+        { time: 0.25, x: 420, y: 740 },
+        { time: 0.2, x: 0, y: 0 },
         { time: 0.1, x: 900, y: 440 },
-        { time: 0.2, x: 900, y: 200 },
+        { time: 0.15, x: 900, y: 200 },
+        { time: 0.15, x: 900, y: 300 },
         { time: 0.15, x: 660, y: 600 },
       ],
     },
@@ -51,7 +53,6 @@ const raceData = {
       avatar:
         'https://converted-media.jpgstoreapis.com/Qme1g965BZcVwzWaVqYJtYhz7cLcuSdNFRBuwXcQHj2Bnu.sz_1242.dims_100x100.anim_0.webp',
       ship: 'scout',
-      place: 1,
       alive: true,
       destructionType: 1,
       race: [
@@ -66,14 +67,15 @@ const raceData = {
       avatar:
         'https://converted-media.jpgstoreapis.com/QmNggaPXACZJi7bcsNscdqMuHTT56C4YnNRcVUnVEpEdTg.sz_1946.dims_100x100.anim_0.webp',
       ship: 'support',
-      place: 1,
+      place: 2,
       alive: true,
       race: [
         { time: 0.3, x: 1200, y: 240 },
         { time: 0.1, x: 780, y: 140 },
         { time: 0.1, x: 700, y: 740 },
         { time: 0.15, x: 300, y: 300 },
-        { time: 0.2, x: 390, y: 400 },
+        { time: 0.2, x: 200, y: 800 },
+        { time: 0.15, x: 390, y: 400 },
       ],
     },
     {
@@ -82,14 +84,14 @@ const raceData = {
       avatar:
         'https://converted-media.jpgstoreapis.com/KeU2KhX48znCkdxcx3ftFD_JOAU9rhycQRP_etL4MfU.sz_816.dims_100x100.anim_0.webp',
       ship: 'gunner',
-      place: 1,
       alive: true,
       race: [
         { time: 0.15, x: 300, y: 140 },
-        { time: 0.3, x: 1200, y: 1240 },
+        { time: 0.2, x: 1200, y: 1240 },
         { time: 0.2, x: 50, y: 500 },
-        { time: 0.1, x: 300, y: 0 },
-        { time: 0.1, x: 550, y: 1140 },
+        { time: 0.1, x: 300, y: 300 },
+        { time: 0.2, x: 300, y: 0 },
+        { time: 0.15, x: 550, y: 1140 },
       ],
     },
   ],

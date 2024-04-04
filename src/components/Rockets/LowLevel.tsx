@@ -21,6 +21,21 @@ const PLACE_SPACING = 16
 const PLACE_FULL_HEIGHT = PLACE_HEIGHT + PLACE_SPACING
 const PLACE_X = CANVAS_WIDTH - PLACE_WIDTH - PLACE_SPACING
 
+const PLACE_POSITIONS = [
+  {
+    x: 500,
+    y: 400,
+  },
+  {
+    x: 200,
+    y: 650,
+  },
+  {
+    x: 800,
+    y: 900,
+  },
+]
+
 interface RaceSegment {
   time: number
   x: number
@@ -78,7 +93,7 @@ const RiveAnimation = ({ raceData }: Props) => {
       )
 
       const riveRace = users.map((user, index) => {
-        const { ship, race, id, destructionType, avatar } = user
+        const { ship, race, id, place, destructionType, avatar, name } = user
 
         // ship thumbnail
         const baseShipImage = new Image()
@@ -136,6 +151,10 @@ const RiveAnimation = ({ raceData }: Props) => {
             duration: time * duration,
             ease: 'back.inOut',
             onComplete: () => {
+              // console.log(name)
+              if (name === 'Brad') {
+                console.log('Brad', x, y)
+              }
               if (onCompleteTrigger && destructionTrigger) {
                 destructionTrigger.fire()
                 raceData.users.find((user) => user.id === id)!.alive = false
@@ -143,6 +162,22 @@ const RiveAnimation = ({ raceData }: Props) => {
             },
           })
         })
+
+        if (!destructionType && !place) {
+          // If the user doesn't die or place, finish by animating them off the screen
+          tl.to(position, {
+            y: 2000,
+            duration: 1,
+            ease: 'back.out',
+          })
+        } else if (place) {
+          tl.to(position, {
+            x: PLACE_POSITIONS[place - 1].x,
+            y: PLACE_POSITIONS[place - 1].y,
+            duration: 1,
+            ease: 'back.inOut',
+          })
+        }
 
         return {
           artboard,
