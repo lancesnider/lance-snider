@@ -15,7 +15,7 @@ const RIVE_FILE_URL = '/rockets/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
 
-const PLACE_WIDTH = 400
+const PLACE_WIDTH = 500
 const PLACE_HEIGHT = 100
 const PLACE_SPACING = 16
 const PLACE_FULL_HEIGHT = PLACE_HEIGHT + PLACE_SPACING
@@ -41,10 +41,12 @@ interface User {
   id: string
   name: string
   ship: string
+  avatar: string
   place?: number
   alive: boolean
   race: RaceSegment[]
-  baseImage: HTMLImageElement
+  baseShipImage: HTMLImageElement
+  baseAvatarImage: HTMLImageElement
   destructionType?: number
 }
 
@@ -76,14 +78,23 @@ const RiveAnimation = ({ raceData }: Props) => {
       )
 
       const riveRace = users.map((user, index) => {
-        const { ship, race, id, destructionType } = user
+        const { ship, race, id, destructionType, avatar } = user
 
         // ship thumbnail
-        const baseImage = new Image()
-        baseImage.src = `/rockets/ships/${ship}.png`
-        baseImage.onload = function () {
+        const baseShipImage = new Image()
+        baseShipImage.src = `/rockets/ships/${ship}.png`
+        baseShipImage.onload = function () {
           // This function will be called when the image is fully loaded
-          user.baseImage = baseImage
+          user.baseShipImage = baseShipImage
+          // You can perform any further actions you need here
+        }
+
+        // ship thumbnail
+        const baseAvatarImage = new Image()
+        baseAvatarImage.src = avatar
+        baseAvatarImage.onload = function () {
+          // This function will be called when the image is fully loaded
+          user.baseAvatarImage = baseAvatarImage
           // You can perform any further actions you need here
         }
 
@@ -176,7 +187,7 @@ const RiveAnimation = ({ raceData }: Props) => {
         )
         starsArtboard.draw(renderer)
 
-        users.map(({ place, name, alive, baseImage }) => {
+        users.map(({ place, name, alive, baseShipImage, baseAvatarImage }) => {
           if (!place || !alive) return
           renderer.beginPath()
           renderer.lineWidth = 1
@@ -189,9 +200,16 @@ const RiveAnimation = ({ raceData }: Props) => {
           )
           renderer.stroke()
 
-          if (baseImage) {
+          if (baseShipImage) {
             renderer.drawImage(
-              baseImage,
+              baseShipImage,
+              PLACE_X + 100,
+              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
+            )
+          }
+          if (baseAvatarImage) {
+            renderer.drawImage(
+              baseAvatarImage,
               PLACE_X,
               PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
             )
@@ -199,7 +217,7 @@ const RiveAnimation = ({ raceData }: Props) => {
 
           renderer.fillText(
             name,
-            PLACE_X + 140,
+            PLACE_X + 240,
             PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
           )
           renderer.fillStyle = 'green'

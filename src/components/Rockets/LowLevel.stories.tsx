@@ -7,6 +7,8 @@ const raceData = {
     {
       id: '1',
       name: 'Jason',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/bafybeiauv2cqxcnp43xhfehbensppwhr2zmbl3uvs6ziqfwijn5oiy3ifa.sz_1658.dims_100x100.anim_0.webp',
       ship: 'fighter',
       place: 1,
       alive: true,
@@ -21,6 +23,8 @@ const raceData = {
     {
       id: '2',
       name: 'Lance',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/QmRP2NML23BBJQd8C6HTyqTSxz1RgFrMeVPSiQm437ewWt.sz_2368.dims_100x100.anim_0.webp',
       ship: 'frigate',
       alive: true,
       destructionType: 1,
@@ -29,6 +33,8 @@ const raceData = {
     {
       id: '3',
       name: 'Brad',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/QmdLiN1XRFStiCS2MsfWhXdt7BiBbjMxEuE3zm5TwG5fsy.sz_10206.dims_100x100.anim_0.webp',
       ship: 'bomber',
       alive: true,
       race: [
@@ -42,6 +48,8 @@ const raceData = {
     {
       id: '5',
       name: 'Jessie',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/Qme1g965BZcVwzWaVqYJtYhz7cLcuSdNFRBuwXcQHj2Bnu.sz_1242.dims_100x100.anim_0.webp',
       ship: 'scout',
       place: 1,
       alive: true,
@@ -55,6 +63,8 @@ const raceData = {
     {
       id: '6',
       name: 'Lucious',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/QmNggaPXACZJi7bcsNscdqMuHTT56C4YnNRcVUnVEpEdTg.sz_1946.dims_100x100.anim_0.webp',
       ship: 'support',
       place: 1,
       alive: true,
@@ -69,6 +79,8 @@ const raceData = {
     {
       id: '7',
       name: 'Flavio',
+      avatar:
+        'https://converted-media.jpgstoreapis.com/KeU2KhX48znCkdxcx3ftFD_JOAU9rhycQRP_etL4MfU.sz_816.dims_100x100.anim_0.webp',
       ship: 'gunner',
       place: 1,
       alive: true,
