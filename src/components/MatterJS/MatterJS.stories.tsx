@@ -3,7 +3,7 @@ import React from 'react'
 import MatterJS from './MatterJS'
 
 export default {
-  title: 'Components/MatterJS',
+  title: 'Experiments/Rive Physics Test',
   component: MatterJS,
   args: {},
 }
