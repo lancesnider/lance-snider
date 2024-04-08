@@ -4539,6 +4539,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/matter-js@npm:^0":
+  version: 0.19.6
+  resolution: "@types/matter-js@npm:0.19.6"
+  checksum: d88b4facb8c630212ecfb375df79a7218278a0fab469f8cbddaab7d9be177a7e12288242157be4d76f27d174c20bbf995fef209606c19300c6bef41795a4bf36
+  languageName: node
+  linkType: hard
+
 "@types/mdx@npm:^2.0.0":
   version: 2.0.10
   resolution: "@types/mdx@npm:2.0.10"
@@ -9868,6 +9875,7 @@ __metadata:
     "@storybook/nextjs": "npm:^7.6.6"
     "@storybook/react": "npm:^7.6.6"
     "@storybook/test": "npm:^7.6.6"
+    "@types/matter-js": "npm:^0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -9879,6 +9887,7 @@ __metadata:
     eslint-plugin-storybook: "npm:^0.6.15"
     gsap: "npm:^3.12.4"
     lodash: "npm:^4.17.21"
+    matter-js: "npm:^0.19.0"
     next: "npm:14.0.4"
     react: "npm:^18"
     react-dom: "npm:^18"
@@ -10168,6 +10177,13 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 78cb222bf4b848d5a2e5187a24a02fed4c3f18eb8f50c5f7e1ad67041b491bb574fb347ab2e2ad0636fb6e4e9ba1030b21d8c18e46dfa60c283557723f8fe5e5
+  languageName: node
+  linkType: hard
+
+"matter-js@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "matter-js@npm:0.19.0"
+  checksum: 8b35d7838a608b02005016862eeb78f061fce5a4c156d1801e9d52c4b6e2a1c328b09c3a6e74fb3df5d13be08940083e5c3e519a4258e0aeb30079231994bb55
   languageName: node
   linkType: hard
 
