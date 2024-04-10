@@ -75,6 +75,10 @@ interface Props {
   }
 }
 
+const progressValue = {
+  value: 0,
+}
+
 const RiveAnimation = ({ raceData }: Props) => {
   const { users, duration } = raceData
 
@@ -94,6 +98,24 @@ const RiveAnimation = ({ raceData }: Props) => {
         starsArtboard,
         'State Machine 1'
       )
+
+      const progressInput = getInput(
+        starsStateMachine,
+        InputType.Number,
+        'progress'
+      )
+
+      if (progressInput) {
+        const progressTl = gsap.timeline({ delay: 2 })
+        progressTl.to(progressValue, {
+          value: 100,
+          duration: duration,
+          ease: 'quad.in',
+          onUpdate: () => {
+            progressInput.value = progressValue.value
+          },
+        })
+      }
 
       const riveRace = users.map((user, index) => {
         const { ship, race, id, place, destructionType, avatar, name, prize } =
@@ -232,6 +254,7 @@ const RiveAnimation = ({ raceData }: Props) => {
 
         starsStateMachine.advance(elapsedTimeSec)
         starsArtboard.advance(elapsedTimeSec)
+
         renderer.save()
         renderer.align(
           rive.Fit.contain,
