@@ -11,6 +11,7 @@ const raceData = {
         'https://converted-media.jpgstoreapis.com/bafybeiauv2cqxcnp43xhfehbensppwhr2zmbl3uvs6ziqfwijn5oiy3ifa.sz_1658.dims_100x100.anim_0.webp',
       ship: 'fighter',
       place: 1,
+      prize: '$10,000',
       alive: true,
       race: [
         { time: 0.1, x: 100, y: 140 },
@@ -37,6 +38,7 @@ const raceData = {
         'https://converted-media.jpgstoreapis.com/QmdLiN1XRFStiCS2MsfWhXdt7BiBbjMxEuE3zm5TwG5fsy.sz_10206.dims_100x100.anim_0.webp',
       ship: 'bomber',
       place: 3,
+      prize: '$1,000',
       alive: true,
       race: [
         { time: 0.25, x: 420, y: 740 },
@@ -68,6 +70,7 @@ const raceData = {
         'https://converted-media.jpgstoreapis.com/QmNggaPXACZJi7bcsNscdqMuHTT56C4YnNRcVUnVEpEdTg.sz_1946.dims_100x100.anim_0.webp',
       ship: 'support',
       place: 2,
+      prize: '$5,000',
       alive: true,
       race: [
         { time: 0.3, x: 1200, y: 240 },
@@ -95,7 +98,7 @@ const raceData = {
       ],
     },
   ],
-  duration: 20,
+  duration: 5,
 }
 
 export default {

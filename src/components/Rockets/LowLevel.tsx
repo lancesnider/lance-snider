@@ -23,16 +23,16 @@ const PLACE_X = CANVAS_WIDTH - PLACE_WIDTH - PLACE_SPACING
 
 const PLACE_POSITIONS = [
   {
-    x: 500,
+    x: 300,
     y: 400,
   },
   {
-    x: 200,
-    y: 650,
+    x: 300,
+    y: 700,
   },
   {
-    x: 800,
-    y: 900,
+    x: 300,
+    y: 1000,
   },
 ]
 
@@ -52,6 +52,8 @@ const fighterTypes = {
   gunner: 5,
 }
 
+const placeText = ['1st Place', '2nd Place', '3rd Place']
+
 interface User {
   id: string
   name: string
@@ -63,6 +65,7 @@ interface User {
   baseShipImage: HTMLImageElement
   baseAvatarImage: HTMLImageElement
   destructionType?: number
+  prize?: string
 }
 
 interface Props {
@@ -93,7 +96,8 @@ const RiveAnimation = ({ raceData }: Props) => {
       )
 
       const riveRace = users.map((user, index) => {
-        const { ship, race, id, place, destructionType, avatar, name } = user
+        const { ship, race, id, place, destructionType, avatar, name, prize } =
+          user
 
         // ship thumbnail
         const baseShipImage = new Image()
@@ -114,6 +118,16 @@ const RiveAnimation = ({ raceData }: Props) => {
         }
 
         const artboard = getArtboardByName(riveFile, 'rockets')
+
+        if (place) {
+          const textPrize = artboard.textRun('textPlaceMoney')
+          textPrize.text = prize
+          const textName = artboard.textRun('textPlaceName')
+          textName.text = name
+          const textPlace = artboard.textRun('textPlace')
+          textPlace.text = placeText[place - 1]
+        }
+
         const stateMachine = getStateMachineByName(
           rive,
           artboard,
@@ -133,6 +147,11 @@ const RiveAnimation = ({ raceData }: Props) => {
           stateMachine,
           InputType.Number,
           'destructionType'
+        )
+        const showPrizeTrigger = getInput(
+          stateMachine,
+          InputType.Trigger,
+          'showPrize'
         )
 
         if (fighterType)
@@ -176,6 +195,10 @@ const RiveAnimation = ({ raceData }: Props) => {
             y: PLACE_POSITIONS[place - 1].y,
             duration: 1,
             ease: 'back.inOut',
+            onComplete: () => {
+              console.log('done')
+              showPrizeTrigger?.fire()
+            },
           })
         }
 
@@ -183,6 +206,7 @@ const RiveAnimation = ({ raceData }: Props) => {
           artboard,
           stateMachine,
           destructionTrigger,
+          showPrizeTrigger,
           position,
           id,
         }
