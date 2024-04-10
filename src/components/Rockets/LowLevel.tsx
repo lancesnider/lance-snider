@@ -11,7 +11,7 @@ import { forEach } from 'lodash'
 
 const CANVAS_WIDTH = 1600
 const CANVAS_HEIGHT = 1600
-const RIVE_FILE_URL = '/rockets/space_race.riv'
+const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
 
