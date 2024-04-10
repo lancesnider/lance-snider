@@ -98,7 +98,7 @@ const raceData = {
       ],
     },
   ],
-  duration: 5,
+  duration: 20,
 }
 
 export default {
