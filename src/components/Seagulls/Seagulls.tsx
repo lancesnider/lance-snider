@@ -16,10 +16,10 @@ import './Seagulls.scss'
 const STATE_MACHINE_NAME = 'State Machine 1'
 
 export default function Example() {
-  const { mouseXPerc, mouseYPerc } = useMousePosition()
+  const { mouseYPerc } = useMousePosition()
 
   const { rive, RiveComponent } = useRive({
-    src: '/rive/seagulls.riv',
+    src: '/rive/robo_whale_seagulls.riv',
     stateMachines: STATE_MACHINE_NAME,
     layout: new Layout({
       fit: Fit.Cover,
@@ -29,22 +29,12 @@ export default function Example() {
   })
 
   const fireInput = useStateMachineInput(rive, STATE_MACHINE_NAME, 'fire')
-  const mouseXPercInput = useStateMachineInput(
-    rive,
-    STATE_MACHINE_NAME,
-    'cursorX'
-  )
+
   const mouseYPercInput = useStateMachineInput(
     rive,
     STATE_MACHINE_NAME,
     'cursorY'
   )
-
-  useEffect(() => {
-    if (mouseXPercInput && mouseXPerc !== null) {
-      mouseXPercInput.value = mouseXPerc
-    }
-  }, [mouseXPercInput, mouseXPerc])
 
   useEffect(() => {
     if (mouseYPercInput && mouseYPerc !== null) {
