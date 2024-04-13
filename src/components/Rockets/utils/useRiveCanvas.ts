@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import RiveCanvas, {
+  FileAsset,
   RiveCanvas as RiveCanvasType,
-  WrappedRenderer,
 } from '@rive-app/canvas-advanced'
 
 interface Props {
@@ -33,6 +33,12 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
       const rive = await RiveCanvas({
         locateFile: (_) => wasmUrl,
       })
+
+      // const assetLoader = new rive.CustomFileAssetLoader({
+      //   loadContents: (asset: FileAsset, bytes: Uint8Array) => {
+      //     asset.setRenderImage(bytes)
+      //   },
+      // })
 
       const mainCanvas = canvasRef.current as HTMLCanvasElement | null
 

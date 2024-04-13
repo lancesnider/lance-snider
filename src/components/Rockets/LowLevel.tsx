@@ -192,10 +192,6 @@ const RiveAnimation = ({ raceData }: Props) => {
             duration: time * duration,
             ease: 'back.inOut',
             onComplete: () => {
-              // console.log(name)
-              if (name === 'Brad') {
-                console.log('Brad', x, y)
-              }
               if (onCompleteTrigger && destructionTrigger) {
                 destructionTrigger.fire()
                 raceData.users.find((user) => user.id === id)!.alive = false

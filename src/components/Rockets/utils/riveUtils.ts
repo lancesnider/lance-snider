@@ -2,6 +2,7 @@ import {
   Artboard,
   SMIInput,
   StateMachineInstance,
+  CustomFileAssetLoader,
 } from '@rive-app/canvas-advanced'
 
 enum InputType {
@@ -76,27 +77,14 @@ const advanceArtboards = (artboards: Artboard[], elapsedTimeSec: number) => {
 
 const drawArtboards = (
   artboards: { artboard: Artboard; position?: { x: number; y: number } }[],
-  renderer: any,
-  rive: any
+  renderer: any
 ) => {
   artboards.forEach(({ artboard, position }) => {
-    // renderer.clear()
     if (!artboard) return
 
     if (position) {
       console.log('position', position)
       renderer.translate(position.x, position.y)
-      //   renderer.align(
-      //     rive.Fit.contain,
-      //     rive.Alignment.topCenter,
-      //     {
-      //       minX: position.x,
-      //       minY: position.y,
-      //       maxX: position.x + 220,
-      //       maxY: position.y + 220,
-      //     },
-      //     artboard.bounds
-      //   )
     }
     renderer.save()
     artboard.draw(renderer)
