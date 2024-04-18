@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
 import gsap from 'gsap'
 
-import useRiveCanvas, { InputType } from './utils/useRiveCanvas'
+import useRiveCanvas from './utils/useRiveCanvas'
 import {
-  getStateMachineByName,
-  getArtboardByName,
   getInput,
+  advanceStateMachine,
+  advanceArtboard,
 } from './utils/riveUtils'
 import { forEach } from 'lodash'
 
-const CANVAS_WIDTH = 1600
+const CANVAS_WIDTH = 2000
 const CANVAS_HEIGHT = 1600
 const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
@@ -82,28 +82,35 @@ const progressValue = {
 const RiveAnimation = ({ raceData }: Props) => {
   const { users, duration } = raceData
 
-  const { canvas, canvasRef, rive, renderer, riveFile } = useRiveCanvas({
+  const {
+    loading,
+    error,
+    canvas,
+    canvasRef,
+    rive,
+    renderer,
+    riveFile,
+    getArtboardByName,
+    getStateMachineByName,
+  } = useRiveCanvas({
     wasmUrl: RIVE_WASM_URL,
     dimensions: { width: CANVAS_WIDTH, height: CANVAS_HEIGHT },
     riveFileUrl: RIVE_FILE_URL,
   })
 
+  console.log(error)
+
   useEffect(() => {
     async function loadRive() {
       if (!rive || !renderer) return
 
-      const starsArtboard = getArtboardByName(riveFile, 'stars')
+      const starsArtboard = getArtboardByName('stars')
       const starsStateMachine = getStateMachineByName(
-        rive,
         starsArtboard,
         'State Machine 1'
       )
 
-      const progressInput = getInput(
-        starsStateMachine,
-        InputType.Number,
-        'progress'
-      )
+      const progressInput = getInput('progress', starsStateMachine)
 
       if (progressInput) {
         const progressTl = gsap.timeline({ delay: 2 })
@@ -139,7 +146,7 @@ const RiveAnimation = ({ raceData }: Props) => {
           // You can perform any further actions you need here
         }
 
-        const artboard = getArtboardByName(riveFile, 'rockets')
+        const artboard = getArtboardByName('rockets')
 
         if (place) {
           const textPrize = artboard.textRun('textPlaceMoney')
@@ -150,31 +157,11 @@ const RiveAnimation = ({ raceData }: Props) => {
           textPlace.text = placeText[place - 1]
         }
 
-        const stateMachine = getStateMachineByName(
-          rive,
-          artboard,
-          'State Machine 1'
-        )
-        const destructionTrigger = getInput(
-          stateMachine,
-          InputType.Trigger,
-          'destruction'
-        )
-        const fighterType = getInput(
-          stateMachine,
-          InputType.Number,
-          'fighterType'
-        )
-        const destructionTypeInput = getInput(
-          stateMachine,
-          InputType.Number,
-          'destructionType'
-        )
-        const showPrizeTrigger = getInput(
-          stateMachine,
-          InputType.Trigger,
-          'showPrize'
-        )
+        const stateMachine = getStateMachineByName(artboard, 'State Machine 1')
+        const destructionTrigger = getInput('destruction', stateMachine)
+        const fighterType = getInput('fighterType', stateMachine)
+        const destructionTypeInput = getInput('destructionType', stateMachine)
+        const showPrizeTrigger = getInput('showPrize', stateMachine)
 
         if (fighterType)
           fighterType.value = fighterTypes[ship as keyof typeof fighterTypes]
@@ -248,8 +235,8 @@ const RiveAnimation = ({ raceData }: Props) => {
         lastTime = time
         renderer.clear()
 
-        starsStateMachine.advance(elapsedTimeSec)
-        starsArtboard.advance(elapsedTimeSec)
+        advanceArtboard(elapsedTimeSec, starsArtboard)
+        advanceStateMachine(elapsedTimeSec, starsStateMachine)
 
         renderer.save()
         renderer.align(
@@ -258,53 +245,53 @@ const RiveAnimation = ({ raceData }: Props) => {
           {
             minX: 0,
             minY: 0,
-            maxX: 1600,
-            maxY: 1600,
+            maxX: CANVAS_WIDTH,
+            maxY: CANVAS_HEIGHT,
           },
           starsArtboard.bounds
         )
         starsArtboard.draw(renderer)
 
-        users.map(({ place, name, alive, baseShipImage, baseAvatarImage }) => {
-          if (!place || !alive) return
-          renderer.beginPath()
-          renderer.lineWidth = 1
-          renderer.strokeStyle = 'red'
-          renderer.rect(
-            PLACE_X,
-            PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
-            PLACE_WIDTH,
-            PLACE_HEIGHT
-          )
-          renderer.stroke()
+        // users.map(({ place, name, alive, baseShipImage, baseAvatarImage }) => {
+        //   if (!place || !alive) return
+        //   renderer.beginPath()
+        //   renderer.lineWidth = 1
+        //   renderer.strokeStyle = 'red'
+        //   renderer.rect(
+        //     PLACE_X,
+        //     PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT,
+        //     PLACE_WIDTH,
+        //     PLACE_HEIGHT
+        //   )
+        //   renderer.stroke()
 
-          if (baseShipImage) {
-            renderer.drawImage(
-              baseShipImage,
-              PLACE_X + 100,
-              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
-            )
-          }
-          if (baseAvatarImage) {
-            renderer.drawImage(
-              baseAvatarImage,
-              PLACE_X,
-              PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
-            )
-          }
+        //   if (baseShipImage) {
+        //     renderer.drawImage(
+        //       baseShipImage,
+        //       PLACE_X + 100,
+        //       PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
+        //     )
+        //   }
+        //   if (baseAvatarImage) {
+        //     renderer.drawImage(
+        //       baseAvatarImage,
+        //       PLACE_X,
+        //       PLACE_SPACING + (place - 1) * PLACE_FULL_HEIGHT
+        //     )
+        //   }
 
-          renderer.fillText(
-            name,
-            PLACE_X + 240,
-            PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
-          )
-          renderer.fillStyle = 'green'
-          renderer.font = '48px serif'
-        })
+        //   renderer.fillText(
+        //     name,
+        //     PLACE_X + 240,
+        //     PLACE_SPACING + 62 + (place - 1) * PLACE_FULL_HEIGHT
+        //   )
+        //   renderer.fillStyle = 'green'
+        //   renderer.font = '48px serif'
+        // })
 
         riveRace.map(({ artboard, stateMachine, position, id }) => {
-          stateMachine.advance(elapsedTimeSec)
-          artboard.advance(elapsedTimeSec)
+          advanceStateMachine(elapsedTimeSec, stateMachine)
+          advanceArtboard(elapsedTimeSec, artboard)
 
           renderer.save()
           renderer.align(
@@ -368,14 +355,14 @@ const RiveAnimation = ({ raceData }: Props) => {
   return (
     <canvas
       style={{
-        width: 800,
-        height: 800,
+        width: CANVAS_WIDTH / 2,
+        height: CANVAS_HEIGHT / 2,
         maxWidth: '100vw',
         maxHeight: '100vw',
         background: 'black',
       }}
-      width={800}
-      height={800}
+      width={CANVAS_WIDTH / 2}
+      height={CANVAS_HEIGHT / 2}
       ref={canvasRef}
       id='rive-canvas'
     />

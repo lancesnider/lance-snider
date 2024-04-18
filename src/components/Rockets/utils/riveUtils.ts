@@ -1,23 +1,20 @@
 import {
-  Artboard,
   SMIInput,
   StateMachineInstance,
-  CustomFileAssetLoader,
+  Artboard,
 } from '@rive-app/canvas-advanced'
+import { StateMachineInputType } from '@rive-app/react-canvas'
 
-enum InputType {
-  Number = 'number',
-  Bool = 'bool',
-  Trigger = 'trigger',
-}
+// Rather than manually defining the input type, we can get it from the Rive input
+const getInputType = (input: SMIInput) => {
+  const { type } = input
 
-const getInputType = (inputType: InputType, input: SMIInput) => {
-  switch (inputType) {
-    case InputType.Number:
+  switch (type) {
+    case StateMachineInputType.Number:
       return input.asNumber()
-    case InputType.Bool:
+    case StateMachineInputType.Boolean:
       return input.asBool()
-    case InputType.Trigger:
+    case StateMachineInputType.Trigger:
       return input.asTrigger()
     default:
       return null
@@ -25,19 +22,21 @@ const getInputType = (inputType: InputType, input: SMIInput) => {
 }
 
 const getInput = (
-  animationMachine: StateMachineInstance,
-  inputType: InputType,
-  inputName: string
+  inputName: string,
+  animationMachine?: StateMachineInstance
 ) => {
+  if (!animationMachine) return
+
   // This low level portion of the API requires iterating the inputs
   // to find the one you want.
   let groundSoloInput
 
+  // Cycle through the inputs to find the one with the specified name
   for (let i = 0, l = animationMachine.inputCount(); i < l; i++) {
     const input = animationMachine.input(i)
     switch (input.name) {
       case inputName:
-        groundSoloInput = getInputType(inputType, input)
+        groundSoloInput = getInputType(input)
         break
       default:
         break
@@ -47,10 +46,6 @@ const getInput = (
   return groundSoloInput
 }
 
-const getArtboardByName = (riveFile: any, name: string) => {
-  return riveFile.artboardByName(name)
-}
-
 const getStateMachineByName = (rive: any, artboard: any, name: string) => {
   return new rive.StateMachineInstance(
     artboard.stateMachineByName(name),
@@ -58,44 +53,17 @@ const getStateMachineByName = (rive: any, artboard: any, name: string) => {
   )
 }
 
-const advanceStateMachines = (
-  artboards: StateMachineInstance[],
-  elapsedTimeSec: number
+const advanceStateMachine = (
+  elapsedTimeSec: number,
+  artboard?: StateMachineInstance
 ) => {
-  artboards.forEach((artboard) => {
-    if (!artboard) return
-    artboard.advance(elapsedTimeSec)
-  })
+  if (!artboard) return
+  artboard.advance(elapsedTimeSec)
 }
 
-const advanceArtboards = (artboards: Artboard[], elapsedTimeSec: number) => {
-  artboards.forEach((artboard) => {
-    if (!artboard) return
-    artboard.advance(elapsedTimeSec)
-  })
+const advanceArtboard = (elapsedTimeSec: number, artboard?: Artboard) => {
+  if (!artboard) return
+  artboard.advance(elapsedTimeSec)
 }
 
-const drawArtboards = (
-  artboards: { artboard: Artboard; position?: { x: number; y: number } }[],
-  renderer: any
-) => {
-  artboards.forEach(({ artboard, position }) => {
-    if (!artboard) return
-
-    if (position) {
-      console.log('position', position)
-      renderer.translate(position.x, position.y)
-    }
-    renderer.save()
-    artboard.draw(renderer)
-  })
-}
-
-export {
-  getInput,
-  InputType,
-  getArtboardByName,
-  getStateMachineByName,
-  // advanceStateMachines,
-  // advanceArtboards,
-}
+export { getInput, getStateMachineByName, advanceStateMachine, advanceArtboard }
