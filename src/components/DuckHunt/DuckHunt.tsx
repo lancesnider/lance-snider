@@ -13,6 +13,8 @@ const RIVE_FILE_URL = '/rive/duck_hunt.riv'
 const CANVAS_WIDTH = 768
 const CANVAS_HEIGHT = 720
 
+import './DuckHunt.scss'
+
 const getStateMachineByName = (
   rive: RiveCanvasType,
   artboard: Artboard,
@@ -34,6 +36,9 @@ const DuckHunt = () => {
     let file: File | null = null
     let mainArtboard: Artboard | null = null
     let mainStateMachine: StateMachineInstance | null = null
+    let handleClick: (e: MouseEvent) => void | null
+    let handleMove: (e: MouseEvent) => void | null
+    const mainCanvas = canvasRef.current as HTMLCanvasElement | null
 
     const loadDuckHunt = async () => {
       if (!canvasRef.current) return
@@ -41,8 +46,6 @@ const DuckHunt = () => {
       const rive = await RiveCanvas({
         locateFile: (_) => RIVE_WASM_URL,
       })
-
-      const mainCanvas = canvasRef.current as HTMLCanvasElement | null
 
       if (!mainCanvas) return
 
@@ -64,6 +67,38 @@ const DuckHunt = () => {
         'State Machine 1'
       )
 
+      /*
+        Event Listeners
+      */
+
+      handleClick = (e: MouseEvent) => {
+        const rect = mainCanvas.getBoundingClientRect()
+        const mouseX = e.clientX - rect.left
+        const mouseY = e.clientY - rect.top
+
+        console.log('Mouse position relative to canvas:', mouseX, mouseY)
+
+        mainStateMachine?.pointerDown(mouseX / 3, mouseY / 3)
+      }
+
+      mainCanvas.addEventListener('click', handleClick)
+
+      handleMove = (e: MouseEvent) => {
+        const rect = mainCanvas.getBoundingClientRect()
+        const mouseX = e.clientX - rect.left
+        const mouseY = e.clientY - rect.top
+
+        console.log('Mouse position relative to canvas:', mouseX, mouseY)
+
+        mainStateMachine?.pointerMove(mouseX / 3, mouseY / 3)
+      }
+
+      mainCanvas.addEventListener('mousemove', handleMove)
+
+      /*
+        Render Loop
+      */
+
       let lastTime = 0
       function renderLoop(time: number) {
         if (!renderer || !mainArtboard || !mainStateMachine) return
@@ -76,11 +111,12 @@ const DuckHunt = () => {
         lastTime = time
         renderer.clear()
 
-        // game logic goes here
+        // Advance the state machine and artboard
         mainStateMachine.advance(elapsedTimeSec)
         mainArtboard.advance(elapsedTimeSec)
         renderer.save()
 
+        // Align the artboard to the canvas
         renderer.align(
           rive.Fit.contain,
           rive.Alignment.center,
@@ -92,6 +128,8 @@ const DuckHunt = () => {
           },
           mainArtboard.bounds
         )
+
+        // get mouse x position relative to the canvas
 
         mainArtboard.draw(renderer)
         renderer.restore()
@@ -105,6 +143,10 @@ const DuckHunt = () => {
 
     return () => {
       console.log('DuckHunt unmounted')
+
+      mainCanvas?.removeEventListener('click', handleClick as EventListener)
+      mainCanvas?.removeEventListener('mouseMove', handleMove as EventListener)
+
       renderer?.delete()
       file?.delete()
       mainArtboard?.delete()
@@ -112,7 +154,7 @@ const DuckHunt = () => {
   }, [canvasRef.current])
 
   return (
-    <div className='duckhunt'>
+    <div className='duck-hunt'>
       <canvas width={CANVAS_WIDTH} height={CANVAS_HEIGHT} ref={canvasRef} />
     </div>
   )
