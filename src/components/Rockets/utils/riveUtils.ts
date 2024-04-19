@@ -21,36 +21,24 @@ const getInputType = (input: SMIInput) => {
   }
 }
 
-const getInput = (
-  inputName: string,
-  animationMachine?: StateMachineInstance
-) => {
-  if (!animationMachine) return
+const getInput = (inputName: string, stateMachine?: StateMachineInstance) => {
+  if (!stateMachine) return
 
-  // This low level portion of the API requires iterating the inputs
-  // to find the one you want.
-  let groundSoloInput
+  let newInput
 
   // Cycle through the inputs to find the one with the specified name
-  for (let i = 0, l = animationMachine.inputCount(); i < l; i++) {
-    const input = animationMachine.input(i)
+  for (let i = 0, l = stateMachine.inputCount(); i < l; i++) {
+    const input = stateMachine.input(i)
     switch (input.name) {
       case inputName:
-        groundSoloInput = getInputType(input)
+        newInput = getInputType(input)
         break
       default:
         break
     }
   }
 
-  return groundSoloInput
-}
-
-const getStateMachineByName = (rive: any, artboard: any, name: string) => {
-  return new rive.StateMachineInstance(
-    artboard.stateMachineByName(name),
-    artboard
-  )
+  return newInput
 }
 
 const advanceStateMachine = (
@@ -66,4 +54,4 @@ const advanceArtboard = (elapsedTimeSec: number, artboard?: Artboard) => {
   artboard.advance(elapsedTimeSec)
 }
 
-export { getInput, getStateMachineByName, advanceStateMachine, advanceArtboard }
+export { getInput, advanceStateMachine, advanceArtboard }

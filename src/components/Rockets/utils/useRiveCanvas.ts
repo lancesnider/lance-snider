@@ -5,6 +5,8 @@ import RiveCanvas, {
   RiveCanvas as RiveCanvasType,
 } from '@rive-app/canvas-advanced'
 
+import { getInput, advanceStateMachine, advanceArtboard } from './riveUtils'
+
 interface Props {
   wasmUrl: string
   dimensions: { width: number; height: number }
@@ -94,10 +96,14 @@ const useRiveCanvas = ({ wasmUrl, dimensions, riveFileUrl }: Props) => {
     rive,
     canvas,
     renderer,
-    riveFile: mainRiveFile,
     getArtboardByName,
     getStateMachineByName,
   }
 }
 
-export { useRiveCanvas as default }
+export {
+  useRiveCanvas as default,
+  getInput,
+  advanceStateMachine,
+  advanceArtboard,
+}

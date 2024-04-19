@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import gsap from 'gsap'
 
-import useRiveCanvas from './utils/useRiveCanvas'
-import {
+import useRiveCanvas, {
   getInput,
   advanceStateMachine,
   advanceArtboard,
-} from './utils/riveUtils'
+} from './utils/useRiveCanvas'
+
 import { forEach } from 'lodash'
 
 const CANVAS_WIDTH = 2000
@@ -15,11 +15,11 @@ const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
 
-const PLACE_WIDTH = 500
-const PLACE_HEIGHT = 100
-const PLACE_SPACING = 16
-const PLACE_FULL_HEIGHT = PLACE_HEIGHT + PLACE_SPACING
-const PLACE_X = CANVAS_WIDTH - PLACE_WIDTH - PLACE_SPACING
+// const PLACE_WIDTH = 500
+// const PLACE_HEIGHT = 100
+// const PLACE_SPACING = 16
+// const PLACE_FULL_HEIGHT = PLACE_HEIGHT + PLACE_SPACING
+// const PLACE_X = CANVAS_WIDTH - PLACE_WIDTH - PLACE_SPACING
 
 const PLACE_POSITIONS = [
   {
@@ -83,13 +83,11 @@ const RiveAnimation = ({ raceData }: Props) => {
   const { users, duration } = raceData
 
   const {
+    canvasRef,
     loading,
     error,
-    canvas,
-    canvasRef,
     rive,
     renderer,
-    riveFile,
     getArtboardByName,
     getStateMachineByName,
   } = useRiveCanvas({
@@ -225,7 +223,7 @@ const RiveAnimation = ({ raceData }: Props) => {
       ]
 
       function renderLoop(time: number) {
-        if (!rive || !renderer || !canvas) return
+        if (!rive || !renderer) return
 
         if (!lastTime) {
           lastTime = time
@@ -239,6 +237,7 @@ const RiveAnimation = ({ raceData }: Props) => {
         advanceStateMachine(elapsedTimeSec, starsStateMachine)
 
         renderer.save()
+        if (!starsArtboard) return
         renderer.align(
           rive.Fit.contain,
           rive.Alignment.topCenter,
@@ -290,6 +289,8 @@ const RiveAnimation = ({ raceData }: Props) => {
         // })
 
         riveRace.map(({ artboard, stateMachine, position, id }) => {
+          if (!artboard) return
+
           advanceStateMachine(elapsedTimeSec, stateMachine)
           advanceArtboard(elapsedTimeSec, artboard)
 
@@ -350,7 +351,7 @@ const RiveAnimation = ({ raceData }: Props) => {
     return () => {
       // Perform any necessary clean-up here
     }
-  }, [rive, renderer, riveFile, users])
+  }, [rive, renderer, users])
 
   return (
     <canvas
@@ -364,7 +365,6 @@ const RiveAnimation = ({ raceData }: Props) => {
       width={CANVAS_WIDTH / 2}
       height={CANVAS_HEIGHT / 2}
       ref={canvasRef}
-      id='rive-canvas'
     />
   )
 }
