@@ -1,11 +1,33 @@
-import {
+import RiveCanvas, {
+  Artboard,
+  Renderer,
+  RiveCanvas as RiveCanvasType,
+  File,
   SMIInput,
   StateMachineInstance,
-  Artboard,
 } from '@rive-app/canvas-advanced'
 import { StateMachineInputType } from '@rive-app/react-canvas'
 
-// Rather than manually defining the input type, we can get it from the Rive input
+const redDuckPosition = {
+  x: 286.5,
+  y: 625.5,
+  width: 24,
+  height: 24,
+}
+
+const getStateMachineByName = (
+  rive: RiveCanvasType,
+  name: string,
+  artboard?: Artboard
+) => {
+  if (!rive || !artboard) return null
+
+  return new rive.StateMachineInstance(
+    artboard.stateMachineByName(name),
+    artboard
+  )
+}
+
 const getInputType = (input: SMIInput) => {
   const { type } = input
 
@@ -44,17 +66,4 @@ const getInput = (
   return newInput
 }
 
-const advanceStateMachine = (
-  elapsedTimeSec: number,
-  artboard?: StateMachineInstance
-) => {
-  if (!artboard) return
-  artboard.advance(elapsedTimeSec)
-}
-
-const advanceArtboard = (elapsedTimeSec: number, artboard?: Artboard) => {
-  if (!artboard) return
-  artboard.advance(elapsedTimeSec)
-}
-
-export { getInput, advanceStateMachine, advanceArtboard }
+export { getStateMachineByName, getInput, redDuckPosition }

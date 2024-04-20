@@ -1,11 +1,18 @@
 import { useRef, useEffect } from 'react'
+import { times } from 'lodash'
 import RiveCanvas, {
   Artboard,
   Renderer,
-  RiveCanvas as RiveCanvasType,
   File,
   StateMachineInstance,
+  SMIInput,
 } from '@rive-app/canvas-advanced'
+
+import {
+  getInput,
+  getStateMachineByName,
+  redDuckPosition,
+} from './duckHuntUtils'
 
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
@@ -15,17 +22,11 @@ const CANVAS_HEIGHT = 720
 
 import './DuckHunt.scss'
 
-const getStateMachineByName = (
-  rive: RiveCanvasType,
-  artboard: Artboard,
-  name: string
-) => {
-  if (!rive) return null
-
-  return new rive.StateMachineInstance(
-    artboard.stateMachineByName(name),
-    artboard
-  )
+enum GameState {
+  HOME = 0,
+  NEW_ROUND = 1,
+  TURN = 2,
+  BETWEEN_TURNS = 3,
 }
 
 const DuckHunt = () => {
@@ -34,11 +35,18 @@ const DuckHunt = () => {
   useEffect(() => {
     let renderer: Renderer | null = null
     let file: File | null = null
+    const redDucks: {
+      redDuckArtboard?: Artboard
+      redDuckStateMachine: StateMachineInstance | null
+      redDuckStateInput?: SMIInput | null
+    }[] = []
     let mainArtboard: Artboard | null = null
     let mainStateMachine: StateMachineInstance | null = null
     let handleClick: (e: MouseEvent) => void | null
     let handleMove: (e: MouseEvent) => void | null
     const mainCanvas = canvasRef.current as HTMLCanvasElement | null
+
+    let currentRound = 0
 
     const loadDuckHunt = async () => {
       if (!canvasRef.current) return
@@ -63,22 +71,47 @@ const DuckHunt = () => {
       mainArtboard = file.artboardByName('duckHunt')
       mainStateMachine = getStateMachineByName(
         rive,
-        mainArtboard,
-        'State Machine 1'
+        'State Machine 1',
+        mainArtboard
       )
 
+      // Load 8 instances of the red ducks
+      times(10, () => {
+        const redDuckArtboard = file?.artboardByName('redDuck')
+        const redDuckStateMachine = getStateMachineByName(
+          rive,
+          'State Machine 1',
+          redDuckArtboard
+        )
+
+        const duckStateInput = getInput('duckState', redDuckStateMachine)
+
+        redDucks.push({
+          redDuckArtboard: redDuckArtboard,
+          redDuckStateMachine: redDuckStateMachine,
+          redDuckStateInput: duckStateInput,
+        })
+      })
+
       /*
-        Event Listeners
+        Inputs
       */
+      const gameStateInput = getInput('gameState', mainStateMachine)
+      const ammoInput = getInput('ammo', mainStateMachine)
+
+      /*
+        Text runs
+
+      */
+
+      const roundNumberText = mainArtboard.textRun('roundNumber')
 
       handleClick = (e: MouseEvent) => {
         const rect = mainCanvas.getBoundingClientRect()
         const mouseX = e.clientX - rect.left
         const mouseY = e.clientY - rect.top
 
-        console.log('Mouse position relative to canvas:', mouseX, mouseY)
-
-        mainStateMachine?.pointerDown(mouseX / 3, mouseY / 3)
+        mainStateMachine?.pointerDown(mouseX, mouseY)
       }
 
       mainCanvas.addEventListener('click', handleClick)
@@ -88,12 +121,42 @@ const DuckHunt = () => {
         const mouseX = e.clientX - rect.left
         const mouseY = e.clientY - rect.top
 
-        console.log('Mouse position relative to canvas:', mouseX, mouseY)
-
-        mainStateMachine?.pointerMove(mouseX / 3, mouseY / 3)
+        mainStateMachine?.pointerMove(mouseX, mouseY)
       }
 
       mainCanvas.addEventListener('mousemove', handleMove)
+
+      /*
+        Rive events
+      */
+
+      const releaseDucks = () => {
+        // console
+        resetTurn()
+      }
+
+      const resetTurn = () => {
+        currentRound++
+        if (ammoInput) ammoInput.value = 3
+      }
+
+      const handleGameStateEvent = ({ properties }: any) => {
+        if (!properties) return
+
+        const { currentGameState } = properties
+
+        switch (currentGameState) {
+          case 'roundStart':
+            currentRound++
+            roundNumberText.text = currentRound.toString()
+            return
+          case 'releaseDucks':
+            releaseDucks()
+            return
+          default:
+            return
+        }
+      }
 
       /*
         Render Loop
@@ -109,30 +172,57 @@ const DuckHunt = () => {
         const elapsedTimeMs = time - lastTime
         const elapsedTimeSec = elapsedTimeMs / 1000
         lastTime = time
+
+        // Rive events
+        const numFiredEvents = mainStateMachine.reportedEventCount()
+        for (let i = 0; i < numFiredEvents; i++) {
+          const event = mainStateMachine.reportedEventAt(i)
+          // Run any Event-based logic now
+          if (!event) return
+
+          switch (event.name) {
+            case 'gameStateEvent':
+              handleGameStateEvent(event)
+            default:
+          }
+        }
+
         renderer.clear()
 
         // Advance the state machine and artboard
         mainStateMachine.advance(elapsedTimeSec)
         mainArtboard.advance(elapsedTimeSec)
+
         renderer.save()
-
-        // Align the artboard to the canvas
-        renderer.align(
-          rive.Fit.contain,
-          rive.Alignment.center,
-          {
-            minX: 0,
-            minY: 0,
-            maxX: CANVAS_WIDTH,
-            maxY: CANVAS_HEIGHT,
-          },
-          mainArtboard.bounds
-        )
-
-        // get mouse x position relative to the canvas
-
         mainArtboard.draw(renderer)
         renderer.restore()
+
+        // get mouse x position relative to the canvas
+        if (gameStateInput?.value !== GameState.HOME) {
+          redDucks.map(({ redDuckArtboard, redDuckStateMachine }, index) => {
+            if (renderer && redDuckArtboard) {
+              redDuckStateMachine?.advance(elapsedTimeSec)
+              redDuckArtboard?.advance(elapsedTimeSec)
+              renderer.save()
+
+              const xPos = redDuckPosition.x + redDuckPosition.width * index
+
+              renderer.align(
+                rive.Fit.contain,
+                rive.Alignment.topCenter,
+                {
+                  minX: xPos,
+                  minY: redDuckPosition.y,
+                  maxX: xPos + redDuckPosition.width,
+                  maxY: redDuckPosition.y + redDuckPosition.height,
+                },
+                redDuckArtboard.bounds
+              )
+              redDuckArtboard?.draw(renderer)
+              renderer.restore()
+            }
+          })
+        }
 
         rive.requestAnimationFrame(renderLoop)
       }
@@ -150,6 +240,11 @@ const DuckHunt = () => {
       renderer?.delete()
       file?.delete()
       mainArtboard?.delete()
+
+      redDucks.forEach((redDuck) => {
+        redDuck?.redDuckArtboard?.delete()
+        redDuck?.redDuckStateMachine?.delete()
+      })
     }
   }, [canvasRef.current])
 
