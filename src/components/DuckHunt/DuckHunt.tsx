@@ -35,6 +35,14 @@ const DuckHunt = () => {
   useEffect(() => {
     let renderer: Renderer | null = null
     let file: File | null = null
+    const ducks: {
+      duckArtboard?: Artboard
+      duckStateMachine: StateMachineInstance | null
+      isGlideInput?: SMIInput | null
+      isRightInput?: SMIInput | null
+      resetTrigger?: SMIInput | null
+      dieTrigger?: SMIInput | null
+    }[] = []
     const redDucks: {
       redDuckArtboard?: Artboard
       redDuckStateMachine: StateMachineInstance | null
@@ -47,6 +55,7 @@ const DuckHunt = () => {
     const mainCanvas = canvasRef.current as HTMLCanvasElement | null
 
     let currentRound = 0
+    let duckCount = 1
 
     const loadDuckHunt = async () => {
       if (!canvasRef.current) return
@@ -92,6 +101,34 @@ const DuckHunt = () => {
           redDuckStateInput: duckStateInput,
         })
       })
+
+      // create ducks (this happens when clicking play on the home screen)
+      const instantiateDucks = (ducksToInstantiate: number) => {
+        duckCount = ducksToInstantiate
+
+        times(ducksToInstantiate, () => {
+          const duckArtboard = file?.artboardByName('duck')
+          const duckStateMachine = getStateMachineByName(
+            rive,
+            'State Machine 1',
+            duckArtboard
+          )
+
+          const isGlideInput = getInput('isGlide', duckStateMachine)
+          const isRightInput = getInput('isRight', duckStateMachine)
+          const resetTrigger = getInput('reset', duckStateMachine)
+          const dieTrigger = getInput('die', duckStateMachine)
+
+          ducks.push({
+            duckArtboard,
+            duckStateMachine,
+            isGlideInput,
+            isRightInput,
+            resetTrigger,
+            dieTrigger,
+          })
+        })
+      }
 
       /*
         Inputs
@@ -183,7 +220,17 @@ const DuckHunt = () => {
           switch (event.name) {
             case 'gameStateEvent':
               handleGameStateEvent(event)
+              break
+            case 'startGame1Duck':
+              console.log('startGame1Duck')
+              instantiateDucks(1)
+              break
+            case 'startGame2Ducks':
+              console.log('startGame2Ducks')
+              instantiateDucks(2)
+              break
             default:
+              break
           }
         }
 
@@ -224,6 +271,31 @@ const DuckHunt = () => {
           })
         }
 
+        // Render ducks
+        ducks.map(({ duckArtboard, duckStateMachine }, index) => {
+          if (renderer && duckArtboard) {
+            duckStateMachine?.advance(elapsedTimeSec)
+            duckArtboard?.advance(elapsedTimeSec)
+            renderer.save()
+
+            const xPos = 256 + 256 * index
+
+            // renderer.align(
+            //   rive.Fit.contain,
+            //   rive.Alignment.topCenter,
+            //   {
+            //     minX: xPos,
+            //     minY: 108,
+            //     maxX: xPos + 108,
+            //     maxY: 108 + 108,
+            //   },
+            //   duckArtboard.bounds
+            // )
+            duckArtboard?.draw(renderer)
+            renderer.restore()
+          }
+        })
+
         rive.requestAnimationFrame(renderLoop)
       }
       rive.requestAnimationFrame(renderLoop)
@@ -240,6 +312,11 @@ const DuckHunt = () => {
       renderer?.delete()
       file?.delete()
       mainArtboard?.delete()
+
+      ducks.forEach((duck) => {
+        duck?.duckArtboard?.delete()
+        duck?.duckStateMachine?.delete()
+      })
 
       redDucks.forEach((redDuck) => {
         redDuck?.redDuckArtboard?.delete()
