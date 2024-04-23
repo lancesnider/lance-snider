@@ -70,6 +70,7 @@ enum GameState {
 const DUCK_WIDTH = 108
 const DUCK_HEIGHT = 105
 const ROUND_DURATION = 5
+const DUCK_START_Y = 465
 
 const DuckHunt = () => {
   const canvasRef = useRef(null)
@@ -79,7 +80,6 @@ const DuckHunt = () => {
     let currentTurn = 0
     let duckCount = 1
     let ducksKilledPerRound = 0
-    let ducksLandeddPerRound = 0
     let ducksKilledPerTurn = 0
     let missesPerTurn = 0
     let currentAmmo = 3
@@ -202,6 +202,8 @@ const DuckHunt = () => {
             duckArtboard
           )
 
+          const timeline = gsap.timeline()
+
           const isGlideInput = getInput('isGlide', duckStateMachine)
           const isRightInput = getInput('isRight', duckStateMachine)
           const resetTrigger = getInput('reset', duckStateMachine)
@@ -214,6 +216,7 @@ const DuckHunt = () => {
             isRightInput,
             resetTrigger,
             dieTrigger,
+            timeline,
             position: { x: 0, y: 0 },
             previousPosition: { x: 0, y: 0 },
           })
@@ -254,14 +257,15 @@ const DuckHunt = () => {
         ducksKilledPerTurn = 0
         // activate gun
         // release ducks
-        ducks.map(({ position, isRightInput }, index) => {
-          // duckStateMachine?.fireTrigger('reset')
-          const duckTl = gsap.timeline()
+        ducks.map(({ position, resetTrigger, timeline }, index) => {
+          resetTrigger?.fire()
+
+          timeline?.clear()
 
           let xPos = 205 + 205 * index
-          let yPos = 465
+          let yPos = DUCK_START_Y
 
-          duckTl.set(position, {
+          timeline?.set(position, {
             x: xPos,
             y: yPos,
           })
@@ -280,7 +284,7 @@ const DuckHunt = () => {
             const duration = distance / 300
             totalDuration += duration
 
-            duckTl.to(position, {
+            timeline?.to(position, {
               x: newXPos,
               y: newYPos,
               duration: duration,
@@ -299,7 +303,7 @@ const DuckHunt = () => {
             Math.pow(finalXPos - xPos, 2) + Math.pow(finalYPos - yPos, 2)
           )
           const finalDuration = distance / 300
-          duckTl.to(position, {
+          timeline?.to(position, {
             x: finalXPos,
             y: finalYPos,
             duration: finalDuration,
@@ -307,7 +311,7 @@ const DuckHunt = () => {
             onComplete: () => {
               missesPerTurn++
 
-              if (missesPerTurn === duckCount) {
+              if (missesPerTurn + ducksKilledPerTurn === duckCount) {
                 endTurn()
               }
             },
@@ -318,7 +322,7 @@ const DuckHunt = () => {
       const checkHitDuck = (mouseX: number, mouseY: number) => {
         let ducksHit = 0
 
-        ducks.map(({ position, duckStateMachine, dieTrigger }, index) => {
+        ducks.map(({ position, timeline, dieTrigger }, index) => {
           if (
             ducksHit == 0 &&
             mouseX > position.x &&
@@ -327,9 +331,21 @@ const DuckHunt = () => {
             mouseY < position.y + DUCK_HEIGHT
           ) {
             ducksHit++
-            ducksKilledPerTurn++
-            ducksKilledPerRound++
             dieTrigger?.fire()
+            timeline?.clear()
+
+            // get duration based on y distance
+            const distance = DUCK_START_Y - position.y
+
+            timeline?.to(position, {
+              y: DUCK_START_Y,
+              duration: distance / 500,
+              onComplete: duckLanded,
+              ease: 'linear',
+              delay: 0.6,
+            })
+
+            timeline?.play()
           }
         })
 
@@ -337,33 +353,14 @@ const DuckHunt = () => {
 
         if (ducksHit === 0) {
           console.log('miss')
-          missesPerTurn++
         }
-      }
-
-      const duckMissed = () => {
-        currentAmmo -= 1
-        missesPerTurn++
-
-        if (currentAmmo === 0) {
-          // trigger fly away
-          // set round over in Rive
-        }
-      }
-
-      const duckHit = () => {
-        console.log('duck hit')
-        currentAmmo -= 1
-        ducksKilledPerTurn++
-
-        // update score (missesPerTurn 0 = 1000, 1 = 500, 2 = 250)
-        // Update red ducks in ui
       }
 
       const duckLanded = () => {
-        ducksLandeddPerRound++
+        ducksKilledPerTurn++
+        ducksKilledPerRound++
 
-        if (ducksKilledPerTurn === duckCount) {
+        if (ducksKilledPerTurn + missesPerTurn === duckCount) {
           endTurn()
         }
       }
@@ -388,6 +385,7 @@ const DuckHunt = () => {
         // update high score
         // shift red ducks in ui until red are all to the left, white to the right
         if (ducksKilledPerRound >= 6) {
+          console.log('round over, success')
           currentRound++
           beginRound()
         } else {
@@ -457,9 +455,6 @@ const DuckHunt = () => {
               break
             case 'turnOverAnimationEnd':
               endTurnAnimationEnd()
-              break
-            case 'duckKilled':
-              duckHit()
               break
             default:
               break
