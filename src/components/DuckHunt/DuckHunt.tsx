@@ -151,9 +151,11 @@ const DuckHunt = () => {
         const mouseX = e.clientX - rect.left
         const mouseY = e.clientY - rect.top
 
+        checkHitDuck(mouseX, mouseY)
+
         mainStateMachine?.pointerDown(mouseX, mouseY)
       }
-      mainCanvas.addEventListener('click', handleClick)
+      mainCanvas.addEventListener('mousedown', handleClick)
       handleMove = (e: MouseEvent) => {
         const rect = mainCanvas.getBoundingClientRect()
         const mouseX = e.clientX - rect.left
@@ -311,6 +313,32 @@ const DuckHunt = () => {
             },
           })
         })
+      }
+
+      const checkHitDuck = (mouseX: number, mouseY: number) => {
+        let ducksHit = 0
+
+        ducks.map(({ position, duckStateMachine, dieTrigger }, index) => {
+          if (
+            ducksHit == 0 &&
+            mouseX > position.x &&
+            mouseX < position.x + DUCK_WIDTH &&
+            mouseY > position.y &&
+            mouseY < position.y + DUCK_HEIGHT
+          ) {
+            ducksHit++
+            ducksKilledPerTurn++
+            ducksKilledPerRound++
+            dieTrigger?.fire()
+          }
+        })
+
+        currentAmmo -= 1
+
+        if (ducksHit === 0) {
+          console.log('miss')
+          missesPerTurn++
+        }
       }
 
       const duckMissed = () => {
