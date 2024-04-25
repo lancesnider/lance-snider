@@ -69,7 +69,7 @@ enum GameState {
 
 const DUCK_WIDTH = 108
 const DUCK_HEIGHT = 105
-const ROUND_DURATION = 5
+const ROUND_DURATION = 4
 const DUCK_START_Y = 465
 
 const DuckHunt = () => {
@@ -81,16 +81,18 @@ const DuckHunt = () => {
     let duckCount = 1
     let ducksKilledPerRound = 0
     let ducksKilledPerTurn = 0
+    let missedDucksPerTurn = 0
     let missesPerTurn = 0
     let currentAmmo = 3
     let currentScore = 0
-    let currentGameState = GameState.HOME_SCREEN
+    let currentGameState: GameState = GameState.HOME_SCREEN
 
     let renderer: Renderer | null = null
     let file: File | null = null
     let ducks: {
       duckArtboard?: Artboard
       duckStateMachine: StateMachineInstance | null
+      duckFireTrigger?: SMIInput | null
       isGlideInput?: SMIInput | null
       isRightInput?: SMIInput | null
       resetTrigger?: SMIInput | null
@@ -143,6 +145,16 @@ const DuckHunt = () => {
         mainArtboard
       )
 
+      const bgArtboard = file.artboardByName('background')
+      const bgStateMachine = getStateMachineByName(
+        rive,
+        'State Machine 1',
+        bgArtboard
+      )
+      const blueSkyTrigger = getInput('blueSky', bgStateMachine)
+      const flyAwayTrigger = getInput('flyAway', bgStateMachine)
+      const bgFireTrigger = getInput('fire', bgStateMachine)
+
       /*
         Pass mouse move/click events to the Rive State Machine
       */
@@ -151,7 +163,9 @@ const DuckHunt = () => {
         const mouseX = e.clientX - rect.left
         const mouseY = e.clientY - rect.top
 
-        checkHitDuck(mouseX, mouseY)
+        if (currentGameState === GameState.TURN && currentAmmo > 0) {
+          checkHitDuck(mouseX, mouseY)
+        }
 
         mainStateMachine?.pointerDown(mouseX, mouseY)
       }
@@ -208,6 +222,7 @@ const DuckHunt = () => {
           const isRightInput = getInput('isRight', duckStateMachine)
           const resetTrigger = getInput('reset', duckStateMachine)
           const dieTrigger = getInput('die', duckStateMachine)
+          const duckFireTrigger = getInput('fire', duckStateMachine)
 
           ducks.push({
             duckArtboard,
@@ -217,6 +232,7 @@ const DuckHunt = () => {
             resetTrigger,
             dieTrigger,
             timeline,
+            duckFireTrigger,
             position: { x: 0, y: 0 },
             previousPosition: { x: 0, y: 0 },
           })
@@ -227,18 +243,25 @@ const DuckHunt = () => {
         Game Inputs
       */
       const gameStateInput = getInput('gameState', mainStateMachine)
+      const fireTrigger = getInput('fire', mainStateMachine)
       const ammoInput = getInput('ammo', mainStateMachine)
       const turnOverTrigger = getInput('turnOver', mainStateMachine)
       const killsInput = getInput('kills', mainStateMachine)
 
       // Text runs
       const roundNumberText = mainArtboard.textRun('roundNumber')
+      const scoreText = mainArtboard.textRun('score')
 
       /*
         -----------------------------------------
         -------------- GAME LOGIC --------------
         -----------------------------------------
       */
+
+      const setAmmo = (ammo: number) => {
+        currentAmmo = ammo
+        if (ammoInput) ammoInput.value = ammo
+      }
 
       const startGame = (duckCount: number) => {
         instantiateDucks(duckCount)
@@ -247,13 +270,17 @@ const DuckHunt = () => {
       }
 
       const beginRound = () => {
+        currentGameState = GameState.ROUND_START
         // reset red ducks in ui
         ducksKilledPerRound = 0
       }
 
       const beginTurn = () => {
-        currentAmmo = 3
+        currentGameState = GameState.TURN
+
         missesPerTurn = 0
+        setAmmo(3)
+        missedDucksPerTurn = 0
         ducksKilledPerTurn = 0
         // activate gun
         // release ducks
@@ -308,10 +335,13 @@ const DuckHunt = () => {
             y: finalYPos,
             duration: finalDuration,
             ease: 'linear',
+            onStart: () => {
+              if (flyAwayTrigger) flyAwayTrigger.fire()
+            },
             onComplete: () => {
-              missesPerTurn++
+              missedDucksPerTurn++
 
-              if (missesPerTurn + ducksKilledPerTurn === duckCount) {
+              if (missedDucksPerTurn + ducksKilledPerTurn === duckCount) {
                 endTurn()
               }
             },
@@ -319,37 +349,55 @@ const DuckHunt = () => {
         })
       }
 
+      const updateScore = () => {
+        // TO DO: Update to reflect real scoring
+        currentScore += 1000
+        // score with 6 characters. If the score is less than 1000, add leading zeros
+        const scoreString = currentScore.toString().padStart(6, '0')
+        scoreText.text = scoreString
+      }
+
       const checkHitDuck = (mouseX: number, mouseY: number) => {
         let ducksHit = 0
 
-        ducks.map(({ position, timeline, dieTrigger }, index) => {
-          if (
-            ducksHit == 0 &&
-            mouseX > position.x &&
-            mouseX < position.x + DUCK_WIDTH &&
-            mouseY > position.y &&
-            mouseY < position.y + DUCK_HEIGHT
-          ) {
-            ducksHit++
-            dieTrigger?.fire()
-            timeline?.clear()
+        fireTrigger?.fire()
+        bgFireTrigger?.fire()
 
-            // get duration based on y distance
-            const distance = DUCK_START_Y - position.y
+        ducks.map(
+          ({ position, timeline, dieTrigger, duckFireTrigger }, index) => {
+            duckFireTrigger?.fire()
 
-            timeline?.to(position, {
-              y: DUCK_START_Y,
-              duration: distance / 500,
-              onComplete: duckLanded,
-              ease: 'linear',
-              delay: 0.6,
-            })
+            if (
+              ducksHit == 0 &&
+              mouseX > position.x &&
+              mouseX < position.x + DUCK_WIDTH &&
+              mouseY > position.y &&
+              mouseY < position.y + DUCK_HEIGHT
+            ) {
+              ducksHit++
+              dieTrigger?.fire()
+              timeline?.clear()
+              updateScore()
 
-            timeline?.play()
+              // get duration based on y distance
+              const distance = DUCK_START_Y - position.y
+
+              timeline?.to(position, {
+                y: DUCK_START_Y,
+                duration: distance / 500,
+                onComplete: duckLanded,
+                ease: 'linear',
+                delay: 0.6,
+              })
+
+              timeline?.play()
+            } else {
+              missesPerTurn++
+            }
           }
-        })
+        )
 
-        currentAmmo -= 1
+        setAmmo(currentAmmo - 1)
 
         if (ducksHit === 0) {
           console.log('miss')
@@ -360,12 +408,16 @@ const DuckHunt = () => {
         ducksKilledPerTurn++
         ducksKilledPerRound++
 
-        if (ducksKilledPerTurn + missesPerTurn === duckCount) {
+        if (ducksKilledPerTurn + missedDucksPerTurn === duckCount) {
           endTurn()
         }
       }
 
       const endTurn = () => {
+        currentGameState = GameState.END_TURN
+
+        if (blueSkyTrigger) blueSkyTrigger.fire()
+
         if (killsInput && turnOverTrigger) {
           killsInput.value = ducksKilledPerTurn
           turnOverTrigger?.fire()
@@ -382,6 +434,7 @@ const DuckHunt = () => {
       }
 
       const endRound = () => {
+        currentGameState = GameState.END_ROUND
         // update high score
         // shift red ducks in ui until red are all to the left, white to the right
         if (ducksKilledPerRound >= 6) {
@@ -394,6 +447,7 @@ const DuckHunt = () => {
       }
 
       const gameOver = () => {
+        currentGameState = GameState.GAME_OVER
         // show game over animation for 5 seconds
         // reset game
         resetGame()
@@ -405,8 +459,8 @@ const DuckHunt = () => {
         duckCount = 1
         ducksKilledPerRound = 0
         ducksKilledPerTurn = 0
-        missesPerTurn = 0
-        currentAmmo = 3
+        missedDucksPerTurn = 0
+        setAmmo(3)
         currentScore = 0
 
         if (gameStateInput) gameStateInput.value = 0
@@ -463,40 +517,10 @@ const DuckHunt = () => {
 
         renderer.clear()
 
-        // Advance the state machine and artboard
-        mainStateMachine.advance(elapsedTimeSec)
-        mainArtboard.advance(elapsedTimeSec)
+        bgStateMachine?.advance(elapsedTimeSec)
+        bgArtboard?.advance(elapsedTimeSec)
 
-        renderer.save()
-        mainArtboard.draw(renderer)
-        renderer.restore()
-
-        // get mouse x position relative to the canvas
-        if (gameStateInput?.value !== GameState.HOME_SCREEN) {
-          redDucks.map(({ redDuckArtboard, redDuckStateMachine }, index) => {
-            if (renderer && redDuckArtboard) {
-              redDuckStateMachine?.advance(elapsedTimeSec)
-              redDuckArtboard?.advance(elapsedTimeSec)
-              renderer.save()
-
-              const xPos = redDuckPosition.x + redDuckPosition.width * index
-
-              renderer.align(
-                rive.Fit.contain,
-                rive.Alignment.topCenter,
-                {
-                  minX: xPos,
-                  minY: redDuckPosition.y,
-                  maxX: xPos + redDuckPosition.width,
-                  maxY: redDuckPosition.y + redDuckPosition.height,
-                },
-                redDuckArtboard.bounds
-              )
-              redDuckArtboard?.draw(renderer)
-              renderer.restore()
-            }
-          })
-        }
+        bgArtboard?.draw(renderer)
 
         // Render ducks
         ducks.map(
@@ -531,6 +555,41 @@ const DuckHunt = () => {
             }
           }
         )
+
+        // Advance the state machine and artboard
+        mainStateMachine.advance(elapsedTimeSec)
+        mainArtboard.advance(elapsedTimeSec)
+
+        renderer.save()
+        mainArtboard.draw(renderer)
+        renderer.restore()
+
+        // get mouse x position relative to the canvas
+        if (gameStateInput?.value !== GameState.HOME_SCREEN) {
+          redDucks.map(({ redDuckArtboard, redDuckStateMachine }, index) => {
+            if (renderer && redDuckArtboard) {
+              redDuckStateMachine?.advance(elapsedTimeSec)
+              redDuckArtboard?.advance(elapsedTimeSec)
+              renderer.save()
+
+              const xPos = redDuckPosition.x + redDuckPosition.width * index
+
+              renderer.align(
+                rive.Fit.contain,
+                rive.Alignment.topCenter,
+                {
+                  minX: xPos,
+                  minY: redDuckPosition.y,
+                  maxX: xPos + redDuckPosition.width,
+                  maxY: redDuckPosition.y + redDuckPosition.height,
+                },
+                redDuckArtboard.bounds
+              )
+              redDuckArtboard?.draw(renderer)
+              renderer.restore()
+            }
+          })
+        }
 
         rive.requestAnimationFrame(renderLoop)
       }
