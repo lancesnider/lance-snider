@@ -233,8 +233,8 @@ const DuckHunt = () => {
             dieTrigger,
             timeline,
             duckFireTrigger,
-            position: { x: 0, y: 0 },
-            previousPosition: { x: 0, y: 0 },
+            position: { x: 0, y: 600 },
+            previousPosition: { x: 0, y: 600 },
           })
         })
       }
