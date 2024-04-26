@@ -517,6 +517,9 @@ const DuckHunt = () => {
             case 'startGame2Ducks':
               startGame(2)
               break
+            case 'startGame3Ducks':
+              startGame(3)
+              break
             case 'beginRoundAnimationEnd':
               beginTurn()
               break
