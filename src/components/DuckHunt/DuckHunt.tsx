@@ -300,6 +300,17 @@ const DuckHunt = () => {
         setAmmo(maxAmmo)
         missedDucksPerTurn = 0
         ducksKilledPerTurn = 0
+
+        // get the number of red ducks based on duck count, starting with currentTurn * duckCount.
+        const redDucksToActivate = redDucks.slice(
+          currentTurn * duckCount,
+          currentTurn * duckCount + duckCount
+        )
+
+        redDucksToActivate.map(({ redDuckStateInput }) => {
+          if (redDuckStateInput) redDuckStateInput.value = 1
+        })
+
         // activate gun
         // release ducks
         ducks.map(({ position, resetTrigger, timeline }, index) => {
