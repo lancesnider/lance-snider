@@ -87,6 +87,7 @@ const DuckHunt = () => {
     let currentScore = 0
     let highScore = 12000
     let currentGameState: GameState = GameState.HOME_SCREEN
+    let currentRedDuckIndex = 0
 
     // get high score from local storage
     const storedData = localStorage.getItem('highScore')
@@ -288,6 +289,13 @@ const DuckHunt = () => {
         if (gameStateInput) gameStateInput.value = GameState.ROUND_START
         currentTurn = 0
         currentRound++
+        currentRedDuckIndex = 0
+
+        // reset red ducks
+        redDucks.map(({ redDuckStateInput }) => {
+          if (redDuckStateInput) redDuckStateInput.value = 0
+        })
+
         roundNumberText.text = currentRound.toString()
         // reset red ducks in ui
         ducksKilledPerRound = 0
@@ -371,6 +379,7 @@ const DuckHunt = () => {
               if (flyAwayTrigger) flyAwayTrigger.fire()
             },
             onComplete: () => {
+              updateRedDucks(0)
               missedDucksPerTurn++
 
               if (missedDucksPerTurn + ducksKilledPerTurn === duckCount) {
@@ -379,6 +388,14 @@ const DuckHunt = () => {
             },
           })
         })
+      }
+
+      const updateRedDucks = (newState: number) => {
+        const redDuckStateInput =
+          redDucks[currentRedDuckIndex]?.redDuckStateInput
+        if (redDuckStateInput) redDuckStateInput.value = newState
+
+        currentRedDuckIndex++
       }
 
       const updateScore = () => {
@@ -417,6 +434,7 @@ const DuckHunt = () => {
               ducksHit++
               dieTrigger?.fire()
               timeline?.clear()
+              updateRedDucks(2)
               updateScore()
               ducks[index].alive = false
 
@@ -544,7 +562,7 @@ const DuckHunt = () => {
               startGame(2)
               break
             case 'startGame3Ducks':
-              startGame(3)
+              startGame(5)
               break
             case 'beginRoundAnimationEnd':
               beginTurn()
