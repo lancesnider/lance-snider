@@ -85,7 +85,14 @@ const DuckHunt = () => {
     let maxAmmo = 3
     let currentAmmo = 3
     let currentScore = 0
+    let highScore = 12000
     let currentGameState: GameState = GameState.HOME_SCREEN
+
+    // get high score from local storage
+    const storedData = localStorage.getItem('highScore')
+    if (storedData && parseInt(storedData) > highScore) {
+      highScore = parseInt(storedData)
+    }
 
     let renderer: Renderer | null = null
     let file: File | null = null
@@ -252,6 +259,8 @@ const DuckHunt = () => {
       const startRoundTrigger = getInput('startRound', mainStateMachine)
 
       // Text runs
+      const highScoreText = mainArtboard.textRun('highScore')
+      highScoreText.text = highScore.toString()
       const roundNumberText = mainArtboard.textRun('roundNumber')
       const scoreText = mainArtboard.textRun('score')
 
@@ -367,6 +376,12 @@ const DuckHunt = () => {
         // score with 6 characters. If the score is less than 1000, add leading zeros
         const scoreString = currentScore.toString().padStart(6, '0')
         scoreText.text = scoreString
+
+        if (currentScore > highScore) {
+          highScore = currentScore
+          localStorage.setItem('highScore', highScore.toString())
+          highScoreText.text = highScore.toString()
+        }
       }
 
       const checkHitDuck = (mouseX: number, mouseY: number) => {
