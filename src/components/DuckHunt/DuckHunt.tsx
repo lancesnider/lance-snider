@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { times } from 'lodash'
+import { throttle, times } from 'lodash'
 import gsap from 'gsap'
 import RiveCanvas, {
   Artboard,
@@ -20,6 +20,8 @@ const RIVE_WASM_URL =
 const RIVE_FILE_URL = '/rive/duck_hunt.riv'
 const CANVAS_WIDTH = 768
 const CANVAS_HEIGHT = 720
+
+const drawMs = 42 // 24 fps
 
 import './DuckHunt.scss'
 
@@ -72,6 +74,11 @@ const DUCK_HEIGHT = 105
 const ROUND_DURATION = 4
 const DUCK_START_Y = 465
 
+interface Position {
+  x: number
+  y: number
+}
+
 const DuckHunt = () => {
   const canvasRef = useRef(null)
 
@@ -88,6 +95,7 @@ const DuckHunt = () => {
     let highScore = 12000
     let currentGameState: GameState = GameState.HOME_SCREEN
     let currentRedDuckIndex = 0
+    let msSinceDraw = 0
 
     // get high score from local storage
     const storedData = localStorage.getItem('highScore')
@@ -106,8 +114,8 @@ const DuckHunt = () => {
       resetTrigger?: SMIInput | null
       dieTrigger?: SMIInput | null
       timeline?: gsap.core.Timeline | null
-      position: { x: number; y: number }
-      previousPosition: { x: number; y: number }
+      position: Position
+      previousPosition: Position
       alive?: boolean
     }[] = []
     const redDucks: {
@@ -274,6 +282,15 @@ const DuckHunt = () => {
       const setAmmo = (ammo: number) => {
         currentAmmo = ammo
         if (ammoInput) ammoInput.value = ammo
+
+        if (ammo === 0) {
+          ducks.map(({ timeline, position, alive }) => {
+            if (!alive) return
+
+            timeline?.clear()
+            flyAway(position.x, position.y, position, timeline)
+          })
+        }
       }
 
       const startGame = (duckCount: number) => {
@@ -346,7 +363,8 @@ const DuckHunt = () => {
               Math.pow(newXPos - xPos, 2) + Math.pow(newYPos - yPos, 2)
             )
 
-            const duration = distance / 300
+            // Increase speed each round
+            const duration = distance / (300 + (currentRound - 1) * 70)
             totalDuration += duration
 
             timeline?.to(position, {
@@ -362,31 +380,45 @@ const DuckHunt = () => {
           }
 
           // fly offscreen
-          const finalXPos =
-            Math.floor(Math.random() * CANVAS_WIDTH) - DUCK_WIDTH / 2
-          const finalYPos = -110
-          const distance = Math.sqrt(
-            Math.pow(finalXPos - xPos, 2) + Math.pow(finalYPos - yPos, 2)
-          )
-          const finalDuration = distance / 300
-          timeline?.to(position, {
-            x: finalXPos,
-            y: finalYPos,
-            counterIncrement: 1,
-            duration: finalDuration,
-            ease: 'linear',
-            onStart: () => {
-              if (flyAwayTrigger) flyAwayTrigger.fire()
-            },
-            onComplete: () => {
-              updateRedDucks(0)
-              missedDucksPerTurn++
+          flyAway(xPos, yPos, position, timeline)
+        })
+      }
 
-              if (missedDucksPerTurn + ducksKilledPerTurn === duckCount) {
-                endTurn()
-              }
-            },
-          })
+      const flyAway = (
+        xPos: number,
+        yPos: number,
+        position: Position,
+        timeline?: gsap.core.Timeline | null
+      ) => {
+        // fly offscreen
+        const finalXPos =
+          Math.floor(Math.random() * CANVAS_WIDTH) - DUCK_WIDTH / 2
+        const finalYPos = -110
+        const distance = Math.sqrt(
+          Math.pow(finalXPos - xPos, 2) + Math.pow(finalYPos - yPos, 2)
+        )
+
+        const finalDuration = distance / 300
+        timeline?.to(position, {
+          x: finalXPos,
+          y: finalYPos,
+          counterIncrement: 1,
+          duration: finalDuration,
+          ease: 'linear',
+          onStart: () => {
+            if (flyAwayTrigger) {
+              console.log('xxx', flyAwayTrigger)
+              flyAwayTrigger.fire()
+            }
+          },
+          onComplete: () => {
+            updateRedDucks(0)
+            missedDucksPerTurn++
+
+            if (missedDucksPerTurn + ducksKilledPerTurn === duckCount) {
+              endTurn()
+            }
+          },
         })
       }
 
@@ -542,6 +574,16 @@ const DuckHunt = () => {
         const elapsedTimeSec = elapsedTimeMs / 1000
         lastTime = time
 
+        msSinceDraw += elapsedTimeMs
+        const doDraw = msSinceDraw >= drawMs
+
+        if (doDraw) {
+          msSinceDraw = 0
+        }
+        //   return
+        //   // renderer.restore()
+        // }
+
         /*
           Rive Event Handling
           Listen for events fired by Rive
@@ -575,12 +617,12 @@ const DuckHunt = () => {
           }
         }
 
-        renderer.clear()
+        if (doDraw) renderer.clear()
 
         bgStateMachine?.advance(elapsedTimeSec)
         bgArtboard?.advance(elapsedTimeSec)
 
-        bgArtboard?.draw(renderer)
+        if (doDraw) bgArtboard?.draw(renderer)
 
         // Render ducks
         ducks.map(
@@ -609,7 +651,7 @@ const DuckHunt = () => {
               }
               renderer.translate(position.x, position.y)
 
-              duckArtboard?.draw(renderer)
+              if (doDraw) duckArtboard?.draw(renderer)
               renderer.restore()
               ducks[index].previousPosition = { ...position }
             }
@@ -621,7 +663,7 @@ const DuckHunt = () => {
         mainArtboard.advance(elapsedTimeSec)
 
         renderer.save()
-        mainArtboard.draw(renderer)
+        if (doDraw) mainArtboard.draw(renderer)
         renderer.restore()
 
         // get mouse x position relative to the canvas
@@ -645,7 +687,7 @@ const DuckHunt = () => {
                 },
                 redDuckArtboard.bounds
               )
-              redDuckArtboard?.draw(renderer)
+              if (doDraw) redDuckArtboard?.draw(renderer)
               renderer.restore()
             }
           })
