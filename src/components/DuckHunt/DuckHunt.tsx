@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { throttle, times } from 'lodash'
+import { times } from 'lodash'
 import gsap from 'gsap'
 import RiveCanvas, {
   Artboard,
@@ -21,7 +21,7 @@ const RIVE_FILE_URL = '/rive/duck_hunt.riv'
 const CANVAS_WIDTH = 768
 const CANVAS_HEIGHT = 720
 
-const drawMs = 42 // 24 fps
+const drawMs = 16.6 // 24 fps
 
 import './DuckHunt.scss'
 
