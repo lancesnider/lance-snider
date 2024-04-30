@@ -1,5 +1,6 @@
 import Columns from '@/components/Columns/Columns'
 
+import seagulls from '@/assets/dev/seagulls.jpg'
 import milkshake from '@/assets/dev/milkshake.jpg'
 import mathMonsters from '@/assets/dev/math-monsters.webp'
 import ukraineSirenAlerts from '@/assets/dev/ukraine-siren-alerts.jpg'
@@ -25,6 +26,14 @@ export default function Page() {
         subheading="Hi, I'm Lance! I'm a mobile, web, game, and extension developer with over 20 years of experience and a particular focus on interactive experiences. I've done work for major brands like the NBA, Right Guard, Estee Lauder, and Zicam and am here for your next project."
         defaultColumns={3}
         columns={[
+          {
+            heading: 'Interactive Animations (Rive)',
+            body: "I'm an expert in Rive, a tool that lets you create interactive animations for web, mobile, and games. I can help you create animations that are lightweight, scalable, and easy to maintain.",
+            image: seagulls,
+            link: '/dev/case-studies/seagulls',
+            linkText: 'Case Study',
+            tags: 'React, Rive',
+          },
           {
             heading: 'Zyft Browser Extension',
             body: 'I built the Chrome, Safari (desktop/mobile) extension, plus snapshot testing for XPath & Metadata Logic that needs to work across 40k+ Domains.',
