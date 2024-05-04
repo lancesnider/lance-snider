@@ -9880,12 +9880,15 @@ __metadata:
     gsap: "npm:^3.12.4"
     lodash: "npm:^4.17.21"
     next: "npm:14.0.4"
+    planck: "npm:^1.0.2"
+    planck-js: "npm:^0.3.31"
     react: "npm:^18"
     react-dom: "npm:^18"
     react-image-size: "npm:^2.3.2"
     react-photo-gallery: "npm:^8.0.0"
     resize-observer-polyfill: "npm:^1.5.1"
     sass: "npm:^1.69.5"
+    stage-js: "npm:^1.0.0-alpha.2"
     storybook: "npm:^7.6.6"
     typescript: "npm:^5"
     usehooks-ts: "npm:^2.9.1"
@@ -11357,6 +11360,24 @@ __metadata:
   dependencies:
     find-up: "npm:^6.3.0"
   checksum: 1afb23d2efb1ec9d8b2c4a0c37bf146822ad2774f074cb05b853be5dca1b40815c5960dd126df30ab8908349262a266f31b771e877235870a3b8fd313beebec5
+  languageName: node
+  linkType: hard
+
+"planck-js@npm:^0.3.31":
+  version: 0.3.31
+  resolution: "planck-js@npm:0.3.31"
+  dependencies:
+    stage-js: "npm:^0.9.4"
+  checksum: 35bd96090e0f6158768d1fc4e60156cf78e9d999cd8cc6988bb8d093a244352a5ae98a925944231faaf40e94f4752dda923920944cade5f733bd5aee12cbbfb6
+  languageName: node
+  linkType: hard
+
+"planck@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "planck@npm:1.0.2"
+  dependencies:
+    stage-js: "github:piqnt/stage.js#v1-alpha"
+  checksum: fdc8421c0c7e1a24c5abd19e0fa9eefb802d3e3aeab0640822fd4326b5c3dad3fd46fda2aab234945fe4c69469c4c1f8fa9f4df415dc5ba88e6771b8481ba02a
   languageName: node
   linkType: hard
 
@@ -12919,6 +12940,27 @@ __metadata:
   version: 1.3.4
   resolution: "stackframe@npm:1.3.4"
   checksum: 18410f7a1e0c5d211a4effa83bdbf24adbe8faa8c34db52e1cd3e89837518c592be60b60d8b7270ac53eeeb8b807cd11b399a41667f6c9abb41059c3ccc8a989
+  languageName: node
+  linkType: hard
+
+"stage-js@github:piqnt/stage.js#v1-alpha":
+  version: 1.0.0-alpha.3
+  resolution: "stage-js@https://github.com/piqnt/stage.js.git#commit=f9d9646bcb96f8e5e19e99446ee54e07d6c89863"
+  checksum: 9a6923c4dc69e2fd0fa74d245ada6048ad6b4aad4952efeb4fccff04bcd0508a0dbfbcd8ef45902fbf8bade822d819625c8e3d119236be64786a77306d8b6304
+  languageName: node
+  linkType: hard
+
+"stage-js@npm:^0.9.4":
+  version: 0.9.5
+  resolution: "stage-js@npm:0.9.5"
+  checksum: 36c99cf297a64260d86d68acff3be4daafaa53f5b9dc02ee14bbc3a65b84e8a06e2fae49505f266b054184347a44ce9bedf1853db0671e7873b35254315be1d3
+  languageName: node
+  linkType: hard
+
+"stage-js@npm:^1.0.0-alpha.2":
+  version: 1.0.0-alpha.2
+  resolution: "stage-js@npm:1.0.0-alpha.2"
+  checksum: 27ea3a372009fadfd07317143254e98614542166f45e76f16217fe5a04a7b28ece9960011744e85c84f06b11a11ef32ac4237f1451d5f51da882320cd33ca781
   languageName: node
   linkType: hard
 
