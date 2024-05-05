@@ -7,6 +7,10 @@ export default {
   component: OffroadRally,
 }
 
-const Template = () => <OffroadRally />
+const Template = () => (
+  <div style={{ maxWidth: 500 }}>
+    <OffroadRally />
+  </div>
+)
 
 export const Default = Template.bind({})
