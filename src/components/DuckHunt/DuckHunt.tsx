@@ -9,11 +9,14 @@ import RiveCanvas, {
   SMIInput,
 } from '@rive-app/canvas-advanced'
 
-import {
-  getInput,
-  getStateMachineByName,
-  redDuckPosition,
-} from './duckHuntUtils'
+import { getInput, getStateMachineByName } from '../../utils/riveLowLevelUtils'
+
+const redDuckPosition = {
+  x: 286.5,
+  y: 625.5,
+  width: 24,
+  height: 24,
+}
 
 const RIVE_WASM_URL =
   'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'

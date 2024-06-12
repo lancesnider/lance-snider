@@ -1,19 +1,10 @@
-import RiveCanvas, {
+import {
   Artboard,
-  Renderer,
   RiveCanvas as RiveCanvasType,
-  File,
   SMIInput,
   StateMachineInstance,
 } from '@rive-app/canvas-advanced'
 import { StateMachineInputType } from '@rive-app/react-canvas'
-
-const redDuckPosition = {
-  x: 286.5,
-  y: 625.5,
-  width: 24,
-  height: 24,
-}
 
 const getStateMachineByName = (
   rive: RiveCanvasType,
@@ -66,4 +57,4 @@ const getInput = (
   return newInput
 }
 
-export { getStateMachineByName, getInput, redDuckPosition }
+export { getStateMachineByName, getInput }
