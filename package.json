@@ -55,7 +55,6 @@
     "storybook": "^7.6.6",
     "typescript": "^5"
   },
-  "packageManager": "yarn@4.0.2",
   "readme": "ERROR: No README data found!",
   "_id": "lance-snider@0.1.0"
 }
