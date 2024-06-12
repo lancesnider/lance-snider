@@ -8,6 +8,7 @@ import useRiveCanvas, {
 } from './utils/useRiveCanvas'
 
 import { forEach } from 'lodash'
+import { Artboard, StateMachineInstance } from '@rive-app/canvas-advanced'
 
 const CANVAS_WIDTH = 2000
 const CANVAS_HEIGHT = 1600
@@ -108,6 +109,8 @@ const RiveAnimation = ({ raceData }: Props) => {
         'State Machine 1'
       )
 
+      if (!starsStateMachine) return
+
       const progressInput = getInput('progress', starsStateMachine)
 
       if (progressInput) {
@@ -156,6 +159,9 @@ const RiveAnimation = ({ raceData }: Props) => {
         }
 
         const stateMachine = getStateMachineByName(artboard, 'State Machine 1')
+
+        if (!stateMachine) return
+
         const destructionTrigger = getInput('destruction', stateMachine)
         const fighterType = getInput('fighterType', stateMachine)
         const destructionTypeInput = getInput('destructionType', stateMachine)
@@ -288,7 +294,7 @@ const RiveAnimation = ({ raceData }: Props) => {
         //   renderer.font = '48px serif'
         // })
 
-        riveRace.map(({ artboard, stateMachine, position, id }) => {
+        riveRace.map(({ artboard, stateMachine, position, id }: any) => {
           if (!artboard) return
 
           advanceStateMachine(elapsedTimeSec, stateMachine)
