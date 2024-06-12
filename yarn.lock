@@ -3138,6 +3138,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rive-app/canvas-advanced@npm:^2.10.4":
+  version: 2.10.4
+  resolution: "@rive-app/canvas-advanced@npm:2.10.4"
+  checksum: 14b4ce2f8a654cfdbcc45a7805a391a9f7716b286cf5f7bd7f732c3542068473284dcdc3ba3401590151dedc2cbcb006e259d61b864bb55f396622cd8abbdcaa
+  languageName: node
+  linkType: hard
+
 "@rive-app/canvas@npm:2.10.1":
   version: 2.10.1
   resolution: "@rive-app/canvas@npm:2.10.1"
@@ -9859,6 +9866,7 @@ __metadata:
     "@gsap/react": "npm:^2.1.0"
     "@mui/lab": "npm:^5.0.0-alpha.158"
     "@mui/material": "npm:^5.15.2"
+    "@rive-app/canvas-advanced": "npm:^2.10.4"
     "@rive-app/react-canvas": "npm:^4.8.1"
     "@storybook/addon-essentials": "npm:^7.6.6"
     "@storybook/addon-interactions": "npm:^7.6.6"
