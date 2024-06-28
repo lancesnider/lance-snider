@@ -84,13 +84,16 @@ export default function Example() {
     (e: any) => {
       const moveDelta = e.targetTouches[0].clientX - mouseDownX
       const moveDeltaPercent = -(moveDelta / windowWidth) * 100
+      const updatedSceneX = clamp(
+        moveDeltaPercent * maxShift + sceneX,
+        0,
+        maxShift * 100
+      )
 
+      console.log(updatedSceneX, maxShift, updatedSceneX / maxShift)
       if (sceneXInput && pointerXInput) {
-        sceneXInput.value = clamp(
-          moveDeltaPercent * maxShift + sceneX,
-          0,
-          maxShift * 100
-        )
+        pointerXInput.value = updatedSceneX / maxShift
+        sceneXInput.value = updatedSceneX
       }
     },
     [mouseDownX, maxShift, sceneX]
