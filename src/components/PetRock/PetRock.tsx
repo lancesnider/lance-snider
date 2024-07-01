@@ -90,7 +90,6 @@ export default function Example() {
         maxShift * 100
       )
 
-      console.log(updatedSceneX, maxShift, updatedSceneX / maxShift)
       if (sceneXInput && pointerXInput) {
         pointerXInput.value = updatedSceneX / maxShift
         sceneXInput.value = updatedSceneX
@@ -98,6 +97,29 @@ export default function Example() {
     },
     [mouseDownX, maxShift, sceneX]
   )
+
+  useEffect(() => {
+    if (!rive) return
+
+    const updateTime = () => {
+      const date = new Date()
+      let hours = date.getHours()
+      let minutes = date.getMinutes()
+
+      // Add leading zero if less than 10
+      const hoursString = hours < 10 ? `0${hours}` : hours.toString()
+      const minutesString = minutes < 10 ? `0${minutes}` : minutes.toString()
+
+      rive.setTextRunValue('hoursText', hoursString)
+      rive.setTextRunValue('minutesText', minutesString)
+    }
+
+    updateTime()
+    const intervalId = setInterval(updateTime, 60000) // Update every minute
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId)
+  }, [rive])
 
   return (
     <div
