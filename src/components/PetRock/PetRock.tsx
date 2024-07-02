@@ -7,8 +7,10 @@ import {
   Fit,
   Alignment,
   useStateMachineInput,
+  EventType,
 } from '@rive-app/react-canvas'
 import { clamp } from 'lodash'
+import { RiveEvent } from '@rive-app/canvas-advanced'
 
 const BAR_WIDTH = 4177
 const BAR_HEIGHT = 2160
@@ -98,8 +100,17 @@ export default function Example() {
     [mouseDownX, maxShift, sceneX]
   )
 
+  const onRiveEventReceived = (riveEvent: any) => {
+    const eventData = riveEvent.data
+    console.log('Event data', eventData)
+  }
+
   useEffect(() => {
     if (!rive) return
+
+    // Wait until the rive object is instantiated before adding the Rive
+    // event listener
+    rive.on(EventType.RiveEvent, onRiveEventReceived)
 
     const updateTime = () => {
       const date = new Date()
