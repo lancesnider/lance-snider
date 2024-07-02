@@ -10,14 +10,13 @@ import {
   EventType,
 } from '@rive-app/react-canvas'
 import { clamp } from 'lodash'
-import { RiveEvent } from '@rive-app/canvas-advanced'
 
 const BAR_WIDTH = 4177
 const BAR_HEIGHT = 2160
 const STATE_MACHINE_NAME = 'State Machine 1'
 
 // For extra wide screens, we want a min shift
-const minRatio = BAR_HEIGHT / (BAR_WIDTH - 500)
+const minRatio = BAR_HEIGHT / BAR_WIDTH
 
 export default function Example() {
   const [maxShift, setMaxShift] = useState(0)
