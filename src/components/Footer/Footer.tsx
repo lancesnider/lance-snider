@@ -30,8 +30,15 @@ const Footer = () => {
 
         <div className='footer__links'>
           <Link href='/'>art</Link>
-          <Link href='https://www.instagram.com/lances_art/'>instagram</Link>
-          <Link href='https://www.etsy.com/shop/artbylance'>etsy</Link>
+          <Link href='https://www.instagram.com/lances_art/' target='_blank'>
+            instagram
+          </Link>
+          <Link href='https://www.etsy.com/shop/artbylance' target='_blank'>
+            etsy
+          </Link>
+          <Link href='/resume/lance-snider__resume.pdf' target='_blank'>
+            resume
+          </Link>
         </div>
         <div className='footer__copyright'>
           {/* display the current year thatn copyright */}
