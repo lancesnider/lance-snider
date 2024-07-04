@@ -49,6 +49,7 @@ next-env.d.ts
 build-storybook.log
 
 # design
+/_design
 *.psd
 *.ai
 *.eps
