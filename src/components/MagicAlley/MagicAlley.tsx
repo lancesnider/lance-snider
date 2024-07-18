@@ -41,8 +41,6 @@ export default function MagicAlley() {
 
   useEffect(() => {
     if (parallaxInput && beta !== null) {
-      // normalize beta value where -6 to 6 is between 0 and 100
-
       const minMax = [-6, 6]
       // normalize beta value where minMax[0] to minMax[1] is between 0 and 100
       const parallaxValue = round(
