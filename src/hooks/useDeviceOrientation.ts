@@ -14,7 +14,6 @@ function useDeviceOrientation() {
   })
   useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
-      console.log(event)
       setOrientation({
         alpha: event.alpha,
         beta: event.beta,

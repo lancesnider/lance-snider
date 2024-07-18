@@ -12,8 +12,8 @@ import { round } from 'lodash'
 const STATE_MACHINE_NAME = 'State Machine 1'
 
 export default function MagicAlley() {
-  const orientation = useDeviceOrientation()
-  const { mouseXPerc } = useMousePosition()
+  const { beta } = useDeviceOrientation()
+  // const { mouseXPerc } = useMousePosition()
 
   const { rive, RiveComponent } = useRive({
     src: '/rive/magic_alley_7.riv',
@@ -30,17 +30,44 @@ export default function MagicAlley() {
     'parallax'
   )
 
+  // useEffect(() => {
+  //   if (parallaxInput && mouseXPerc !== null) {
+  //     const parallaxValue = round(100 - mouseXPerc, 2)
+  //     parallaxInput.value = parallaxValue
+  //     // parallaxInput.value = 50
+  //     rive?.setTextRunValue('test', parallaxValue.toString())
+  //   }
+  // }, [mouseXPerc, parallaxInput])
+
   useEffect(() => {
-    if (parallaxInput && mouseXPerc !== null) {
-      const parallaxValue = round(100 - mouseXPerc, 2)
-      parallaxInput.value = parallaxValue
-      // parallaxInput.value = 50
-      rive?.setTextRunValue('test', parallaxValue.toString())
+    if (parallaxInput && beta !== null) {
+      // normalize beta value where -6 to 6 is between 0 and 100
+
+      const minMax = [-6, 6]
+      // normalize beta value where minMax[0] to minMax[1] is between 0 and 100
+      const parallaxValue = round(
+        ((beta - minMax[0]) / (minMax[1] - minMax[0])) * 100,
+        2
+      )
+
+      parallaxInput.value = 100 - parallaxValue
     }
-  }, [mouseXPerc, parallaxInput])
+  }, [beta, parallaxInput])
 
   return (
     <div className='magic-alley'>
+      {/* <button
+        onClick={() => {
+          DeviceOrientationEvent.requestPermission().then((response) => {
+            if (response === 'granted') {
+              console.log('Permission granted')
+            }
+          })
+        }}
+      >
+        xxx
+      </button> */}
+
       <RiveComponent />
     </div>
   )

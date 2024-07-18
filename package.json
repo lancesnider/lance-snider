@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
+    "storybook-https": "storybook  --https --ssl-cert ./localhost.crt --ssl-key ./localhost.key",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_ba5c2459d8149d9"
   },
