@@ -53,3 +53,8 @@ build-storybook.log
 *.psd
 *.ai
 *.eps
+*.rev
+
+# Keys and certs
+*.key
+*.crt
