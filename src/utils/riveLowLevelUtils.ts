@@ -3,7 +3,7 @@ import {
   StateMachineInstance,
   RiveCanvas as RiveCanvasType,
   Artboard,
-} from '@rive-app/canvas-advanced'
+} from '@rive-app/webgl2-advanced'
 import { StateMachineInputType } from '@rive-app/react-canvas'
 
 const getStateMachineByName = (
