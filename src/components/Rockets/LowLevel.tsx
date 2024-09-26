@@ -14,7 +14,7 @@ const CANVAS_WIDTH = 2000
 const CANVAS_HEIGHT = 1600
 const RIVE_FILE_URL = '/rive/space_race.riv'
 const RIVE_WASM_URL =
-  'https://unpkg.com/@rive-app/canvas-advanced@2.10.4/rive.wasm'
+  'https://unpkg.com/@rive-app/canvas-advanced@2.21.3/rive.wasm'
 
 // const PLACE_WIDTH = 500
 // const PLACE_HEIGHT = 100
